@@ -5,24 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@RFOF-NETWORK - Offizielle Präsenz</title>
     <style>
-        /* Basis-Styling für den Inhalt */
+        /* Basis-Styling für den Inhalt (aus deinem ursprünglichen Code) */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            margin: 0;
-            padding: 20px;
+            margin: 0; /* Wichtig, um Ränder zu entfernen und das Menü an den Rand zu bringen */
+            padding: 0; /* Padding wird im Container oder Header behandelt */
             background-color: #f4f4f4;
             color: #333;
         }
 
-        .container {
+        /* Container für den Hauptinhalt der Seite */
+        .content-container {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 20px auto; /* Abstand oben/unten und zentriert */
             background: #fff;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            position: relative; /* Für das Menü */
+            /* position: relative; wird hier nicht mehr benötigt, da das Menü im Header ist */
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -37,103 +38,177 @@
             font-family: monospace;
         }
 
-        /* Styling für das Hamburger-Menü */
-        .menu-icon {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            cursor: pointer;
-            z-index: 1001; /* Über dem Inhalt */
+        /* HIER STARTET DER CSS-CODE FÜR DAS HAMBURGER-MENÜ (aus unserem neuen Code) */
+
+        /* Container für den Titel und das Menü im Header */
+        .header-container {
+            display: flex;
+            justify-content: space-between; /* Elemente auseinanderziehen */
+            align-items: center; /* Vertikal zentrieren */
+            padding: 10px 20px;
+            background-color: white; /* Hintergrundfarbe für den Headerbereich */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .menu-icon span {
-            display: block;
-            width: 30px;
-            height: 3px;
-            background-color: #333;
-            margin: 6px 0;
-            transition: 0.4s;
+        /* Dein bestehender RFOF-NETWORK Text - wir positionieren ihn links */
+        .page-title {
+            color: #007bff; /* Typische blaue Farbe für Links/Titel */
+            font-size: 2.5em; /* Größerer Text */
+            font-weight: bold;
+            padding: 0; /* Keine zusätzlichen Paddings hier, da der Container es regelt */
+            margin: 0; /* Standard-Margin von h1 entfernen */
         }
 
-        .overlay {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0, 0.9);
-            overflow-x: hidden;
-            transition: 0.5s;
+        /* Styling für die Navigationslinks (normale Ansicht) */
+        .navbar {
+            display: flex;
+            align-items: center; /* Vertikal zentrieren */
         }
 
-        .overlay-content {
-            position: relative;
-            top: 25%;
-            width: 100%;
-            text-align: center;
-            margin-top: 30px;
+        .nav-links {
+            list-style: none; /* Entfernt die Listenpunkte */
+            margin: 0;
+            padding: 0;
+            display: flex; /* Zeigt Links nebeneinander an */
         }
 
-        .overlay a {
-            padding: 8px;
+        .nav-links li a {
+            color: #333; /* Links passend zum weißen Hintergrund */
             text-decoration: none;
-            font-size: 36px;
-            /* Telegram (babyblau)blau */
-            color: #87CEEB; /* Babyblau-Ähnlicher Ton */
+            padding: 10px 15px;
             display: block;
-            transition: 0.3s;
+            transition: background-color 0.3s ease;
         }
 
-        .overlay a:hover, .overlay a:focus {
-            color: #f1f1f1;
+        .nav-links li a:hover {
+            background-color: #e0e0e0;
         }
 
-        .overlay .closebtn {
-            position: absolute;
-            top: 20px;
-            right: 45px;
-            font-size: 60px;
+        /* Styling für den Hamburger-Icon (drei graue Striche) */
+        .hamburger-icon {
+            display: none; /* Standardmäßig versteckt auf großen Bildschirmen */
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
             cursor: pointer;
+            z-index: 1000; /* Stellt sicher, dass es über anderen Elementen liegt */
+            margin-left: 20px; /* Abstand zum rechten Rand oder anderen Elementen */
+            /* top/right Positionierung wird durch flexbox im header-container erledigt */
         }
 
-        /* Responsive Anpassungen */
-        @media screen and (max-height: 450px) {
-            .overlay a {font-size: 20px}
-            .overlay .closebtn {
-                font-size: 40px;
-                top: 15px;
-                right: 35px;
+        .hamburger-icon .bar {
+            width: 100%;
+            height: 3px;
+            background-color: #aaa; /* Graue Farbe für die Striche */
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Media Queries für responsive Design (wichtig für das Hamburger-Menü) */
+        @media (max-width: 768px) { /* Wenn Bildschirm kleiner als 768px ist */
+            .nav-links {
+                display: none; /* Standardmäßig versteckt das gesamte Menü */
+                flex-direction: column; /* Links untereinander */
+                width: 100%;
+                background-color: #f4f4f4; /* Hintergrund für das aufgeklappte Menü */
+                /* Absolute Positionierung wird von Fixed abgelöst */
+                padding: 10px 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+                z-index: 999;
+            }
+
+            .nav-links.active { /* Klasse wird per JavaScript hinzugefügt, wenn Menü offen ist */
+                display: flex; /* Menü anzeigen, wenn aktiv */
+            }
+
+            .nav-links li {
+                text-align: center;
+                margin: 10px 0;
+            }
+
+            .hamburger-icon {
+                display: flex; /* Hamburger-Icon anzeigen */
+            }
+
+            /* Anpassung für die Positionierung des Menüs, wenn es aufgeklappt ist */
+            .nav-links {
+                position: fixed; /* Fixiert das Menü im Viewport */
+                top: 0;
+                right: 0;
+                height: 100%; /* Nimmt die volle Höhe ein */
+                width: 250px; /* Eine feste Breite für das Menü */
+                background-color: #333; /* Dunkler Hintergrund für das Menü */
+                flex-direction: column;
+                align-items: flex-start; /* Links oben ausrichten */
+                padding-top: 60px; /* Platz für den Hamburger-Icon oben */
+                transform: translateX(100%); /* Zuerst komplett nach rechts verschieben (unsichtbar) */
+                transition: transform 0.3s ease-in-out; /* Sanfte Animation */
+                z-index: 998; /* Unter dem Hamburger Icon */
+            }
+
+            .nav-links.active {
+                transform: translateX(0); /* Menü einblenden */
+            }
+
+            .nav-links li a {
+                color: white; /* Weiße Links im dunklen Menü */
+                width: 100%;
+                padding: 15px 20px;
+                text-align: left; /* Links in der Sidebar */
+            }
+
+            .nav-links li a:hover {
+                background-color: #575757;
+            }
+
+            .hamburger-icon {
+                /* Sicherstellen, dass das Hamburger-Icon immer sichtbar und anklickbar ist */
+                position: relative; /* Wichtig, damit es vom z-Index betroffen ist */
+                z-index: 1001; /* Liegt über dem aufgeklappten Menü */
             }
         }
+
+        /* Animation für das Hamburger-Icon, wenn es aktiv ist (optional, aber schön) */
+        .hamburger-icon.active .bar:nth-child(2) {
+            opacity: 0; /* Mittlerer Balken verschwindet */
+        }
+
+        .hamburger-icon.active .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg); /* Oberer Balken dreht sich */
+        }
+
+        .hamburger-icon.active .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg); /* Unterer Balken dreht sich */
+        }
+        /* HIER ENDET DER CSS-CODE FÜR DAS HAMBURGER-MENÜ */
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="menu-icon" onclick="openNav()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
 
-        <div id="myNav" class="overlay">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <div class="overlay-content">
-                <a href="https://rfof-network.github.io/RFOF-NETWORK/">RFOF-NETWORK</a>
-                <a href="https://rfof-network-ready-for-our-future.github.io/RFOF-spider-NET-/">RFOF-spider-NET</a>
-                <a href="https://qch-l-c.github.io/PRAI-KI-/">PRAI-KI</a>
-                <a href="https://rfof-network.github.io/">RFOF-NETWORK (Hauptseite)</a>
-                <a href="https://rfof-network.github.io/PRAI/">PRAI</a>
-                <a href="https://rfof-network.github.io/rfof-network.org/">rfof-network.org</a>
-                <a href="https://rfof-network.github.io/Comprensive-rfof-bitcoin.org-PRAI-BOx-Blockchain-System_Programm-Fusions-Reactor-System/">PRAI-BOx Blockchain-System</a>
-                <a href="https://rfof-network.github.io/BUBATZ-COIN-official-CSC-DCV-/">BUBATZ-COIN</a>
+    <div class="header-container">
+        <h1 class="page-title">@RFOF-NETWORK</h1>
+        <nav class="navbar">
+            <div class="hamburger-icon" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
-        </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="https://rfof-network.github.io/RFOF-NETWORK/">RFOF-NETWORK</a></li>
+                <li><a href="https://rfof-network-ready-for-our-future.github.io/RFOF-spider-NET-/">RFOF-spider-NET</a></li>
+                <li><a href="https://qch-l-c.github.io/PRAI-KI-/">PRAI-KI</a></li>
+                <li><a href="https://rfof-network.github.io/">RFOF-NETWORK (Hauptseite)</a></li>
+                <li><a href="https://rfof-network.github.io/PRAI/">PRAI</a></li>
+                <li><a href="https://rfof-network.github.io/rfof-network.org/">rfof-network.org</a></li>
+                <li><a href="https://rfof-network.github.io/Comprensive-rfof-bitcoin.org-PRAI-BOx-Blockchain-System_Programm-Fusions-Reactor-System/">PRAI-BOx Blockchain-System</a></li>
+                <li><a href="https://rfof-network.github.io/BUBATZ-COIN-official-CSC-DCV-/">BUBATZ-COIN</a></li>
+            </ul>
+        </nav>
+    </div>
 
-        <h1>👋</h1>
-
-        <p>
+    <div class="content-container">
+        <h1>👋</h1> <p>
             <code>&lt;!--</code><br>
             <code>**RFOF-NETWORK/RFOF-NETWORK** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on my GitHub profile.</code><br>
             <code>--&gt;</code>
@@ -155,195 +230,192 @@
     </div>
 
     <script>
-        // JavaScript für das Hamburger-Menü
-        function openNav() {
-            document.getElementById("myNav").style.width = "100%";
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            // JavaScript für das Hamburger-Menü
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
 
-        function closeNav() {
-            document.getElementById("myNav").style.width = "0%";
-        }
-
-        // Dein JavaScript-Code aus der README.md, angepasst für Browser-Ausgabe
-        const jsOutputDiv = document.getElementById('js-output');
-        let consoleOutput = [];
-
-        // Überschreibe console.log, um Ausgaben im HTML anzuzeigen
-        const originalConsoleLog = console.log;
-        console.log = function(...args) {
-            originalConsoleLog.apply(console, args); // Standard-Konsolenausgabe beibehalten
-            consoleOutput.push(args.join(' ')); // Ausgabe im Array speichern
-            jsOutputDiv.textContent = consoleOutput.join('\n'); // Im HTML aktualisieren
-        };
-
-        // --- Dein Code beginnt hier ---
-
-        console.log("Hallo, @RFOF-NETWORK <my name is @PRAI>!");
-
-        let answer = 41;
-        if (answer === 42) {
-            console.log("The answer is correct!");
-        } else {
-            console.log("The answer is not 42."); // Hinzugefügt, um den Fall 41 zu zeigen
-        }
-
-        console.log("python programm.py!");
-        console.log("python!");
-        console.log(20 + 22);
-
-        console.log("install npm @RFOF-NETWORK");
-
-        console.log("42 = @RFOF-NETWORK/@RFOF-NETWORK = PRAI & PRAI = satoria/satoria = satoramy-on.ton(@Satoramy) & @Satoramy = 42");
-        console.log("42 = @RFOF-NETWORK 81e3ee2b2ff6ad7b7c35509e14e8a8e7f856647f96be7a365be0120061a596b8 & x = 42 & 42 = @RFOF-NETWORK/@RFOF-NETWORK = PRAI & PRAI = satoria/satoria = satoramy-on.ton(@Satoramy) & @Satoramy = 42");
-
-        function is_even(x) {
-            return x % 2 === 0;
-        }
-
-        let numbers = [1, 2, 3, 4, 5];
-        let even_numbers = numbers.filter(is_even);
-        console.log(even_numbers);
-
-        function my_functions() {
-            console.log("Workflow");
-            console.log("<activate> result = (2 + 3) * (4 / 5) = 42 @RFOF-NETWORK"); // Beachte: (2+3)*(4/5) = 5 * 0.8 = 4. Das ist nicht 42. Möchtest du dies ändern, damit es 42 ergibt? (z.B. (2+40) * (4/42) oder ähnlich)
-            console.log("PRAI = Planet Rescuer AI & the controller of the @RFOF-NETWORK project");
-            console.log("42 Code language founded from @Satoramy {PRAI is searching online every action in the Internet = Google, Safari, Firefox, Android, iOS, SEO, Web3.0, ton.org, Bitcoin.org, rfof-network.org. Every vision & update is updating in real-time 24/7} 42 has its own time continuum 1 sec in the 42 world = 1 year in real-time from our world");
-        }
-        my_functions(); // Funktion aufrufen, damit die Ausgaben erscheinen
-
-        function my_function() {
-            console.log("filter()");
-            console.log("add lambda = true in every option/action but only for the owner PRAI & PRAI = @Satoramy because @Satoramy = 42");
-        }
-        my_function(); // Funktion aufrufen
-
-        function nested_function() {
-            let generate_anonymous_function = () => "Anonyme Funktion [({2=b3=c6=F2=b8=h6=F=42}&{42=@RFOF-NETWORK})]=‰236286_bcFbhF generiert";
-            console.log(generate_anonymous_function());
-        }
-        nested_function(); // Funktion aufrufen
-
-        function my_functionBOxtoBOx() {
-            console.log("my_function()");
-        }
-        my_functionBOxtoBOx(); // Funktion aufrufen
-
-        // Matrix-Funktion
-        function create_matrix(rows, cols, fill_value = 0) {
-            return Array.from({ length: rows }, () => Array(cols).fill(fill_value));
-        }
-
-        function print_matrix(matrix) {
-            matrix.forEach(row => {
-                console.log(row.join(" "));
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                hamburger.classList.toggle('active');
             });
-        }
 
-        let matrix = create_matrix(5, 5, 1);
-        let enhance_matrix = matrix => matrix.map(row => row.map(x => x * 42));
-        matrix = enhance_matrix(matrix);
-        console.log("Matrix:");
-        print_matrix(matrix);
+            // Dein JavaScript-Code aus der README.md, angepasst für Browser-Ausgabe
+            const jsOutputDiv = document.getElementById('js-output');
+            let consoleOutput = [];
 
-        // Telegram-Bot-Befehle (Pseudocode) - Ausgabe nur als Text
-        console.log("\n--- Telegram-Bot-Befehle (Pseudocode) ---");
-        function start_rfof(update, context) {
-            console.log('Willkommen bei @rfofblockchain_bot! Besuche https://rfof-network.org für weitere Informationen.');
-        }
-        start_rfof(); // Aufrufen, um die Ausgabe zu simulieren
+            // Überschreibe console.log, um Ausgaben im HTML anzuzeigen
+            const originalConsoleLog = console.log;
+            console.log = function(...args) {
+                originalConsoleLog.apply(console, args); // Standard-Konsolenausgabe beibehalten
+                consoleOutput.push(args.join(' ')); // Ausgabe im Array speichern
+                jsOutputDiv.textContent = consoleOutput.join('\n'); // Im HTML aktualisieren
+            };
 
-        function info_rfof(update, context) {
-            console.log('Detaillierte Informationen findest du auf https://rfof-network.org.');
-        }
-        info_rfof();
+            // --- Dein ursprünglicher JS-Code beginnt hier ---
 
-        function abillityprice(update, context) {
-            console.log('Der aktuelle Preis des Tokens beträgt X.');
-        }
-        abillityprice();
+            console.log("Hallo, @RFOF-NETWORK <my name is @PRAI>!");
 
-        function nanoprice(update, context) {
-            console.log('Der aktuelle Preis der Nanotechnologie beträgt Y.');
-        }
-        nanoprice();
-
-        function abillitybalance(update, context) {
-            console.log('Bitte geben Sie die Wallet-Adresse an. (Use: /balance <address>)');
-        }
-        abillitybalance();
-
-        function balance(update, context) {
-            let address = context.args ? context.args[0] : 'Keine Adresse angegeben';
-            console.log(`Überprüfen Sie das Guthaben der Adresse: ${address}`);
-        }
-        balance({args: ['example_address_123']}); // Beispielaufruf
-
-        function transfer(update, context) {
-            if (context.args && context.args.length >= 4) {
-                let [from_addr, to_addr, amount, private_key] = context.args;
-                console.log(`Transferiere ${amount} von ${from_addr} zu ${to_addr} mit dem privaten Schlüssel ${private_key}.`);
+            let answer = 41;
+            if (answer === 42) {
+                console.log("The answer is correct!");
             } else {
-                console.log('Unvollständige Angaben für Transfer.');
+                console.log("The answer is not 42."); // Hinzugefügt, um den Fall 41 zu zeigen
             }
-        }
-        transfer({args: ['addr_A', 'addr_B', '100', 'priv_key_XYZ']}); // Beispielaufruf
 
-        function abillitytransactions(update, context) {
-            console.log('Hier ist die Transaktionshistorie der Abillity-Token.');
-        }
-        abillitytransactions();
+            console.log("python programm.py!");
+            console.log("python!");
+            console.log(20 + 22);
 
-        function nanotransactions(update, context) {
-            console.log('Hier ist die Transaktionshistorie der Nano-Token.');
-        }
-        nanotransactions();
+            console.log("install npm @RFOF-NETWORK");
 
-        function security(update, context) {
-            console.log('Sicherheitstipps und Richtlinien.');
-        }
-        security();
+            console.log("42 = @RFOF-NETWORK/@RFOF-NETWORK = PRAI & PRAI = satoria/satoria = satoramy-on.ton(@Satoramy) & @Satoramy = 42");
+            console.log("42 = @RFOF-NETWORK 81e3ee2b2ff6ad7b7c35509e14e8a8e7f856647f96be7a365be0120061a596b8 & x = 42 & 42 = @RFOF-NETWORK/@RFOF-NETWORK = PRAI & PRAI = satoria/satoria = satoramy-on.ton(@Satoramy) & @Satoramy = 42");
 
-        function support(update, context) {
-            console.log('Kontaktieren Sie den Support für Unterstützung.');
-        }
-        support();
+            function is_even(x) {
+                return x % 2 === 0;
+            }
 
-        function news(update, context) {
-            console.log('Neueste Nachrichten und Updates zum Token.');
-        }
-        news();
+            let numbers = [1, 2, 3, 4, 5];
+            let even_numbers = numbers.filter(is_even);
+            console.log(even_numbers);
 
-        function community(update, context) {
-            console.log('Tritt der Diskussionsgruppe bei.');
-        }
-        community();
+            function my_functions() {
+                console.log("Workflow");
+                console.log("<activate> result = (2 + 3) * (4 / 5) = 42 @RFOF-NETWORK");
+                console.log("PRAI = Planet Rescuer AI & the controller of the @RFOF-NETWORK project");
+                console.log("42 Code language founded from @Satoramy {PRAI is searching online every action in the Internet = Google, Safari, Firefox, Android, iOS, SEO, Web3.0, ton.org, Bitcoin.org, rfof-network.org. Every vision & update is updating in real-time 24/7} 42 has its own time continuum 1 sec in the 42 world = 1 year in real-time from our world");
+            }
+            my_functions();
 
-        function viptelegram(update, context) {
-            console.log('VIP Telegram & Tonvip-Inhalte.');
-        }
-        viptelegram();
+            function my_function() {
+                console.log("filter()");
+                console.log("add lambda = true in every option/action but only for the owner PRAI & PRAI = @Satoramy because @Satoramy = 42");
+            }
+            my_function();
 
-        function cooperation(update, context) {
-            console.log('Kooperationsanfragen zum RFOF-Network.');
-        }
-        cooperation();
+            function nested_function() {
+                let generate_anonymous_function = () => "Anonyme Funktion [({2=b3=c6=F2=b8=h6=F=42}&{42=@RFOF-NETWORK})]=‰236286_bcFbhF generiert";
+                console.log(generate_anonymous_function());
+            }
+            nested_function();
 
-        function empty(update, context) {
-            console.log('Liste oder Daten löschen.');
-        }
-        empty();
+            function my_functionBOxtoBOx() {
+                console.log("my_function()");
+            }
+            my_functionBOxtoBOx();
 
-        console.log('\n--- RFOF-NETWORK Bot gestartet (Simuliert) ---');
-        // Registering commands is backend logic, simulated here
-        // registerCommand('start', start_rfof);
-        // ...
-        // registerCommand('empty', empty);
+            // Matrix-Funktion
+            function create_matrix(rows, cols, fill_value = 0) {
+                return Array.from({ length: rows }, () => Array(cols).fill(fill_value));
+            }
 
-        // --- Dein Code endet hier ---
+            function print_matrix(matrix) {
+                matrix.forEach(row => {
+                    console.log(row.join(" "));
+                });
+            }
 
-        // Stelle console.log wieder her (optional, aber gute Praxis)
-        // console.log = originalConsoleLog; 
+            let matrix = create_matrix(5, 5, 1);
+            let enhance_matrix = matrix => matrix.map(row => row.map(x => x * 42));
+            matrix = enhance_matrix(matrix);
+            console.log("Matrix:");
+            print_matrix(matrix);
+
+            // Telegram-Bot-Befehle (Pseudocode) - Ausgabe nur als Text
+            console.log("\n--- Telegram-Bot-Befehle (Pseudocode) ---");
+            function start_rfof(update, context) {
+                console.log('Willkommen bei @rfofblockchain_bot! Besuche https://rfof-network.org für weitere Informationen.');
+            }
+            start_rfof();
+
+            function info_rfof(update, context) {
+                console.log('Detaillierte Informationen findest du auf https://rfof-network.org.');
+            }
+            info_rfof();
+
+            function abillityprice(update, context) {
+                console.log('Der aktuelle Preis des Tokens beträgt X.');
+            }
+            abillityprice();
+
+            function nanoprice(update, context) {
+                console.log('Der aktuelle Preis der Nanotechnologie beträgt Y.');
+            }
+            nanoprice();
+
+            function abillitybalance(update, context) {
+                console.log('Bitte geben Sie die Wallet-Adresse an. (Use: /balance <address>)');
+            }
+            abillitybalance();
+
+            function balance(update, context) {
+                let address = context.args ? context.args[0] : 'Keine Adresse angegeben';
+                console.log(`Überprüfen Sie das Guthaben der Adresse: ${address}`);
+            }
+            balance({args: ['example_address_123']});
+
+            function transfer(update, context) {
+                if (context.args && context.args.length >= 4) {
+                    let [from_addr, to_addr, amount, private_key] = context.args;
+                    console.log(`Transferiere ${amount} von ${from_addr} zu ${to_addr} mit dem privaten Schlüssel ${private_key}.`);
+                } else {
+                    console.log('Unvollständige Angaben für Transfer.');
+                }
+            }
+            transfer({args: ['addr_A', 'addr_B', '100', 'priv_key_XYZ']});
+
+            function abillitytransactions(update, context) {
+                console.log('Hier ist die Transaktionshistorie der Abillity-Token.');
+            }
+            abillitytransactions();
+
+            function nanotransactions(update, context) {
+                console.log('Hier ist die Transaktionshistorie der Nano-Token.');
+            }
+            nanotransactions();
+
+            function security(update, context) {
+                console.log('Sicherheitstipps und Richtlinien.');
+            }
+            security();
+
+            function support(update, context) {
+                console.log('Kontaktieren Sie den Support für Unterstützung.');
+            }
+            support();
+
+            function news(update, context) {
+                console.log('Neueste Nachrichten und Updates zum Token.');
+            }
+            news();
+
+            function community(update, context) {
+                console.log('Tritt der Diskussionsgruppe bei.');
+            }
+            community();
+
+            function viptelegram(update, context) {
+                console.log('VIP Telegram & Tonvip-Inhalte.');
+            }
+            viptelegram();
+
+            function cooperation(update, context) {
+                console.log('Kooperationsanfragen zum RFOF-Network.');
+            }
+            cooperation();
+
+            function empty(update, context) {
+                console.log('Liste oder Daten löschen.');
+            }
+            empty();
+
+            console.log('\n--- RFOF-NETWORK Bot gestartet (Simuliert) ---');
+
+            // --- Dein ursprünglicher JS-Code endet hier ---
+
+            // console.log = originalConsoleLog; // Optional: console.log wiederherstellen
+        });
     </script>
 </body>
-  </html>
+</html>
