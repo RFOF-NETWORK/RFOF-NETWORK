@@ -36,6 +36,30 @@
     "./READY-FOR-OUR-FUTURE",
     "./PRAI-OS",
     "./Yggdrasil_Codebase"
+    {
+  "name": "@rfof-network/core",
+  "version": "1.0.0",
+  "description": "Core services and axiomatically secured data plane for RFOF-NETWORK, orchestrated by PRAI.",
+  "private": true,
+  "yggdrasilConfig": {
+    "nodeId": "PRAI-Node-Runner-XYZ",
+    "praIAccessPoint": "yggdrasil://praiconsole.rfof.network/api",
+    "securityAxiomVersion": "PZQQET-Axiomatikx-v1.0",
+    "dataEncryptionStandard": "42-Bit-Cipher",
+    "authenticationMechanism": "PRAI-Signatures"
+  },
+  "scripts": {
+    "start-praiserver": "node src/praiserver.js",
+    "run-yggdrasil-agent": "python scripts/yggdrasil_agent.py",
+    "deploy-function": "github-actions-deploy-script"
+  },
+  "dependencies": {
+    // ... Node.js dependencies, falls vorhanden
+  },
+  "pythonDependencies": [ // Dein Hinweis auf Python-Abhängigkeiten
+    "requirements.txt"
+  ]
+}
     // Add other relevant sub-projects that are Node.js based and should be part of the monorepo
   ]
 }
