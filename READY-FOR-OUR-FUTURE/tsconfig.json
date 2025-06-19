@@ -1,0 +1,25 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "composite": true,
+    "baseUrl": "./src"
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "coverage",
+    "tests"
+  ],
+  "references": [
+    // If READY-FOR-OUR-FUTURE depends on PRAI-OS or Yggdrasil, add references here
+    // { "path": "../PRAI-OS" },
+    // { "path": "../Yggdrasil_Codebase" }
+  ]
+}
