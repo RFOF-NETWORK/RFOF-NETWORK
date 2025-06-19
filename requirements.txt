@@ -26,12 +26,10 @@ numpy==1.26.4                  # Mathematische Operationen, oft eine Abhängigke
 
 # Blockchain / Krypto-Integration (READY-FOR-OUR-FUTURE/BOx-Blockchain-Extensions)
 # -------------------------------------------------------------------------------
-# Beispielhafte Bibliotheken für Blockchain-Interaktionen und Smart Contracts
-web3==5.31.1                   # Ethereium-Kommunikation (HERUNTERGESTUFT für Kompatibilität mit eth-abi 2.x)
-eth-abi==2.2.0                 # Ethereum Application Binary Interface (AUF ANFRAGE HERUNTERGESTUFT)
+web3==6.15.1                   # Ethereum-Kommunikation (Bleibt auf der neuesten Version)
+eth-abi==4.3.0                 # Ethereum Application Binary Interface (AUF KOMPATIBLE VERSION MIT web3 AKTUALISIERT)
 # solidity-json-abi -- ENTFERNT: Paket nicht auf PyPI gefunden und verursacht Installationsfehler.
-pysha3==1.0.6                  # SHA3 (Keccak) Hashing, oft in Krypto-Kontexten
-
+pysha3==1.0.6                  # SHA3 (Keccak) Hashing
 # KI / Neuronale Netze (PRAI-OS/AI_Integration_Layer, prai-neuron-manager)
 # ------------------------------------------------------------------------
 tensorflow==2.16.1             # Für fortgeschrittene KI-Modelle
