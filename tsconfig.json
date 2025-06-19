@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "commonjs",
+    "lib": ["es2020", "dom"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "rootDir": "./",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*", "src/types/*"]
+    },
+    "composite": true, // Enable project references
+    "declaration": true, // Generate .d.ts files
+    "sourceMap": true // Generate sourcemaps
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.js"
+    // Potentially include Yggdrasil specific TypeScript definitions if they exist
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "coverage",
+    "tests"
+  ],
+  "references": [
+    { "path": "./READY-FOR-OUR-FUTURE" },
+    { "path": "./PRAI-OS" },
+    { "path": "./Yggdrasil_Codebase" }
+    // Add other relevant sub-projects that are TypeScript based
+  ]
+}
