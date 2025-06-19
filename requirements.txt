@@ -28,7 +28,7 @@ numpy==1.26.4                  # Mathematische Operationen, oft eine Abhängigke
 # -------------------------------------------------------------------------------
 # Beispielhafte Bibliotheken für Blockchain-Interaktionen und Smart Contracts
 web3==6.15.1                   # Ethereum-Kommunikation (für Solidity-Smart Contracts)
-eth-abi==4.3.0                 # Ethereum Application Binary Interface
+eth-abi==2.2.0                 # Ethereum Application Binary Interface
 solidity-json-abi==0.0.1       # Für ABI-Definitionen von Solidity-Contracts
 pysha3==1.0.6                  # SHA3 (Keccak) Hashing, oft in Krypto-Kontexten
 # Achtung: Für spezifische Blockchains (TON, BTC, BNB, TRX, EGLD, XPORTAL) können weitere spezialisierte Bibliotheken notwendig sein.
