@@ -1,0 +1,75 @@
+# Core / Allgemeine Python-Funktionalität
+# -------------------------------------
+# Diese Pakete sind oft grundlegend für viele Python-Projekte.
+requests==2.31.0               # Für HTTP-Anfragen, z.B. API-Interaktionen, GitHub API
+beautifulsoup4==4.12.3         # Wenn Web-Scraping Teil der Datenbeschaffung ist (z.B. für "Data_Value_Redistribution_System")
+lxml==4.9.3                    # Performance-Optimierung für BeautifulSoup4
+python-dotenv==1.0.1           # Zum Laden von Umgebungsvariablen (.env-Dateien)
+pyyaml==6.0.1                  # Zum Parsen/Generieren von YAML-Dateien (z.B. Workflows, Konfigurationen)
+
+# Azure Functions Spezifisch
+# -------------------------
+# Für den Betrieb von Python-basierten Azure Functions
+azure-functions==1.17.0        # Azure Functions Python Worker (wichtig für den Runner)
+azure-identity==1.16.0         # Für Azure AD Authentifizierung
+azure-storage-blob==12.19.1    # Für Interaktion mit Azure Blob Storage (Speichern von Assets, Logs)
+azure-keyvault-secrets==4.8.0  # Für den Zugriff auf Geheimnisse in Azure Key Vault
+
+# GitHub API / Automatisierung (für generate_readme_snake.yml & generate_repo_stats.yml)
+# -------------------------------------------------------------------------------------
+# Für die Interaktion mit der GitHub API und das Generieren von SVGs
+PyGithub==2.2.0                # Python-Bibliothek für die GitHub API
+svgwrite==1.4.3                # Zum Generieren von SVG-Dateien (für Custom SVGs wie pixel_emoji.svg, author_satoramy_praio.svg)
+pillow==10.3.0                 # Für Bildverarbeitung (wenn SVGs z.B. aus Pixeldaten erstellt werden)
+matplotlib==3.8.4              # Wenn Diagramme oder komplexe Visualisierungen generiert werden (repo_activity_chart.svg)
+numpy==1.26.4                  # Mathematische Operationen, oft eine Abhängigkeit von Matplotlib
+
+# Blockchain / Krypto-Integration (READY-FOR-OUR-FUTURE/BOx-Blockchain-Extensions)
+# -------------------------------------------------------------------------------
+# Beispielhafte Bibliotheken für Blockchain-Interaktionen und Smart Contracts
+web3==6.15.1                   # Ethereum-Kommunikation (für Solidity-Smart Contracts)
+eth-abi==4.3.0                 # Ethereum Application Binary Interface
+solidity-json-abi==0.0.1       # Für ABI-Definitionen von Solidity-Contracts
+pysha3==1.0.6                  # SHA3 (Keccak) Hashing, oft in Krypto-Kontexten
+# Achtung: Für spezifische Blockchains (TON, BTC, BNB, TRX, EGLD, XPORTAL) können weitere spezialisierte Bibliotheken notwendig sein.
+# Zum Beispiel:
+# ton-py-client==0.1.0         # Beispiel für TON-Blockchain
+# python-bitcoinrpc==1.0       # Beispiel für Bitcoin RPC
+
+# KI / Neuronale Netze (PRAI-OS/AI_Integration_Layer, prai-neuron-manager)
+# ------------------------------------------------------------------------
+# Wenn du Machine Learning oder neuronale Netze in Python implementierst/nutzt.
+tensorflow==2.16.1             # Für fortgeschrittene KI-Modelle
+keras==3.3.3                   # Hochlevel-API für TensorFlow
+scikit-learn==1.4.2            # Für allgemeine Machine Learning Algorithmen
+pandas==2.2.2                  # Datenanalyse und -manipulation
+# Hinweis: Wenn nur "Konzepte" oder "Logik" ohne tatsächliche ML-Implementierung, sind diese optional.
+
+# Quanten-Kryptografie (BOx-Blockchain-Extensions/Quantum_Encryption_Layer)
+# --------------------------------------------------------------------------
+# Bibliotheken für Konzepte oder Simulationen von Quanten-Kryptografie
+qiskit==1.0.2                  # Für Quantencomputing und -Kryptografie-Experimente
+cryptography==42.0.7           # Allgemeine Kryptografie-Bibliothek (für Post-Quantum-Kryptografie-Konzepte relevant)
+
+# Web UI / Flask/Django (optional, falls ein Python-Backend für WebUI in PRAI-OS/applications/webUI)
+# ----------------------------------------------------------------------------------------------------
+# Wenn du ein Python-Backend für deine Web-UI hast (nicht nur statisches HTML/JS)
+flask==3.0.3                   # Leichtgewichtiges Web-Framework
+gunicorn==22.0.0               # WSGI HTTP Server für Python (für Produktion)
+
+# Telegram Bot (PRAI-OS/applications/telegramBot)
+# -----------------------------------------------
+python-telegram-bot==20.8      # Für die Entwicklung des Telegram Bots
+
+# Tests (jest.config.js, alle tests/ Ordner)
+# -------------------------------------------
+# Für das Ausführen von Python-Tests (falls Python-Tests neben Jest existieren)
+pytest==8.1.1                  # Allgemeines Python-Testframework
+
+# Sonstiges / Hilfsprogramme
+# --------------------------
+# Wenn ROFF (ein reStructuredText-Tool) verwendet wird, könnte es spezielle Abhängigkeiten haben.
+# Da "ROFF" auch als Teil der Yggdrasil-Sprache genannt wird, ist dies ein Platzhalter.
+# Es gibt kein direktes 'roff' Python-Paket im PyPI, das direkt ein ROFF-Format implementiert.
+# Wenn ROFF ein separates Tool ist, wird es nicht über pip installiert.
+# Wenn es sich um eine interne Implementierung handelt, wären hier die Python-Abhängigkeiten deiner Implementierung
