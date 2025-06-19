@@ -1,0 +1,113 @@
+name: Security Audit for RFOF-NETWORK
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'READY-FOR-OUR-FUTURE/**'
+      - 'PRAI-OS/**'
+      - 'Yggdrasil_Codebase/**'
+      - 'artefacts/**'
+      - '.github/workflows/security-audit.yml'
+  pull_request:
+    branches:
+      - main
+      - develop
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'READY-FOR-OUR-FUTURE/**'
+      - 'PRAI-OS/**'
+      - 'Yggdrasil_Codebase/**'
+      - 'artefacts/**'
+      - '.github/workflows/security-audit.yml'
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  code_scanning_RFOF:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL (RFOF)
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript, python, solidity # Adjust languages based on actual RFOF tech stack
+          source-root: READY-FOR-OUR-FUTURE
+
+      - name: Autobuild (RFOF)
+        uses: github/codeql-action/autobuild@v3 # Attempts to build code for analysis
+
+      - name: Perform CodeQL Analysis (RFOF)
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/READY-FOR-OUR-FUTURE"
+
+  code_scanning_PRAI-OS:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL (PRAI-OS)
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript, python, solidity # Adjust languages based on actual PRAI-OS tech stack
+          source-root: PRAI-OS
+
+      - name: Autobuild (PRAI-OS)
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis (PRAI-OS)
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/PRAI-OS"
+
+  code_scanning_Yggdrasil:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL (Yggdrasil)
+        uses: github/codeql-action/init@v3
+        with:
+          languages: python # Assuming Yggdrasil compiler is primarily Python
+          source-root: Yggdrasil_Codebase
+
+      - name: Autobuild (Yggdrasil)
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis (Yggdrasil)
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/Yggdrasil_Codebase"
+
+  dependency_review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+
+  secret_scanning:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetches all history for comprehensive secret scanning
+
+      - name: Gitleaks Scan
+        uses: zricethezav/gitleaks-action@v2
+        with:
+          config_path: .gitleaks.toml # Optional: Path to a custom gitleaks config
+          detect_private_repos: true
+          # Add any other Gitleaks specific options here
+          # You might want to pass GITHUB_TOKEN as an environment variable if your repo is private
+          # env:
+          #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

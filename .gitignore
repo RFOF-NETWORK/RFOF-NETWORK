@@ -1,0 +1,62 @@
+# Dependency directories
+node_modules/
+dist/
+build/
+coverage/
+
+# Python cache and environment
+__pycache__/
+*.pyc
+.python-version
+.venv/
+env/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.bak
+*.swo
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+.localized
+Thumbs.db
+
+# Environment variables
+.env
+.env.*.local
+.flaskenv
+
+# Smart Contract specific
+/artifacts/ # For Hardhat/Truffle artifacts
+/cache/     # For Hardhat/Truffle cache
+
+# Yggdrasil specific build/runtime artifacts (adjust as needed)
+/Yggdrasil_Codebase/dist/
+/Yggdrasil_Codebase/runtime_output/
+
+# Test reports
+junit.xml
+test-results.xml
+
+# macOS specific (if not covered by .DS_Store)
+.AppleDouble
+.LSOverride
+
+# npm package manager
+.npm/
+
+# Others
+*.iml # IntelliJ IDEA
+*.sublime-project
+*.sublime-workspace
+.project
+.classpath
+.settings/

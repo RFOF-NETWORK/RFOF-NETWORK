@@ -1,0 +1,33 @@
+<svg width="600" height="250" viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .chart-background { fill: #1a1a2e; border-radius: 10px; } /* Dunkler Hintergrund */
+    .chart-title { font-family: sans-serif; font-size: 20px; font-weight: bold; fill: gold; text-anchor: middle; }
+    .label { font-family: sans-serif; font-size: 14px; fill: white; }
+    .value { font-family: monospace; font-size: 18px; fill: white; font-weight: bold; }
+    .bar { fill: #3b82f6; /* Blau für die Balken */ }
+    .line-chart-line { stroke: #3b82f6; stroke-width: 2; fill: none; }
+    .grid-line { stroke: #4a4a6e; stroke-width: 0.5; }
+  </style>
+
+  <rect class="chart-background" x="0" y="0" width="600" height="250" rx="10" ry="10"/>
+  <text x="300" y="30" class="chart-title">RFOF-NETWORK Repository Analytics</text>
+
+  <g transform="translate(50, 70)">
+    <text x="0" y="-10" class="label">Stars:</text>
+    <rect x="0" y="0" width="0" height="20" class="bar" id="star-bar"/>
+    <text x="5" y="15" class="value" id="star-value">0</text>
+
+    <text x="0" y="40" class="label">Forks:</text>
+    <rect x="0" y="50" width="0" height="20" class="bar" id="fork-bar"/>
+    <text x="5" y="65" class="value" id="fork-value">0</text>
+
+    <text x="0" y="90" class="label">Pull Requests:</text>
+    <rect x="0" y="100" width="0" height="20" class="bar" id="pr-bar"/>
+    <text x="5" y="115" class="value" id="pr-value">0</text>
+
+    <text x="0" y="140" class="label">Commits:</text>
+    <rect x="0" y="150" width="0" height="20" class="bar" id="commit-bar"/>
+    <text x="5" y="165" class="value" id="commit-value">0</text>
+  </g>
+
+  </svg>

@@ -1,0 +1,156 @@
+name: CI/CD Pipeline for RFOF-NETWORK
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'READY-FOR-OUR-FUTURE/**'
+      - 'PRAI-OS/**'
+      - 'Yggdrasil_Codebase/**'
+      - 'artefacts/**'
+      - '.github/workflows/ci-cd.yml'
+  pull_request:
+    branches:
+      - main
+      - develop
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'READY-FOR-OUR-FUTURE/**'
+      - 'PRAI-OS/**'
+      - 'Yggdrasil_Codebase/**'
+      - 'artefacts/**'
+      - '.github/workflows/ci-cd.yml'
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  build_and_test_RFOF:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Or your preferred Node.js version
+
+      - name: Install dependencies (RFOF)
+        run: npm install
+        working-directory: ./READY-FOR-OUR-FUTURE
+
+      - name: Run tests (RFOF)
+        run: npm test
+        working-directory: ./READY-FOR-OUR-FUTURE
+
+      - name: Build (RFOF)
+        run: npm run build # Assuming a build script exists
+        working-directory: ./READY-FOR-OUR-FUTURE
+
+  build_and_test_PRAI-OS:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Or your preferred Node.js version
+
+      - name: Install dependencies (PRAI-OS)
+        run: npm install
+        working-directory: ./PRAI-OS
+
+      - name: Run tests (PRAI-OS)
+        run: npm test
+        working-directory: ./PRAI-OS
+
+      - name: Build (PRAI-OS)
+        run: npm run build # Assuming a build script exists
+        working-directory: ./PRAI-OS
+
+  build_and_test_Yggdrasil:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10' # Or your preferred Python version
+
+      - name: Install dependencies (Yggdrasil)
+        run: pip install -r requirements.txt # Assuming Yggdrasil uses Python and has a requirements.txt
+        working-directory: ./Yggdrasil_Codebase
+
+      - name: Run tests (Yggdrasil)
+        run: python -m pytest # Assuming pytest for Python tests
+        working-directory: ./Yggdrasil_Codebase
+
+      - name: Build (Yggdrasil Compiler)
+        run: python ./compiler/build.py # Assuming a build script for the compiler
+        working-directory: ./Yggdrasil_Codebase
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build_and_test_RFOF, build_and_test_PRAI-OS, build_and_test_Yggdrasil]
+    if: github.ref == 'refs/heads/main' # Deploy only from main branch
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Add deployment steps here. This will highly depend on your deployment target.
+      # Examples:
+      # - Deploy to IPFS/Arweave for decentralized hosting
+      # - Deploy Smart Contracts to Blockchain
+      # - Update static website on gh-pages for your 9 websites
+
+      - name: Deploy Smart Contracts
+        run: |
+          # Placeholder for smart contract deployment logic
+          echo "Deploying smart contracts..."
+          # Your actual deployment commands here, e.g., using Truffle, Hardhat, or custom scripts
+          # npm run deploy:contracts --workspace=PRAI-OS
+          # npm run deploy:contracts --workspace=READY-FOR-OUR-FUTURE
+
+      - name: Deploy RFOF Web Components
+        run: |
+          echo "Deploying RFOF web components..."
+          # Deploy compiled RFOF assets
+          # rsync -av READY-FOR-OUR-FUTURE/build/ /var/www/rfof-network/
+
+      - name: Deploy PRAI-OS Web UI
+        run: |
+          echo "Deploying PRAI-OS web UI..."
+          # Deploy compiled PRAI-OS assets
+          # rsync -av PRAI-OS/build/ /var/www/prai-os/
+
+      - name: Deploy Yggdrasil Compiler Artifacts
+        run: |
+          echo "Deploying Yggdrasil compiler artifacts..."
+          # Deploy the built Yggdrasil compiler and runtime
+          # rsync -av Yggdrasil_Codebase/dist/ /usr/local/bin/yggdrasil/
+
+      - name: Trigger Website Deployments (for the 9 Repositories)
+        run: |
+          echo "Triggering deployments for associated websites (9 Repositories)..."
+          # This would involve triggering workflows in other repositories,
+          # or pushing built artifacts to their gh-pages branches.
+          # You might use a personal access token for cross-repo access.
+          # Example using gh-pages action (if websites are in separate repos with gh-pages enabled)
+          # TOKEN=${{ secrets.RFOF_NETWORK_DEPLOY_TOKEN }} # Needs to be set in repo secrets
+          # curl -X POST -H "Authorization: token $TOKEN" \
+          # -H "Accept: application/vnd.github.workflow-dispatch+json" \
+          # https://api.github.com/repos/YourOrganization/website-repo-1/actions/workflows/deploy.yml/dispatches \
+          # -d '{"ref":"main"}'
+
+      - name: Notification on Deployment Success
+        uses: rtCamp/action-slack-notify@v2 # Example for Slack notification
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_CHANNEL: '#deployments'
+          SLACK_MESSAGE: 'RFOF-NETWORK deployment successful! ${{ github.ref }}'

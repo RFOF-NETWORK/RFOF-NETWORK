@@ -1,0 +1,130 @@
+name: Generate Repository Stats Chart
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # Täglich um Mitternacht UTC ausführen
+  workflow_dispatch: # Manuelles Auslösen ermöglichen
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests # Für API-Anfragen
+
+      - name: Generate Repository Stats SVG
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPO_OWNER: Satoramy-PRAI # Dein GitHub-Benutzername/Organisation
+          GITHUB_REPO_NAME: RFOF-NETWORK # Name deines Repositories
+        run: |
+          python -c '
+import requests
+import json
+import os
+
+def get_repo_stats(owner, repo, token):
+    headers = {"Authorization": f"token {token}"}
+    # GraphQL Query, um Stars, Forks, Pull Requests und Commits abzurufen
+    # GitHub GraphQL API ist besser für aggregierte Daten
+    query = """
+    query($owner: String!, $repo: String!) {
+      repository(owner: $owner, name: $repo) {
+        stargazerCount
+        forkCount
+        pullRequests(states: [OPEN, CLOSED, MERGED]) {
+          totalCount
+        }
+        # Commits sind über GraphQL etwas komplexer abzurufen (History eines Branches)
+        # Für Einfachheit, rufen wir nur die Gesamtcommits des Default-Branches ab
+        defaultBranchRef {
+          target {
+            ... on Commit {
+              history {
+                totalCount
+              }
+            }
+          }
+        }
+      }
+    }
+    """
+    variables = {"owner": owner, "repo": repo}
+    response = requests.post("https://api.github.com/graphql", json={"query": query, "variables": variables}, headers=headers)
+    response.raise_for_status()
+    data = response.json()["data"]["repository"]
+    
+    # Versuche, die Pull Request Daten von der REST API zu holen, da GraphQL PRs nur spezifisch countet
+    # Oder passe die GraphQL Query an um mehr PR Details zu bekommen
+    rest_url_prs = f"https://api.github.com/repos/{owner}/{repo}/pulls?state=all"
+    prs_response = requests.get(rest_url_prs, headers=headers)
+    prs_response.raise_for_status()
+    all_prs = len(prs_response.json()) # Alle Pull Requests (open, closed, merged)
+
+    return {
+        "stars": data["stargazerCount"],
+        "forks": data["forkCount"],
+        "pull_requests": all_prs, # Verwende REST API für PRs
+        "commits": data["defaultBranchRef"]["target"]["history"]["totalCount"] if data["defaultBranchRef"] else 0
+    }
+
+def generate_chart_svg(stats):
+    max_value = max(stats.values())
+    # Skalierungsfaktor für die Balken
+    bar_width_scale = 350 / max_value if max_value > 0 else 1 
+
+    svg_content = f"""<svg width="600" height="250" viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg">
+      <style>
+        .chart-background {{ fill: #1a1a2e; border-radius: 10px; }}
+        .chart-title {{ font-family: sans-serif; font-size: 20px; font-weight: bold; fill: gold; text-anchor: middle; }}
+        .label {{ font-family: sans-serif; font-size: 14px; fill: white; }}
+        .value {{ font-family: monospace; font-size: 18px; fill: white; font-weight: bold; }}
+        .bar {{ fill: #3b82f6; }}
+      </style>
+
+      <rect class="chart-background" x="0" y="0" width="600" height="250" rx="10" ry="10"/>
+      <text x="300" y="30" class="chart-title">RFOF-NETWORK Repository Analytics</text>
+
+      <g transform="translate(50, 70)">
+        <text x="0" y="-10" class="label">Stars:</text>
+        <rect x="0" y="0" width="{stats["stars"] * bar_width_scale}" height="20" class="bar"/>
+        <text x="{stats["stars"] * bar_width_scale + 10}" y="15" class="value">{stats["stars"]}</text>
+
+        <text x="0" y="40" class="label">Forks:</text>
+        <rect x="0" y="50" width="{stats["forks"] * bar_width_scale}" height="20" class="bar"/>
+        <text x="{stats["forks"] * bar_width_scale + 10}" y="65" class="value">{stats["forks"]}</text>
+
+        <text x="0" y="90" class="label">Pull Requests:</text>
+        <rect x="0" y="100" width="{stats["pull_requests"] * bar_width_scale}" height="20" class="bar"/>
+        <text x="{stats["pull_requests"] * bar_width_scale + 10}" y="115" class="value">{stats["pull_requests"]}</text>
+
+        <text x="0" y="140" class="label">Commits:</text>
+        <rect x="0" y="150" width="{stats["commits"] * bar_width_scale}" height="20" class="bar"/>
+        <text x="{stats["commits"] * bar_width_scale + 10}" y="165" class="value">{stats["commits"]}</text>
+      </g>
+    </svg>"""
+    
+    with open("assets/repo_activity_chart.svg", "w") as f:
+        f.write(svg_content)
+
+token = os.environ.get("GITHUB_TOKEN")
+owner = os.environ.get("GITHUB_REPO_OWNER")
+repo = os.environ.get("GITHUB_REPO_NAME")
+
+stats_data = get_repo_stats(owner, repo, token)
+generate_chart_svg(stats_data)
+          '
+      - name: Commit changes
+        run: |
+          git add assets/repo_activity_chart.svg
+          git diff --staged --quiet || git commit -m "chore: Regenerate repository stats chart"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
