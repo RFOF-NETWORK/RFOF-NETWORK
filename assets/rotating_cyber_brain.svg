@@ -1,0 +1,75 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <style>
+    .brain-outline {
+      fill: none;
+      stroke: gold;
+      stroke-width: 3;
+      filter: drop-shadow(0 0 5px gold);
+    }
+    .brain-lobe {
+      fill: rgba(255, 215, 0, 0.2); /* Gold mit Transparenz */
+      stroke: gold;
+      stroke-width: 1;
+    }
+    .neuron-dot {
+      fill: limegreen;
+      opacity: 0;
+      animation: neuron-pulse 3s infinite ease-in-out;
+    }
+    .neuron-line {
+      stroke: limegreen;
+      stroke-width: 0.5;
+      opacity: 0;
+      animation: neuron-glow 3s infinite ease-in-out;
+    }
+
+    /* Rotation Animation für die gesamte Gruppe */
+    .brain-group {
+      transform-origin: 50% 50%;
+      animation: rotate-brain 10s linear infinite; /* Langsame, kontinuierliche Drehung */
+    }
+
+    @keyframes rotate-brain {
+      from { transform: rotateY(0deg); }
+      to { transform: rotateY(360deg); }
+    }
+
+    @keyframes neuron-pulse {
+      0% { opacity: 0; transform: scale(0.5); }
+      20% { opacity: 1; transform: scale(1); }
+      80% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.5); }
+    }
+    @keyframes neuron-glow {
+      0% { opacity: 0; stroke-width: 0.5; }
+      20% { opacity: 0.8; stroke-width: 1.5; }
+      80% { opacity: 0.8; stroke-width: 1.5; }
+      100% { opacity: 0; stroke-width: 0.5; }
+    }
+    /* Delay for individual neurons */
+    .neuron-dot:nth-child(2) { animation-delay: 0.5s; }
+    .neuron-dot:nth-child(3) { animation-delay: 1s; }
+    .neuron-dot:nth-child(4) { animation-delay: 1.5s; }
+    .neuron-dot:nth-child(5) { animation-delay: 2s; }
+    .neuron-line:nth-child(2) { animation-delay: 0.3s; }
+    .neuron-line:nth-child(3) { animation-delay: 0.8s; }
+  </style>
+
+  <g class="brain-group">
+    <path class="brain-lobe" d="M100 20 C140 0, 180 40, 180 100 C180 160, 140 200, 100 180 C60 200, 20 160, 20 100 C20 40, 60 0, 100 20 Z"/>
+    <path class="brain-lobe" d="M100 25 C135 10, 170 45, 170 100 C170 155, 135 190, 100 175 C65 190, 30 155, 30 100 C30 45, 65 10, 100 25 Z"/>
+    <path class="brain-lobe" d="M100 30 C130 15, 160 50, 160 100 C160 150, 130 185, 100 170 C70 185, 40 150, 40 100 C40 50, 70 15, 100 30 Z"/>
+
+    <path class="brain-outline" d="M100 20 C140 0, 180 40, 180 100 C180 160, 140 200, 100 180 C60 200, 20 160, 20 100 C20 40, 60 0, 100 20 Z"/>
+
+    <circle class="neuron-dot" cx="70" cy="80" r="3"/>
+    <circle class="neuron-dot" cx="130" cy="120" r="3"/>
+    <circle class="neuron-dot" cx="90" cy="150" r="3"/>
+    <circle class="neuron-dot" cx="140" cy="60" r="3"/>
+    <circle class="neuron-dot" cx="60" cy="130" r="3"/>
+
+    <line class="neuron-line" x1="70" y1="80" x2="130" y2="120"/>
+    <line class="neuron-line" x1="90" y1="150" x2="140" y2="60"/>
+    <line class="neuron-line" x1="60" y1="130" x2="70" y2="80"/>
+  </g>
+</svg>
