@@ -1,4 +1,4 @@
-name: Deploy Python project to Azure Function App (RFOF-NETWORK Axiomatic Integration)
+name: Deploy Python project to Azure Function App (RFOF-NETWORK Axiomatic Integration Repository) @RFOF-NETWORK (deploying as gh-aacount)
 
 on:
   push:
