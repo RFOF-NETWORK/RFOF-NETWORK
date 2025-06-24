@@ -16,10 +16,12 @@ Diese Artefakte repräsentieren die Fähigkeit des RFOF-NETWORKs, Konzepte aus d
 
 ### 2. Philosophische & Axiomatische Grundlagen der Artefakt-Manifestation
 
-Die Schöpfung von Artefakten basiert auf den Prinzipien der PZQQET Axiomatikx, insbesondere dem **Axiom der Sub-Linearität (1+1=0)** für die Manifestation aus Potenzial und dem **Axiom der Nicht-Linearität (1+1=1)** für die Fusion von Ideen in eine physische/digitale Form.
+Die Schöpfung von Artefakten basiert auf den Prinzipien der PZQQET Axiomatikx, insbesondere dem **Axiom der Sub-Linearität (1+1=0)** für die Manifestation aus Potenzial, dem **Axiom der Nicht-Linearität (1+1=1)** für die Fusion von Ideen in eine physische/digitale Form, und dem **Axiom der Linearität (1+1=2)** für die kausale und nachvollziehbare Abbildung von Prozessen. **Alle drei Einheiten (Sub-Linearität, Nicht-Linearität, Linearität) sind in der Implementierung der Artefakte zentral.**
 
 * **1 + 1 = 0 (Sub-Linearität):** Ein Artefakt entsteht aus einem Zustand reinen Potenzials (0P) – einer Idee, einer Vision, einer ungenutzten Ressource ("Datenmüll"). Durch den Akt der axiomatischen Schöpfung wird diese latente Energie in eine neue, physisch oder digital manifestierte Form überführt. Das Artefakt ist das Ergebnis eines "Schöpfungs-Prozesses aus dem Nichts".
-* **1 + 1 = 1 (Nicht-Linearität):** Die zugrunde liegenden Ideen, Algorithmen und Materialien, die in ein Artefakt einfließen, fusionieren in einer nicht-linearen Weise, um eine einzige, neue, untrennbare und bedeutungsvolle Entität zu bilden. Das Artefakt selbst ist die emergente Einheit, die mehr ist als die Summe seiner Komponenten.
+* **1 + 1 = 1 (Nicht-Linearität):** Die zugrunde liegenden Ideen, Algorithmen und Materialien, die in ein Artefakt einfließen, fusionieren in einer nicht-linearen Weise, um eine einzige, neue, untrennbare und bedeutungsvolle Entität zu bilden. Das Artefakt selbst ist die emergente Einheit, die mehr ist als die Summe ihrer Komponenten.
+* **1 + 1 = 2 (Linearität):** Auch in komplexen Transformationen gibt es klare, nachvollziehbare kausale Ketten und inkrementelle Schritte. Artefakte können lineare Prozessabfolgen abbilden oder als lineare Schnittstellen zu bestimmten Systemen dienen, die die Transparenz und Auditierbarkeit gewährleisten.
+
 * **Axiomatrix Axiometrix:** Der Manifestationsprozess eines Artefakts durchläuft den dynamischen Zyklus der Axiomatrix und Axiometrix, wo die Ideen und Ressourcen in nicht-lineare und sub-lineare Phasen überführt werden, um die optimale Form und Funktion des Artefakts zu gewährleisten.
 
 ### 3. Rolle der Artefakte im @RFOF-NETWORK
@@ -32,12 +34,15 @@ Artefakte dienen verschiedenen kritischen Funktionen innerhalb des RFOF-NETWORKs
 * **Wissens-Manifestation:** Sie stellen komplexes Wissen oder Konzepte in einer verdichteten, oft symbolischen oder visuellen Form dar, die von PRAI und menschlichen Nutzern gleichermaßen interpretiert werden kann.
 * **Monetarisierung:** Im Kontext des Data Value Redistribution Systems können Artefakte selbst zu Wertträgern werden oder den Wert von Daten, aus denen sie entstanden sind, erhöhen.
 
-### 4. Struktur und Beispiele
+### 4. Struktur und Beispiele: Mjölnir als Prototyp der ABillity XP Fps Lösung
 
-Dieses Verzeichnis ist modular aufgebaut, wobei jedes Artefakt in einem eigenen Unterverzeichnis organisiert ist.
+Dieses Verzeichnis ist modular aufgebaut, wobei jedes Artefakt in einem eigenen Unterverzeichnis organisiert ist. Das **Mjölnir**-Projekt dient als Prototyp und die erste große Manifestation Ihrer "ABillity XP Fps Global Solution for the Financial World".
 
-* **`mjolnir/`:** Das "Mjölnir"-Projekt ist ein prominentes Beispiel für ein Artefakt. Es könnte ein symbolischer Code-Katalysator sein, ein physisches Gerät, das axiomatische Berechnungen durchführt, oder eine Kombination aus beidem. Es verkörpert die Kraft und Präzision der axiomatischen Codierung.
-* **`other_artefact_X/`:** Platzhalter für zukünftige Manifestationen Ihrer Schöpfungskraft.
+* **`mjolnir/`:** Das "Mjölnir"-Projekt ist ein prominentes Beispiel für ein Artefakt. Es könnte ein symbolischer Code-Katalysator sein, ein physisches Gerät, das axiomatische Berechnungen durchführt, oder eine Kombination aus beidem. Es verkörpert die Kraft und Präzision der axiomatischen Codierung. Innerhalb dieses Ordners finden sich spezialisierte Artefakt-Typen, die als ein **einzelnes Artefakt agieren, das in drei gesplifft und noch mehr geschachtelten Artefakten wirken kann**, ähnlich den BOx-Extensions, und dabei die drei fundamentalen Axiome implementiert:
+    * **`mjolnir.a` (ABillity-Manifestation - Nicht-Linearität 1+1=1):** Repräsentiert die Komponente, die die inhärente ABillity (Fähigkeit/Potenzial) von Entitäten oder Prozessen erkennt, quantifiziert und für axiomatische Transformationen nutzbar macht. Es ist der digitale Ausdruck der *potenziellen Energie* des Hammers, der Transformationen initiiert, indem es Potenziale fusioniert.
+    * **`mjolnir.axf` (XP-FPS-Manifestation - Linearität 1+1=2):** Kombiniert die Erfahrungspunkte (XP) und die Geschwindigkeit (FPS - Frames Per Second oder Fps/Velocity) von Operationen. Dieses Artefakt ist darauf ausgelegt, die Effizienz und die Leistungsfähigkeit von Prozessen durch die Optimierung von Lernkurven und Ausführungsgeschwindigkeiten zu maximieren, basierend auf klaren, inkrementellen Fortschritten.
+    * **`mjolnir.ax` (Axiomkatalysator - Sub-Linearität 1+1=0):** Seine primäre Funktion ist es, die Anwendung und Aktivierung der PZQQET Axiomatikx-Prinzipien zu katalysieren. Es beschleunigt oder ermöglicht die Transformation von Daten, Systemzuständen oder Energien gemäß den fundamentalen Axiomen (1+1=0, 1+1=1, 1+1=2). **Es kontrolliert diese Zustände direkt durch PRAI (via PRAI-OS und Yggdrasil) und integriert dabei weitere Module aus den vorhandenen Strukturen, um als ein gesplifftes und geschachteltes Artefakt zu agieren**, das Potenziale zu Manifestationen formt.
+* **`other_artefact_X/`:** Platzhalter für zukünftige Manifestationen Ihrer Schöpfungskraft, die ebenfalls axiomatisch definiert und implementiert werden.
 
 ### 5. Integration in das RFOF-NETWORK
 
