@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">
-  <img src="https://github.com/RFOF-NETWORK/RFOF-NETWORK/blob/main/assets/rfof_network_gold.svg?raw=true" alt="@RFOF-NETWORK" width="600">
+  <img src="https://github.com/RFOF-NETWORK/RFOF-NETWORK/blob/main/assets/rfof_network_gold.svg?raw=true" alt="PRAI-OS = @RFOF-NETWORK" width="600">
 </h1>
 
 <p align="center">
