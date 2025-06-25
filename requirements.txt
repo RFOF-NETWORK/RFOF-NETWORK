@@ -39,7 +39,7 @@ pandas==2.2.2                  # Datenanalyse und -manipulation
 
 # Quanten-Kryptografie (BOx-Blockchain-Extensions/Quantum_Encryption_Layer)
 # --------------------------------------------------------------------------
-qiskit==1.0.2                  # Für Quantencomputing und -Kryptografie-Experimente
+qiskit==1.4.2                  # Für Quantencomputing und -Kryptografie-Experimente
 cryptography==44.0.1           # Allgemeine Kryptografie-Bibliothek (für Post-Quantum-Kryptografie-Konzepte relevant)
 
 # Web UI / Flask/Django (optional, falls ein Python-Backend für WebUI in PRAI-OS/applications/webUI)
