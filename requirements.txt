@@ -11,7 +11,7 @@ pyyaml==6.0.1                  # Zum Parsen/Generieren von YAML-Dateien (z.B. Wo
 # -------------------------
 # Für den Betrieb von Python-basierten Azure Functions
 azure-functions==1.17.0        # Azure Functions Python Worker (wichtig für den Runner)
-azure-identity==1.16.0         # Für Azure AD Authentifizierung
+azure-identity==1.16.1         # Für Azure AD Authentifizierung
 azure-storage-blob==12.19.1    # Für Interaktion mit Azure Blob Storage (Speichern von Assets, Logs)
 azure-keyvault-secrets==4.8.0  # Für den Zugriff auf Geheimnisse in Azure Key Vault
 
