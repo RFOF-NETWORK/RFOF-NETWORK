@@ -45,7 +45,7 @@ cryptography==42.0.7           # Allgemeine Kryptografie-Bibliothek (für Post-Q
 # Web UI / Flask/Django (optional, falls ein Python-Backend für WebUI in PRAI-OS/applications/webUI)
 # ----------------------------------------------------------------------------------------------------
 flask==3.0.3                   # Leichtgewichtiges Web-Framework
-gunicorn==22.0.0               # WSGI HTTP Server für Python (für Produktion)
+gunicorn==23.0.0               # WSGI HTTP Server für Python (für Produktion)
 
 # Telegram Bot (PRAI-OS/applications/telegramBot)
 # -----------------------------------------------
