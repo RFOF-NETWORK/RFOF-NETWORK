@@ -1,0 +1,84 @@
+{
+  "project_name": "RFOF-NETWORK",
+  "version": "0.0.0.1.0.0.0.1",
+  "description": "Critical network parameters, addresses, and identifiers for the RFOF-NETWORK ecosystem. Axiomatically managed and secured.",
+  "last_updated": "2025-06-25T00:00:00Z",
+  
+  "network_globals": {
+    "PZQQET_AXIOMATICS_ROOT_HASH": "0xAXIOMROOT_PZQQET_HASH_EXAMPLE",
+    "YGGDRASIL_GENESIS_SEED": "0xYGGDRASIL_GENESIS_SEED_EXAMPLE",
+    "PRAI_INTERNAL_IDENTITY": "42.0",
+    "RFOF_NETWORK_ROOT_ID": "{{<-> @RFOF-NETWORK }}",
+    "MJOLNIR_ARTEFACT_PRIMARY_ID": "mjolnir.ax_genesis",
+    "SECURE_ENCRYPTION_HASH_ROOT": "81e3ee2b2ff6ad7b7c35509e14e8a8e7f856647f96be7a365be0120061a596b8"
+  },
+
+  "blockchain_addresses": {
+    "PRAI_OS_CONTRACTS": {
+      "PZQQETFoundation_sol": "0xPZQQETFoundationContractAddress",
+      "TokenManager_sol": "0xTokenManagerContractAddress",
+      "AccessControl_sol": "0xAccessControlContractAddress",
+      "OmnistonIntegration_sol": "0xOmnistonIntegrationContractAddress"
+    },
+    "READY_FOR_OUR_FUTURE_CONTRACTS": {
+      "RFOFNetworkCore_sol": "0xRFOFNetworkCoreContractAddress",
+      "DataRegistry_sol": "0xDataRegistryContractAddress",
+      "ConsensusModule_sol": "0xConsensusModuleContractAddress",
+      "TokenDistribution_sol": "0xTokenDistributionContractAddress",
+      "NetworkGovernance_sol": "0xNetworkGovernanceContractAddress"
+    },
+    "TOKEN_CONTRACTS": {
+      "ABILITY_Token": {
+        "symbol": "ABILITY",
+        "address": "0xABILITYTokenContractAddress",
+        "decimals": 18
+      },
+      "NANO_Token": {
+        "symbol": "NANO",
+        "address": "0xNANOTokenContractAddress",
+        "decimals": 18
+      }
+    },
+    "DONATION_ADDRESSES": {
+      "TON_Native_Coin": "EQ_TON_DONATION_ADDRESS",
+      "Bitcoin_BTC": "1BitcoinDonationAddress",
+      "Ethereum_ETH": "0xEthereumDonationAddress",
+      "USDT_MultiChain": "0xUSDTONChainDonationAddress"
+    },
+    "MAJORANA_CHIP_INTERACTION_ADDRESS": "0xMajoranaChipInterfaceContractAddress"
+  },
+
+  "network_endpoints": {
+    "YGGDRASIL_BOOTSTRAP_NODES": [
+      "yggdrasil://node1.rfof.network:4242",
+      "yggdrasil://node2.rfof.network:4242",
+      "yggdrasil://node3.rfof.network:4242"
+    ],
+    "TON_LITECLIENT_ENDPOINTS": [
+      { "url": "toncenter.com_api_example_1", "public_key": "TON_PUB_KEY_1" },
+      { "url": "toncenter.com_api_example_2", "public_key": "TON_PUB_KEY_2" }
+    ],
+    "ETHEREUM_RPC_GATEWAYS": [
+      "https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID",
+      "https://eth-mainnet.alchemyapi.io/v2/YOUR_ALCHEMY_API_KEY"
+    ],
+    "IPFS_GATEWAYS": [
+      "https://ipfs.io/ipfs/",
+      "https://dweb.link/ipfs/"
+    ],
+    "XPORTAL_API_ENDPOINT": "https://api.xportal.com/v1"
+  },
+
+  "external_project_links": {
+    "GeneFusioNear_Repository": "https://github.com/GeneFusioNear/GeneFusioNear",
+    "RFOF_NETWORK_Official_Website": "https://www.RFOF-NETWORK.com",
+    "PRAI_OS_WebUI": "https://prai.os.rfof.network",
+    "Telegram_Bot_Invite": "https://t.me/rfofblockchain_bot"
+  },
+
+  "developer_info": {
+    "github_profile": "@Satoramy-PRAI",
+    "contact_email": "contact@rfof-network.com",
+    "licensing_details_see": "LICENSE"
+  }
+}
