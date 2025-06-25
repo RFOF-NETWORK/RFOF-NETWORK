@@ -27,7 +27,7 @@ numpy==1.26.4                  # Mathematische Operationen, oft eine Abhängigke
 # Blockchain / Krypto-Integration (READY-FOR-OUR-FUTURE/BOx-Blockchain-Extensions)
 # -------------------------------------------------------------------------------
 web3==6.15.1                   # Ethereum-Kommunikation (Bleibt auf der neuesten Version)
-eth-abi==4.3.0                 # Ethereum Application Binary Interface (AUF KOMPATIBLE VERSION MIT web3 AKTUALISIERT)
+eth-abi==5.0.1                 # Ethereum Application Binary Interface (AUF KOMPATIBLE VERSION MIT web3 AKTUALISIERT)
 # solidity-json-abi -- ENTFERNT: Paket nicht auf PyPI gefunden und verursacht Installationsfehler.
 pysha3==1.0.6                  # SHA3 (Keccak) Hashing
 # KI / Neuronale Netze (PRAI-OS/AI_Integration_Layer, prai-neuron-manager)
