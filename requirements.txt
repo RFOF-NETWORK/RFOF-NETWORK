@@ -1,7 +1,7 @@
 # Core / Allgemeine Python-Funktionalität
 # -------------------------------------
 # Diese Pakete sind oft grundlegend für viele Python-Projekte.
-requests==2.31.0               # Für HTTP-Anfragen, z.B. API-Interaktionen, GitHub API
+requests==2.32.4               # Für HTTP-Anfragen, z.B. API-Interaktionen, GitHub API
 beautifulsoup4==4.12.3         # Wenn Web-Scraping Teil der Datenbeschaffung ist (z.B. für "Data_Value_Redistribution_System")
 lxml==4.9.3                    # Performance-Optimierung für BeautifulSoup4
 python-dotenv==1.0.1           # Zum Laden von Umgebungsvariablen (.env-Dateien)
