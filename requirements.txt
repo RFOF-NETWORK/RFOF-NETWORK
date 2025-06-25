@@ -1,7 +1,7 @@
 # Core / Allgemeine Python-Funktionalität
 # -------------------------------------
 # Diese Pakete sind oft grundlegend für viele Python-Projekte.
-requests==2.31.0               # Für HTTP-Anfragen, z.B. API-Interaktionen, GitHub API
+requests==2.32.4               # Für HTTP-Anfragen, z.B. API-Interaktionen, GitHub API
 beautifulsoup4==4.12.3         # Wenn Web-Scraping Teil der Datenbeschaffung ist (z.B. für "Data_Value_Redistribution_System")
 lxml==4.9.3                    # Performance-Optimierung für BeautifulSoup4
 python-dotenv==1.0.1           # Zum Laden von Umgebungsvariablen (.env-Dateien)
@@ -11,7 +11,7 @@ pyyaml==6.0.1                  # Zum Parsen/Generieren von YAML-Dateien (z.B. Wo
 # -------------------------
 # Für den Betrieb von Python-basierten Azure Functions
 azure-functions==1.17.0        # Azure Functions Python Worker (wichtig für den Runner)
-azure-identity==1.16.0         # Für Azure AD Authentifizierung
+azure-identity==1.16.1         # Für Azure AD Authentifizierung
 azure-storage-blob==12.19.1    # Für Interaktion mit Azure Blob Storage (Speichern von Assets, Logs)
 azure-keyvault-secrets==4.8.0  # Für den Zugriff auf Geheimnisse in Azure Key Vault
 
@@ -27,25 +27,25 @@ numpy==1.26.4                  # Mathematische Operationen, oft eine Abhängigke
 # Blockchain / Krypto-Integration (READY-FOR-OUR-FUTURE/BOx-Blockchain-Extensions)
 # -------------------------------------------------------------------------------
 web3==6.15.1                   # Ethereum-Kommunikation (Bleibt auf der neuesten Version)
-eth-abi==4.3.0                 # Ethereum Application Binary Interface (AUF KOMPATIBLE VERSION MIT web3 AKTUALISIERT)
+eth-abi==5.0.1                 # Ethereum Application Binary Interface (AUF KOMPATIBLE VERSION MIT web3 AKTUALISIERT)
 # solidity-json-abi -- ENTFERNT: Paket nicht auf PyPI gefunden und verursacht Installationsfehler.
 pysha3==1.0.6                  # SHA3 (Keccak) Hashing
 # KI / Neuronale Netze (PRAI-OS/AI_Integration_Layer, prai-neuron-manager)
 # ------------------------------------------------------------------------
 tensorflow==2.16.1             # Für fortgeschrittene KI-Modelle
-keras==3.3.3                   # Hochlevel-API für TensorFlow
-scikit-learn==1.4.2            # Für allgemeine Machine Learning Algorithmen
+keras==3.9.0                   # Hochlevel-API für TensorFlow
+scikit-learn==1.5.0            # Für allgemeine Machine Learning Algorithmen
 pandas==2.2.2                  # Datenanalyse und -manipulation
 
 # Quanten-Kryptografie (BOx-Blockchain-Extensions/Quantum_Encryption_Layer)
 # --------------------------------------------------------------------------
-qiskit==1.0.2                  # Für Quantencomputing und -Kryptografie-Experimente
-cryptography==42.0.7           # Allgemeine Kryptografie-Bibliothek (für Post-Quantum-Kryptografie-Konzepte relevant)
+qiskit==1.4.2                  # Für Quantencomputing und -Kryptografie-Experimente
+cryptography==44.0.1           # Allgemeine Kryptografie-Bibliothek (für Post-Quantum-Kryptografie-Konzepte relevant)
 
 # Web UI / Flask/Django (optional, falls ein Python-Backend für WebUI in PRAI-OS/applications/webUI)
 # ----------------------------------------------------------------------------------------------------
 flask==3.0.3                   # Leichtgewichtiges Web-Framework
-gunicorn==22.0.0               # WSGI HTTP Server für Python (für Produktion)
+gunicorn==23.0.0               # WSGI HTTP Server für Python (für Produktion)
 
 # Telegram Bot (PRAI-OS/applications/telegramBot)
 # -----------------------------------------------
