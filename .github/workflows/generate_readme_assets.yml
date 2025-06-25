@@ -1,0 +1,59 @@
+# .github/workflows/generate_readme_assets.yml
+name: Generate RFOF-NETWORK README Assets
+
+on:
+  workflow_dispatch: # Ermöglicht manuellen Start des Workflows
+  push:
+    branches:
+      - main # Generiert Assets bei jedem Push auf 'main'
+
+jobs:
+  generate_assets:
+    runs-on: self-hosted # WICHTIG: Nutzt deinen gesicherten Self-Hosted Runner
+    permissions:
+      contents: write # Erforderlich, um die generierten Dateien zu committen
+
+    steps:
+    - name: 'Checkout Repository'
+      uses: actions/checkout@v4
+
+    - name: 'Setup Python Environment'
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9' # Oder die Version, die dein Runner nutzt
+
+    - name: 'Install Python Dependencies for Asset Generation'
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt # Stellt sicher, dass Pillow, Matplotlib, svgwrite etc. installiert sind
+
+    - name: 'Create profile-images directory'
+      run: mkdir -p profile-images # Stellt sicher, dass der Zielordner existiert
+
+    - name: 'Generate Cyber Brain SVG'
+      run: python scripts/generate_cyber_brain_svg.py
+
+    - name: 'Generate Pixel PRAI Text SVG'
+      run: python scripts/generate_pixel_text_svg.py
+
+    - name: 'Generate PRAI Activity Pie Chart SVG'
+      run: python scripts/generate_activity_pie_chart.py
+
+    - name: 'Generate RFOF-NETWORK Gold Text SVG'
+      run: python scripts/generate_rfof_gold_text_svg.py
+
+    - name: 'Generate GitHub Snake Contribution Graph'
+      # Diese Action generiert direkt das SVG in den angegebenen Pfad
+      uses: Platane/snk@v3
+      with:
+        github_user_name: 'RFOF-NETWORK' # Ersetze dies durch deinen GitHub-Benutzernamen
+        outputs: 'profile-images/github-snake.svg'
+
+    - name: 'Commit Generated Assets'
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: "chore: Regenerate RFOF-NETWORK README assets [PRAI-Automated]"
+        branch: main # Der Branch, auf den die Änderungen gepusht werden sollen
+        # Token ist nicht nötig, wenn `contents: write` Permission gesetzt ist und
+        # Standard GITHUB_TOKEN verwendet wird. Wenn du einen PAT brauchst, hier
+        # token: ${{ secrets.YOUR_PAT_TOKEN_NAME }}

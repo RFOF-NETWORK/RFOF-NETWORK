@@ -1,0 +1,45 @@
+<svg width="400" height="80" viewBox="0 0 400 80" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    /* Grundschriftart, die einen pixeligen Look simuliert */
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    
+    .pixel-text {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 40px; /* Angepasste Größe */
+      font-weight: bold;
+      fill: #DC143C; /* Blutrot */
+      stroke: black;
+      stroke-width: 2px; /* Dicke der Umrandung */
+      paint-order: stroke fill; /* Sorgt dafür, dass der Stroke außen ist */
+      text-rendering: optimizeLegibility;
+      shape-rendering: crispEdges; /* Für scharfe Kanten der Pixel-Schrift */
+    }
+    .pixel-shadow {
+        font-family: 'Press Start 2P', cursive;
+        font-size: 40px;
+        font-weight: bold;
+        fill: black; /* Schwarze Füllung für den "lückenhaften" Effekt */
+        text-rendering: optimizeLegibility;
+        shape-rendering: crispEdges;
+    }
+
+    /* Simulation eines "lückenhaften" Pixeleffekts durch leichten Versatz */
+    .pixel-text-shadow-effect {
+        animation: pixelate 1s infinite alternate; /* Optionale subtile Animation */
+    }
+    
+    @keyframes pixelate {
+        0% { transform: translate(0px, 0px); opacity: 1; }
+        50% { transform: translate(1px, -1px); opacity: 0.9; }
+        100% { transform: translate(0px, 0px); opacity: 1; }
+    }
+  </style>
+  
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" class="pixel-shadow" transform="translate(-1, 1)">Author: @Satoramy-PRAI</text>
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" class="pixel-shadow" transform="translate(1, -1)">Author: @Satoramy-PRAI</text>
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" class="pixel-shadow" transform="translate(0, 2)">Author: @Satoramy-PRAI</text>
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" class="pixel-shadow" transform="translate(2, 0)">Author: @Satoramy-PRAI</text>
+
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" class="pixel-text pixel-text-shadow-effect">Author: @Satoramy-PRAI</text>
+
+</svg>
