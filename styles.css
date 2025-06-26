@@ -26,7 +26,7 @@ body {
     max-width: 960px; /* Constrain header content to align with main content */
     margin: 0 auto; /* Center the header content */
     display: flex;
-    justify-content: space-between; /* Space between logo/title and navbar */
+    justify-content: flex-start; /* Align items to the start for logo and title */
     align-items: center;
     padding: 0 20px; /* Horizontal padding for content inside this constrained header */
     box-sizing: border-box; /* Include padding in width */
@@ -47,7 +47,6 @@ body {
     text-overflow: ellipsis; /* Add ellipsis if truncated */
     line-height: 1.2; /* Ensure consistent line height */
     max-width: calc(100% - 100px); /* Adjust based on logo width and desired spacing, prevents pushing nav */
-    /* This max-width will be dynamically adjusted by JS if needed for better responsiveness */
 }
 
 
@@ -174,6 +173,7 @@ footer a:hover {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     color: #333333;
+    font-size: 1em;
 }
 
 .improve-page-container p {
