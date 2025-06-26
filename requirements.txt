@@ -1,63 +1,75 @@
+# requirements.txt für das RFOF-NETWORK (Globales Projekt)
+# --------------------------------------------------------
+# Dieses File listet alle Python-Abhängigkeiten auf, die für den Betrieb deiner
+# GitHub Actions, Azure Functions, und aller Python-basierten Module innerhalb von
+# READY-FOR-OUR-FUTURE, PRAI-OS, Yggdrasil_Codebase und Artefakten benötigt werden.
+
 # Core / Allgemeine Python-Funktionalität
 # -------------------------------------
-# Diese Pakete sind oft grundlegend für viele Python-Projekte.
-requests==2.32.4               # Für HTTP-Anfragen, z.B. API-Interaktionen, GitHub API
-beautifulsoup4==4.12.3         # Wenn Web-Scraping Teil der Datenbeschaffung ist (z.B. für "Data_Value_Redistribution_System")
-lxml==4.9.3                    # Performance-Optimierung für BeautifulSoup4
-python-dotenv==1.0.1           # Zum Laden von Umgebungsvariablen (.env-Dateien)
-pyyaml==6.0.1                  # Zum Parsen/Generieren von YAML-Dateien (z.B. Workflows, Konfigurationen)
+requests==2.31.0               # Für HTTP-Anfragen (z.B. GitHub API), auch wenn Yggdrasil eigenes Protokoll hat, bleibt dies für externe Interaktionen relevant.
+beautifulsoup4==4.12.3         # Wenn Web-Scraping Teil der Datenbeschaffung ist (z.B. für "Data_Value_Redistribution_System").
+lxml==4.9.3                    # Performance-Optimierung für BeautifulSoup4.
+python-dotenv==1.0.1           # Zum Laden von Umgebungsvariablen (.env-Dateien) in Python-Skripten.
+pyyaml==6.0.1                  # Zum Parsen/Generieren von YAML-Dateien (z.B. Workflows, Konfigurationen).
 
 # Azure Functions Spezifisch
 # -------------------------
-# Für den Betrieb von Python-basierten Azure Functions
-azure-functions==1.17.0        # Azure Functions Python Worker (wichtig für den Runner)
-azure-identity==1.16.1         # Für Azure AD Authentifizierung
-azure-storage-blob==12.19.1    # Für Interaktion mit Azure Blob Storage (Speichern von Assets, Logs)
-azure-keyvault-secrets==4.8.0  # Für den Zugriff auf Geheimnisse in Azure Key Vault
+azure-functions==1.17.0        # Azure Functions Python Worker.
+azure-identity==1.16.0         # Für Azure AD Authentifizierung in Azure Functions.
+azure-storage-blob==12.19.1    # Für Interaktion mit Azure Blob Storage.
+azure-keyvault-secrets==4.8.0  # Für den Zugriff auf Geheimnisse in Azure Key Vault.
 
-# GitHub API / Automatisierung (für generate_readme_snake.yml & generate_repo_stats.yml)
-# -------------------------------------------------------------------------------------
-# Für die Interaktion mit der GitHub API und das Generieren von SVGs
-PyGithub==2.2.0                # Python-Bibliothek für die GitHub API
-svgwrite==1.4.3                # Zum Generieren von SVG-Dateien (für Custom SVGs wie pixel_emoji.svg, author_satoramy_praio.svg)
-pillow==10.3.0                 # Für Bildverarbeitung (wenn SVGs z.B. aus Pixeldaten erstellt werden)
-matplotlib==3.8.4              # Wenn Diagramme oder komplexe Visualisierungen generiert werden (repo_activity_chart.svg)
-numpy==1.26.4                  # Mathematische Operationen, oft eine Abhängigkeit von Matplotlib
+# GitHub API / Automatisierung (für README.md Asset Generierung)
+# -------------------------------------------------------------
+PyGithub==2.2.0                # Python-Bibliothek für die GitHub API (Datenabruf für Diagramme/Snake).
+svgwrite==1.4.3                # Zum Generieren von SVG-Dateien (Pixeltext, Gehirn, Kreise).
+pillow==10.3.0                 # Für Bildverarbeitung (z.B. in Asset-Generierungssskripten).
+matplotlib==3.8.4              # Wenn Diagramme oder komplexe Visualisierungen generiert werden (z.B. prozentualer Kreis).
+numpy==1.26.4                  # Mathematische Operationen, oft eine Abhängigkeit von Matplotlib.
 
-# Blockchain / Krypto-Integration (READY-FOR-OUR-FUTURE/BOx-Blockchain-Extensions)
-# -------------------------------------------------------------------------------
-web3==6.15.1                   # Ethereum-Kommunikation (Bleibt auf der neuesten Version)
-eth-abi==5.0.1                 # Ethereum Application Binary Interface (AUF KOMPATIBLE VERSION MIT web3 AKTUALISIERT)
-# solidity-json-abi -- ENTFERNT: Paket nicht auf PyPI gefunden und verursacht Installationsfehler.
-pysha3==1.0.6                  # SHA3 (Keccak) Hashing
+# Blockchain / Krypto-Integration (Allgemein und für READY-FOR-OUR-FUTURE)
+# -----------------------------------------------------------------------
+web3==6.15.1                   # Ethereum-Kommunikation und ABI-Interaktion (für Solidity-Contracts).
+eth-abi==4.3.0                 # Ethereum Application Binary Interface (Kompatibel mit web3==6.15.1).
+# solidity-json-abi -- ENTFERNT: Dieses Paket ist nicht auf PyPI verfügbar und verursacht Konflikte.
+pysha3==1.0.6                  # SHA3 (Keccak) Hashing, oft in Krypto-Kontexten.
+# Hinweis: Für spezifische Blockchains (TON, MultiversX etc.) und ihre Python-Bindings
+# müssen hier eventuell zusätzliche Pakete hinzugefügt werden, falls sie von deinen
+# Python-Modulen (z.B. in READY-FOR-OUR-FUTURE/src/blockchain/) genutzt werden.
+# Beispiel (konzeptionell, die genaue Lib hängt von deiner Implementierung ab):
+# ton-client-py==0.x             # Wenn du mit TON Python Client arbeitest
+# multiversx-sdk-core==1.0       # Wenn du MultiversX SDK in Python nutzt
+
 # KI / Neuronale Netze (PRAI-OS/AI_Integration_Layer, prai-neuron-manager)
 # ------------------------------------------------------------------------
-tensorflow==2.16.1             # Für fortgeschrittene KI-Modelle
-keras==3.9.0                   # Hochlevel-API für TensorFlow
-scikit-learn==1.5.0            # Für allgemeine Machine Learning Algorithmen
-pandas==2.2.2                  # Datenanalyse und -manipulation
+tensorflow==2.16.1             # Für fortgeschrittene KI-Modelle und neuronale Netze.
+keras==3.3.3                   # Hochlevel-API für TensorFlow.
+scikit-learn==1.4.2            # Für allgemeine Machine Learning Algorithmen.
+pandas==2.2.2                  # Datenanalyse und -manipulation.
 
 # Quanten-Kryptografie (BOx-Blockchain-Extensions/Quantum_Encryption_Layer)
 # --------------------------------------------------------------------------
-qiskit==1.4.2                  # Für Quantencomputing und -Kryptografie-Experimente
-cryptography==44.0.1           # Allgemeine Kryptografie-Bibliothek (für Post-Quantum-Kryptografie-Konzepte relevant)
+qiskit==1.0.2                  # Für Quantencomputing und -Kryptografie-Experimente/Simulationen.
+cryptography==42.0.7           # Allgemeine Kryptografie-Bibliothek (für Post-Quanten-Kryptografie-Konzepte relevant).
 
-# Web UI / Flask/Django (optional, falls ein Python-Backend für WebUI in PRAI-OS/applications/webUI)
+# Web UI / Flask/Django (falls ein Python-Backend für WebUI in PRAI-OS/applications/webUI)
 # ----------------------------------------------------------------------------------------------------
-flask==3.0.3                   # Leichtgewichtiges Web-Framework
-gunicorn==23.0.0               # WSGI HTTP Server für Python (für Produktion)
+flask==3.0.3                   # Leichtgewichtiges Web-Framework (wenn Python-Backend).
+gunicorn==22.0.0               # WSGI HTTP Server für Python (für Produktion von Flask-Apps).
 
 # Telegram Bot (PRAI-OS/applications/telegramBot)
 # -----------------------------------------------
-python-telegram-bot==20.8      # Für die Entwicklung des Telegram Bots
+python-telegram-bot==20.8      # Für die Entwicklung des Telegram Bots.
 
-# Tests (jest.config.js, alle tests/ Ordner)
-# -------------------------------------------
-pytest==8.1.1                  # Allgemeines Python-Testframework
-# Sonstiges / Hilfsprogramme
-# --------------------------
-# Wenn ROFF (ein reStructuredText-Tool) verwendet wird, könnte es spezielle Abhängigkeiten haben.
-# Da "ROFF" auch als Teil der Yggdrasil-Sprache genannt wird, ist dies ein Platzhalter.
-# Es gibt kein direktes 'roff' Python-Paket im PyPI, das direkt ein ROFF-Format implementiert.
-# Wenn ROFF ein separates Tool ist, wird es nicht über pip installiert.
-# Wenn es sich um eine interne Implementierung handelt, wären hier die Python-Abhängigkeiten deiner Implementierung
+# Tests
+# -----
+pytest==8.1.1                  # Allgemeines Python-Testframework.
+
+# Für 3D-Rendering als Standbild/Vektorgrafik in Python (sehr fortgeschritten & optional):
+# Wenn du komplexe 3D-Modelle in Python-Skripten rendern willst (z.B. Blender Python API, PyVista/VTK).
+# Die genaue Wahl hängt von deiner 3D-Logik und den verfügbaren Renderern auf deinem Runner ab.
+# Beispiel (wenn du diese tatsächlich implementiert hast):
+# pyvista==0.43.0
+# vtk==9.3.0
+
+# ----- ENDE requirements.txt -----

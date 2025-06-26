@@ -41,5 +41,4 @@ def generate_gold_text_svg(text, output_path, font_size=60, font_family="Arial B
 if __name__ == "__main__":
     output_dir = "assets" # Korrekter Pfad: assets/
     os.makedirs(output_dir, exist_ok=True)
-    # Neuer Dateiname für den Goldtext
     generate_gold_text_svg("@RFOF-NETWORK", os.path.join(output_dir, "rfof_network_gold.svg"))

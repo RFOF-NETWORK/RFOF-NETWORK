@@ -2,8 +2,9 @@
 import svgwrite
 import os
 
-def create_pixel_text_svg(text_to_render, output_path, pixel_size=10, gap_size=2,
-                          fill_color='red', outline_color='black'):
+def create_pixel_text_svg(text_to_render, output_path, pixel_size=8, gap_size=1, # Kleinere Pixel für mehr Details
+                          fill_color='#DC143C', # Blutrot
+                          outline_color='black'):
     """
     Generiert ein SVG mit "roter Pixel Schrift mit schwarzen gelückten Pixeln".
     Die "gelückten" Pixel werden durch eine leere Füllung und nur einen Rahmen dargestellt.
@@ -40,34 +41,30 @@ def create_pixel_text_svg(text_to_render, output_path, pixel_size=10, gap_size=2
         '#': ["010", "111", "010", "111", "010"]
     }
 
-    # Berechne die Gesamtbreite und -höhe des SVG
-    total_width = 0
-    max_char_height = 0
+    current_x_offset = 0
+    max_char_height = pixel_size * 5 + gap_size * 4 # Annahme: Buchstaben sind 5 Pixel hoch
+    
+    # Calculate exact width
     for char_code in text_to_render.upper():
         if char_code in pixel_font_map:
             char_pattern = pixel_font_map[char_code]
-            char_width = len(char_pattern[0])
-            char_height = len(char_pattern)
-            total_width += char_width * (pixel_size + gap_size) + pixel_size # Addiere Abstand nach Zeichen
-            if char_height * (pixel_size + gap_size) > max_char_height:
-                max_char_height = char_height * (pixel_size + gap_size)
+            char_width = len(char_pattern[0]) if char_pattern else 0
+            current_x_offset += char_width * (pixel_size + gap_size) + pixel_size # Addiere Abstand nach Zeichen
         else:
-            total_width += pixel_size * 4 # Platz für unbekanntes Zeichen
+            current_x_offset += pixel_size * 4 # Platz für unbekanntes Zeichen
 
-    dwg = svgwrite.Drawing(output_path, profile='full', size=(f"{total_width}px", f"{max_char_height}px"))
-    # Sicherstellen, dass der Viewbox-Ursprung bei (0,0) liegt und die Größe passt
-    dwg.viewbox(0, 0, total_width, max_char_height)
+    dwg = svgwrite.Drawing(output_path, profile='full', size=(f"{current_x_offset}px", f"{max_char_height}px"))
+    dwg.viewbox(0, 0, current_x_offset, max_char_height)
 
-    current_x_offset = 0
+    current_x_offset = 0 # Reset for drawing loop
     
     for char_code in text_to_render.upper():
         if char_code not in pixel_font_map:
-            print(f"Warning: Character '{char_code}' not defined in pixel_font_map. Skipping.")
-            current_x_offset += pixel_size * 4 # Platz für unbekanntes Zeichen
+            current_x_offset += pixel_size * 4
             continue
 
         char_pattern = pixel_font_map[char_code]
-        char_width = len(char_pattern[0]) if char_pattern else 0
+        char_width = len(char_pattern[0])
         
         for r_idx, row in enumerate(char_pattern):
             for c_idx, pixel_type in enumerate(row):
@@ -85,7 +82,6 @@ def create_pixel_text_svg(text_to_render, output_path, pixel_size=10, gap_size=2
     print(f"Pixel-Text SVG generiert: {output_path}")
 
 if __name__ == "__main__":
-    output_dir = "assets" # Korrekter Pfad: assets/
+    output_dir = "assets" 
     os.makedirs(output_dir, exist_ok=True)
-    # Name der Datei gemäß deiner Struktur: author_satoramy_praio.svg
     create_pixel_text_svg("AUTHOR: SATORAMY-PRAI", os.path.join(output_dir, "author_satoramy_praio.svg"))

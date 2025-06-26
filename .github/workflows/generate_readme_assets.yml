@@ -2,58 +2,79 @@
 name: Generate RFOF-NETWORK README Assets
 
 on:
-  workflow_dispatch: # Ermöglicht manuellen Start des Workflows
+  workflow_dispatch: # Ermöglicht manuellen Start des Workflows über die GitHub Actions UI
   push:
     branches:
-      - main # Generiert Assets bei jedem Push auf 'main'
+      - main # Löst den Workflow bei jedem Push auf den 'main'-Branch aus
 
 jobs:
   generate_assets:
-    runs-on: self-hosted # WICHTIG: Nutzt deinen gesicherten Self-Hosted Runner
+    runs-on: self-hosted # WICHTIG: Nutzt deinen gesicherten Self-Hosted Runner für die Ausführung
     permissions:
-      contents: write # Erforderlich, um die generierten Dateien zu committen
+      contents: write # Erforderlich, um die generierten Dateien zurück ins Repository zu committen
 
     steps:
     - name: 'Checkout Repository'
       uses: actions/checkout@v4
+      # Stellt sicher, dass der Runner Zugriff auf alle deine Dateien hat,
+      # inklusive der Python-Skripte in 'scripts/' und der 'assets/' Ordner.
 
     - name: 'Setup Python Environment'
       uses: actions/setup-python@v4
       with:
         python-version: '3.9' # Oder die Version, die dein Runner nutzt
+      # Bereitet die Python-Umgebung vor, um die Generierungsskripte auszuführen.
 
     - name: 'Install Python Dependencies for Asset Generation'
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt # Stellt sicher, dass Pillow, Matplotlib, svgwrite etc. installiert sind
+        # Installiert die Bibliotheken, die in 'requirements.txt' gelistet sind (z.B. Pillow, Matplotlib, svgwrite).
+        # OHNE DIESEN SCHRITT KÖNNTEN DIE PYTHON-SKRIPTE NICHT LAUFEN!
+        pip install -r requirements.txt 
 
-    - name: 'Create profile-images directory'
-      run: mkdir -p profile-images # Stellt sicher, dass der Zielordner existiert
+    - name: 'Create profile-images directory if it does not exist'
+      run: mkdir -p assets # Korrekter Pfad ist 'assets/', nicht 'profile-images/' wie zuvor in manchen Kontexten erwähnt
+      # Stellt sicher, dass der 'assets/' Ordner existiert, bevor die Python-Skripte versuchen, dort Dateien zu speichern.
 
-    - name: 'Generate Cyber Brain SVG'
+    # --- Generierung der SVG-Assets durch Python-Skripte ---
+
+    - name: 'Generate Cyber Brain SVG (Static representation of 3D concept)'
       run: python scripts/generate_cyber_brain_svg.py
+      # Dieses Skript erzeugt assets/rotating_cyber_brain.svg.
+      # HINWEIS: Für tatsächliche 3D-Rotation und komplexe Animationen direkt in der README.md ist SVG/CSS/JS auf GitHub limitiert.
+      # Dies ist eine hochwertige statische Vektorgrafik, die das 3D-Konzept visuell andeutet.
 
-    - name: 'Generate Pixel PRAI Text SVG'
+    - name: 'Generate Pixel PRAI Text SVG (Author: @Satoramy-PRAI)'
       run: python scripts/generate_pixel_text_svg.py
+      # Dieses Skript erzeugt assets/author_satoramy_praio.svg.
+      # Simuliert die "Blut rote Pixel Schrift mit lückenhaft schwarzen Pixeln".
 
-    - name: 'Generate PRAI Activity Pie Chart SVG'
+    - name: 'Generate PRAI Activity Pie Chart SVG (Prozentualer Kreis in Blau)'
       run: python scripts/generate_activity_pie_chart.py
+      # Dieses Skript erzeugt assets/repo_activity_chart.svg.
+      # Stellt den prozentualen Kreis der Aktivität dar.
 
-    - name: 'Generate RFOF-NETWORK Gold Text SVG'
+    - name: 'Generate RFOF-NETWORK Gold Text SVG (@RFOF-NETWORK)'
       run: python scripts/generate_rfof_gold_text_svg.py
+      # Dieses Skript erzeugt assets/rfof_network_gold.svg.
+      # Stellt den goldenen Text für den @RFOF-NETWORK Header dar.
 
-    - name: 'Generate GitHub Snake Contribution Graph'
-      # Diese Action generiert direkt das SVG in den angegebenen Pfad
+    - name: 'Generate GitHub Snake Contribution Graph (Lila Pixel Emojis)'
+      # Diese externe GitHub Action liest deine GitHub-Contributions und generiert das SVG.
+      # Wir versuchen hier, das lila Pixel-Emoji zu verwenden, indem wir die Action entsprechend anpassen.
       uses: Platane/snk@v3
       with:
-        github_user_name: 'RFOF-NETWORK' # Ersetze dies durch deinen GitHub-Benutzernamen
-        outputs: 'profile-images/github-snake.svg'
-
-    - name: 'Commit Generated Assets'
-      uses: stefanzweifel/git-auto-commit-action@v5
-      with:
-        commit_message: "chore: Regenerate RFOF-NETWORK README assets [PRAI-Automated]"
-        branch: main # Der Branch, auf den die Änderungen gepusht werden sollen
-        # Token ist nicht nötig, wenn `contents: write` Permission gesetzt ist und
-        # Standard GITHUB_TOKEN verwendet wird. Wenn du einen PAT brauchst, hier
-        # token: ${{ secrets.YOUR_PAT_TOKEN_NAME }}
+        github_user_name: 'RFOF-NETWORK' # ! WICHTIG: Ersetze dies durch deinen tatsächlichen GitHub-Benutzernamen!
+        outputs: 'assets/github-snake.svg' # Stellt sicher, dass es im 'assets/' Ordner landet
+        # Farben für den Grid-Hintergrund (Blau-Töne)
+        # Dies sind die Umgebungsvariablen für das Python-Skript des Snake-Generators,
+        # falls wir eine eigene Snake-Generierung hätten. Platane/snk nutzt eigene Farbschemata.
+        # Für Platane/snk müssen die Farben über deren 'palette' Option gesetzt werden,
+        # oder wir nutzen einen eigenen Python-Script-Generator für die Snake (wie zuvor besprochen).
+        # Da du 'Platane/snk' als 'uses' angegeben hast, muss die Farb-Konfiguration in deren Syntax erfolgen
+        # oder wir nutzen unseren custom Python-Script-Generator für die Snake komplett.
+        # Für Platane/snk müsste hier die 'palette' gesetzt werden:
+        # palette: "gh-dark" # Beispiel für ein dunkles Theme, oder Custom Palette [0,1,2,3,4] für die Levels
+        # Wenn wir eigene Farben für die Snake und Emojis wollen, ist eine eigene Python-Generierung notwendig.
+        # ICH WERDE HIER ANNEHMEN, DASS DIE FARBEN DIREKT IN DEN PYTHON-SKRIPT GENERATOR GEHEN,
+        # FALLS DU EINEN CUSTOM SNAKE-GENERATOR NUTZT. Platane/snk hat limitierte Farboptionen hier.
