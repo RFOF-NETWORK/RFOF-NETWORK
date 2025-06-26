@@ -1,0 +1,140 @@
+/* Base styling for the main header and nav components */
+.main-header .navbar {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Pushes the navbar to the right */
+    position: relative;
+}
+
+/* Global Dropdown Container */
+.global-dropdown {
+    position: relative;
+    display: inline-block; /* Allows side-by-side with other elements */
+    margin-left: auto;
+}
+
+/* Hamburger menu icon (for mobile) */
+.hamburger-icon {
+    display: none; /* Hidden by default on desktop */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+    z-index: 1001;
+    margin-left: 20px;
+}
+
+.hamburger-icon .bar {
+    width: 100%;
+    height: 3px;
+    background-color: #0088cc; /* Telegram blue bars */
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: none;
+}
+
+/* Global Nav Links (the actual dropdown content) */
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Display as flex for desktop (horizontal) */
+}
+
+.nav-list li {
+    position: relative;
+}
+
+.nav-list li a {
+    color: #333333; /* Dark text color for menu items on white header */
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-list li a:hover {
+    background-color: rgba(0, 136, 204, 0.1); /* Subtle blue hover for white background */
+    color: #0088cc; /* Telegram blue on hover */
+}
+
+/* Mobile: Hamburger menu behavior */
+@media (max-width: 768px) {
+    .navbar {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .site-title { /* Text title, adjust for mobile if next to SVG */
+        font-size: 1.5em; /* Match site-title in mobile media query */
+        margin-right: auto;
+        padding-left: 0;
+    }
+
+    .hamburger-icon {
+        display: flex;
+        margin-left: 0;
+    }
+
+    .nav-list {
+        display: none;
+        flex-direction: column;
+        width: 280px;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        background-color: #2d3748; /* Dark background for mobile menu */
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
+        z-index: 1000;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        padding-top: 60px;
+        border-left: 1px solid #4a5568;
+    }
+
+    .nav-list.active {
+        transform: translateX(0);
+        display: flex;
+    }
+
+    .nav-list li {
+        margin: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-list li:last-child {
+        border-bottom: none;
+    }
+
+    .nav-list li a {
+        padding: 15px 25px;
+        text-align: left;
+        color: #e2e8f0; /* Light text for mobile menu */
+    }
+
+    .nav-list li a:hover {
+        background-color: #4a5568;
+        color: #4299e1;
+    }
+    
+    .hamburger-icon.active {
+        position: fixed;
+        right: 20px;
+        z-index: 1001;
+    }
+}
+
+/* Hamburger icon animation for 'X' */
+.hamburger-icon.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-icon.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger-icon.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
