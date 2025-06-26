@@ -6,7 +6,7 @@
     <title>RFOF-NETWORK: Decentralized Future & PRAI Sandbox</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="menu_styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght0&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <style>
         /* Specific styles for RFOF-NETWORK, building on global styles */
@@ -39,7 +39,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('https://raw.githubusercontent.com/RFOF-NETWORK/RFOF-NETWORK.github.io/main/assets/rfoff_network_hero_background.jpg') no-repeat center center/cover; /* Placeholder background */
+            background: url('https://raw.githubusercontent.com/RFOF-NETWORK/RFOF-NETWORK.github.io/main/assets/rfoff_network_hero_background.jpg') no-repeat center center/cover;
             opacity: 0.15;
             z-index: 1;
         }
@@ -72,21 +72,67 @@
         }
 
         /* PRAI Chatbox & Code Sandbox Styling */
-        #praiai-chatbox {
-            background-color: #f8f8f8;
+        #praiai-chatbox-section { /* Outer container for the whole tool */
+            background-color: #ffffff; /* White background */
             border: 1px solid #e0e0e0;
             border-radius: 8px;
             padding: 20px;
             margin-top: 30px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
-        #praiai-chatbox h2 {
+        .tool-main-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3em; /* Large size for the main tool title */
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333; /* Default dark color, will be styled with pixel effect */
+            position: relative;
+            display: inline-block; /* Allows text-align to center it if parent is block */
+            width: 100%; /* Take full width for centering */
+        }
+        /* Pixelation and Snake Effect (Complex CSS, simplified for inline demo) */
+        .tool-main-title span {
+            /* This is a very simplified pixel/snake effect. True pixelation and animation
+               would require more complex techniques (e.g., SVG mask, multiple text-shadow layers,
+               or canvas rendering). */
+            background: linear-gradient(45deg, #FFD700, #DAA520); /* Gold gradient */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 1;
+            /* Text shadow for pixel contour */
+            text-shadow:
+                -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000,
+                -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+        }
+        .tool-main-title::before {
+            content: " "; /* Placeholder for snake/pixel overlay */
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* For a real snake effect, this would be a complex animation or SVG overlay */
+            /* Simplified: A subtle blue dots pattern for 'snake' idea */
+            background-image: radial-gradient(circle, #0088cc 1px, transparent 1px);
+            background-size: 8px 8px;
+            opacity: 0.1;
+            animation: moveDots 10s linear infinite;
+        }
+        @keyframes moveDots {
+            from { background-position: 0 0; }
+            to { background-position: 80px 80px; }
+        }
+
+        /* Titles for the chatbox windows */
+        #chatbox-title, #output-window-title {
             color: #0088cc;
             font-family: 'Orbitron', sans-serif;
             text-align: center;
             margin-bottom: 20px;
             border-bottom: 1px solid rgba(0, 136, 204, 0.3);
             padding-bottom: 10px;
+            font-size: 1.8em;
         }
         #chat-messages {
             height: 300px;
@@ -107,17 +153,19 @@
             word-wrap: break-word;
             position: relative;
             cursor: pointer;
-            transition: background-color 0.2s ease;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
         }
         .message-item.user-message {
             background-color: #e0f2f7; /* Light blue for user */
             align-self: flex-end;
             text-align: right;
+            border: 1px solid #b3e0f2;
         }
         .message-item.praiai-message {
             background-color: #f0f0f0; /* Light grey for PRAI */
             align-self: flex-start;
             text-align: left;
+            border: 1px solid #e0e0e0;
         }
         .message-item.selected {
             border: 2px solid #0088cc;
@@ -148,6 +196,8 @@
             font-size: 1em;
             resize: vertical;
             min-height: 40px;
+            color: #333; /* Dark text for input */
+            background-color: white;
         }
         .chat-button {
             padding: 10px 20px;
@@ -212,7 +262,42 @@
 <body>
     <header class="main-header">
         <div class="header-content">
-            <h1 class="site-title">RFOF-NETWORK</h1>
+            <div class="header-left-section">
+                <div class="header-logo-svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="brainGradientHeader" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FFD700" />
+                                <stop offset="50%" stop-color="#FFEFD5" />
+                                <stop offset="100%" stop-color="#DAA520" />
+                            </linearGradient>
+                            <filter id="neuronGlowHeader">
+                                <feGaussianBlur in="SourceGraphic" stdDeviation="0.8" result="blur"></feGaussianBlur>
+                                <feColorMatrix in="blur" type="matrix" values="
+                                    1 0 0 0 0
+                                    0 1 0 0 0
+                                    0 0 1 0 0
+                                    0 0 0 5 0
+                                " result="glow"></feColorMatrix>
+                                <feMerge>
+                                    <feMergeNode in="SourceGraphic"></feMergeNode>
+                                    <feMergeNode in="glow"></feMergeNode>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <path d="M 50 10 C 20 10 10 40 10 50 C 10 60 20 90 50 90 C 80 90 90 60 90 50 C 90 40 80 10 50 10 Z"
+                              fill="url(#brainGradientHeader)" stroke="#DAA520" stroke-width="1.5">
+                            <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="20s" repeatCount="indefinite"/>
+                        </path>
+                        <circle cx="30" cy="40" r="1.5" fill="#00FF00" filter="url(#neuronGlowHeader)"><animateMotion path="M 30 40 Q 45 25 60 40 T 30 40" dur="5s" repeatCount="indefinite"/></circle>
+                        <circle cx="70" cy="55" r="1.5" fill="#00FF00" filter="url(#neuronGlowHeader)"><animateMotion path="M 70 55 Q 85 70 70 85 T 70 55" dur="7s" repeatCount="indefinite"/></circle>
+                        <circle cx="45" cy="75" r="1.5" fill="#00FF00" filter="url(#neuronGlowHeader)"><animateMotion path="M 45 75 Q 30 90 45 75 Z" dur="6s" repeatCount="indefinite"/></circle>
+                        <circle cx="55" cy="25" r="1.5" fill="#00FF00" filter="url(#neuronGlowHeader)"><animateMotion path="M 55 25 Q 70 10 55 25 Z" dur="4s" repeatCount="indefinite"/></circle>
+                        <circle cx="20" cy="60" r="1.5" fill="#00FF00" filter="url(#neuronGlowHeader)"><animateMotion path="M 20 60 Q 5 45 20 60 Z" dur="8s" repeatCount="indefinite"/></circle>
+                    </svg>
+                </div>
+                <h1 class="site-title">RFOF-NETWORK</h1>
+            </div>
             <nav class="navbar">
                 <div class="hamburger-icon" id="hamburger">
                     <div class="bar"></div>
@@ -225,7 +310,7 @@
                     <li><a href="https://qch-l-c.github.io/PRAI-KI-/" target="_blank">PRAI-OS</a></li>
                     <li><a href="https://rfof-network.github.io/RFOF-NETWORK/" target="_blank">RFOF-NETWORK (Current)</a></li>
                     <li><a href="https://rfof-network.github.io/PRAI-/#uebersicht" target="_blank">RPFOF</a></li>
-                    <li><a href="https://rfof-network-ready-for-our-future.github.io/QCHC/" target="_blank">QCH-L-C</a></li>
+                    <li><a href="https://rfof-network.github.io/rfof-network.org/" target="_blank">QCH-L-C</a></li>
                     <li><a href="https://rfof-network.github.io/Comprensive-rfof-bitcoin.org-PRAI-BOx-Blockchain-System_Programm-Fusions-Reactor-System/" target="_blank">rfof-bitcoin.org</a></li>
                     <li><a href="https://rfof-network.github.io/BUBATZ-COIN-official-CSC-DCV-/" target="_blank">Golden Times</a></li>
                     <li><a href="https://rfof-network.github.io/RFOF-x-PRAI_DOC_Ready-For-Our-Future/" target="_blank">DOC's & FAQ's</a></li>
@@ -237,7 +322,39 @@
     <main class="content-container">
         <section class="hero-section">
             <div class="hero-content">
-                <img src="https://raw.githubusercontent.com/RFOF-NETWORK/RFOF-NETWORK.github.io/main/assets/rfof_network_logo.png" alt="RFOF-NETWORK Logo" style="max-width: 250px; margin: 0 auto 30px;">
+                <div class="main-hero-logo-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="brainGradientHero" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FFD700" />
+                                <stop offset="50%" stop-color="#FFEFD5" />
+                                <stop offset="100%" stop-color="#DAA520" />
+                            </linearGradient>
+                            <filter id="neuronGlowHero">
+                                <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur"></feGaussianBlur>
+                                <feColorMatrix in="blur" type="matrix" values="
+                                    1 0 0 0 0
+                                    0 1 0 0 0
+                                    0 0 1 0 0
+                                    0 0 0 10 0
+                                " result="glow"></feColorMatrix>
+                                <feMerge>
+                                    <feMergeNode in="SourceGraphic"></feMergeNode>
+                                    <feMergeNode in="glow"></feMergeNode>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <path d="M 50 10 C 20 10 10 40 10 50 C 10 60 20 90 50 90 C 80 90 90 60 90 50 C 90 40 80 10 50 10 Z"
+                              fill="url(#brainGradientHero)" stroke="#DAA520" stroke-width="2">
+                            <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="20s" repeatCount="indefinite"/>
+                        </path>
+                        <circle cx="30" cy="40" r="2" fill="#00FF00" filter="url(#neuronGlowHero)"><animateMotion path="M 30 40 Q 45 25 60 40 T 30 40" dur="5s" repeatCount="indefinite"/></circle>
+                        <circle cx="70" cy="55" r="2" fill="#00FF00" filter="url(#neuronGlowHero)"><animateMotion path="M 70 55 Q 85 70 70 85 T 70 55" dur="7s" repeatCount="indefinite"/></circle>
+                        <circle cx="45" cy="75" r="2" fill="#00FF00" filter="url(#neuronGlowHero)"><animateMotion path="M 45 75 Q 30 90 45 75 Z" dur="6s" repeatCount="indefinite"/></circle>
+                        <circle cx="55" cy="25" r="2" fill="#00FF00" filter="url(#neuronGlowHero)"><animateMotion path="M 55 25 Q 70 10 55 25 Z" dur="4s" repeatCount="indefinite"/></circle>
+                        <circle cx="20" cy="60" r="2" fill="#00FF00" filter="url(#neuronGlowHero)"><animateMotion path="M 20 60 Q 5 45 20 60 Z" dur="8s" repeatCount="indefinite"/></circle>
+                    </svg>
+                </div>
                 <h1>RFOF-NETWORK: The Foundation of a Decentralized Future</h1>
                 <p>RFOF-NETWORK is the core infrastructure for a new era of decentralized applications, powered by blockchain and AI, fostering innovation and global collaboration.</p>
                 <a href="#about" class="btn-primary">Explore Our Network</a>
@@ -254,9 +371,9 @@
             </p>
         </section>
 
-        <section id="praiai-chatbox">
-            <h2>PRAI Chatbox & Code Sandbox</h2>
-            <p id="praiai-question">Code von PRAI autonom korrigiert als neue antwort generierend senden</p>
+        <section id="praiai-chatbox-section">
+            <h2 class="tool-main-title"><span>@RFOF-NETWORK</span></h2>
+            <h2 id="chatbox-title">PRAI Blue deep Gold AI</h2>
             <div id="chat-messages">
                 </div>
             <div id="user-input-area">
@@ -265,7 +382,7 @@
                 <button class="chat-button" onclick="executeCode()">Code Ausführen</button>
             </div>
             <div id="praiai-correction-option" onclick="correctAndSendCode()">Code von PRAI autonom korrigiert als neue antwort generierend senden</div>
-            <h3>Code/Nachrichten Visualisierung & Ausführung</h3>
+            <h3 id="output-window-title">rfof-sandbox.com</h3>
             <div id="code-output-window">
                 Willkommen in der Code Sandbox! Gib Code ein und klicke "Code Ausführen", oder sende eine Nachricht an PRAI.
             </div>
@@ -276,7 +393,7 @@
         </div>
 
         <footer>
-            <p>&copy; 2025 RFOF-NETWORK. Alle Rechte vorbehalten.</p>
+            <p>&copy; 2025 RFOF-NETWORK. All rights reserved.</p>
         </footer>
         
         <script src="menu_script.js"></script>
