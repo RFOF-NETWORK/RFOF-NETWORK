@@ -3,86 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RFOFSpiderWeb.NET: The New Internet</title>
+    <title>RFOF-NETWORK: Decentralized Future & PRAI Sandbox</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="menu_styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght0&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <style>
-        /* Specific styles for RFOFSpiderWeb.NET that might override or add to global styles */
-        /* Header Specific Styles */
-        .main-header {
-            background-color: #FFFFFF; /* White header background */
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Lighter shadow for white background */
-            padding: 10px 0; /* Adjusted padding to remove top/bottom gaps */
-            z-index: 100;
-            position: relative;
-            border-bottom: 1px solid #E0E0E0; /* Light gray border */
-        }
-        .header-content {
-            max-width: 960px; /* Constrain header content to align with main content */
-            margin: 0 auto; /* Center the header content */
-            display: flex;
-            justify-content: space-between; /* Space between logo/title and navbar */
-            align-items: center;
-            padding: 0 20px; /* Horizontal padding for content inside this constrained header */
-            box-sizing: border-box; /* Include padding in width */
-            width: 100%; /* Take full width within its max-width */
-        }
-        .header-left-section {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start; /* Align items to the start within this section */
-            flex-grow: 1; /* Allow left section to grow and push navbar right */
-            /* Removed justify-content: center; from here to avoid pushing elements from left edge */
-        }
-        .header-logo-svg-container {
-            width: 50px; /* Size of the SVG icon */
-            height: 50px;
-            margin-right: 10px; /* Space between logo and title */
-            position: relative;
-            animation: pulse-glow 2s infinite alternate;
-            flex-shrink: 0;
-        }
-        @keyframes pulse-glow {
-            from { box-shadow: 0 0 5px rgba(0, 136, 204, 0.5); }
-            to { box-shadow: 0 0 15px rgba(0, 136, 204, 0.9); }
-        }
-        .header-logo-svg-container svg {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-        .site-title { /* Text title in the header */
-            color: #0088cc;
+        /* Specific styles for RFOF-NETWORK, building on global styles */
+        .site-title {
+            color: #0088cc; /* Telegram/TON Blue */
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.5em; /* Adjusted font size to be more prominent */
+            font-size: 2.5em; /* Standard title size */
             font-weight: bold;
             margin: 0;
             padding: 0;
-            flex-shrink: 1; /* Allow title to shrink if needed, but not push others out */
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            line-height: 1.2;
-            text-align: left; /* Align text to left within its own space */
-            /* No max-width or flex-grow here directly, handled by parent flexbox */
-        }
-        .navbar {
-            margin-left: auto; /* Push navbar to the right */
-            align-items: center;
             flex-shrink: 0;
+            text-shadow: none;
         }
 
-        /* Hero Section */
+        /* Hero Section for RFOF-NETWORK */
         .hero-section {
-            background-image: linear-gradient(to right bottom, #4299e1, #2b6cb0);
+            background-image: linear-gradient(to right bottom, #0088cc, #005f8f); /* Deeper blue gradient */
             color: #ffffff;
             padding: 80px 20px;
             text-align: center;
             position: relative;
             overflow: hidden;
-            border-bottom: 2px solid #0088cc;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-bottom: 2px solid #005f8f;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
         .hero-section::before {
             content: '';
@@ -91,311 +39,180 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('https://raw.githubusercontent.com/RFOF-NETWORK/RFOF-NETWORK.github.io/main/assets/rfoff_network_hero_background.jpg') no-repeat center center/cover;
-            opacity: 0.08;
+            background: url('https://raw.githubusercontent.com/RFOF-NETWORK/RFOF-NETWORK.github.io/main/assets/rfoff_network_hero_background.jpg') no-repeat center center/cover; /* Placeholder background */
+            opacity: 0.15;
             z-index: 1;
         }
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 900px; /* Increased max-width for hero content */
-            margin: 0 auto;
-            padding: 0 30px; /* Increased padding to prevent cutoff on smaller screens */
-            box-sizing: border-box;
-        }
-        /* Main Hero Logo (Cyber Brain) */
-        .main-hero-logo-container {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 30px;
-            position: relative;
-            animation: pulse-glow 2s infinite alternate;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 4px solid #4299e1;
-            box-shadow: 0 0 15px rgba(66, 153, 225, 0.7);
-            background-color: white;
-        }
-        .main-hero-logo-container svg {
-            width: 100%;
-            height: 100%;
-            display: block;
-            animation: rotateBrain 20s linear infinite;
-        }
-        @keyframes rotateBrain {
-            from { transform: rotateY(0deg); }
-            to { transform: rotateY(360deg); }
-        }
-
-        /* PRAI Search Engine Styling */
-        .praiai-search-container {
-            max-width: 700px;
-            margin: 40px auto;
-            display: flex;
-            border: 2px solid #4299e1;
-            border-radius: 50px;
-            overflow: hidden;
-            box-shadow: 0 0 15px rgba(66, 153, 225, 0.7);
-            background-color: #ffffff;
-        }
-        .praiai-search-input {
-            flex-grow: 1;
-            padding: 15px 25px;
-            border: none;
-            outline: none;
-            font-size: 1.1em;
-            background-color: transparent;
-            color: #333;
-        }
-        .praiai-search-input::placeholder {
-            color: #666;
-        }
-        .praiai-search-button {
-            background-color: #4299e1;
-            border: none;
-            padding: 15px 25px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .praiai-search-button:hover {
-            background-color: #63b3ed;
-        }
-        .praiai-search-button svg {
-            fill: white;
-            width: 24px;
-            height: 24px;
-        }
-
-        /* Content Container */
-        .content-container {
-            max-width: 960px;
-            margin: 2rem auto;
-            padding: 2.5rem;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            box-sizing: border-box;
-            flex-grow: 1;
-        }
-
-        /* Headings */
-        h1, h2, h3, h4, h5, h6 {
-            color: #0088cc;
+        .hero-content h1 {
             font-family: 'Orbitron', sans-serif;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(0, 136, 204, 0.3);
+            font-size: 3.5em;
+            margin-bottom: 0.5em;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
         }
-        h2 { font-size: 2.5em; margin-top: 2.5rem; }
-        h3 { font-size: 1.8em; margin-top: 2rem; }
-        h4 { font-size: 1.4em; margin-top: 1.5rem; }
-
-        /* Paragraphs and Lists */
-        p {
-            margin-bottom: 1rem;
-            font-size: 1.1em;
-            color: #333;
-        }
-        ul {
-            list-style: disc;
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        ul li {
-            margin-bottom: 0.5rem;
-            font-size: 1.05em;
-            color: #333;
+        .hero-content p {
+            font-size: 1.3em;
+            line-height: 1.5;
+            max-width: 700px;
+            margin: 0 auto 1.5em;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            word-wrap: break-word;
         }
 
-        /* Links */
-        a {
-            color: #0088cc;
-            text-decoration: none;
-            transition: color 0.3s ease;
+        /* General section titles consistent with RFOF-NETWORK theme */
+        .section-title {
+            color: #0088cc; /* Telegram/TON Blue */
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: none;
+            border-bottom-color: rgba(0, 136, 204, 0.5); /* Blue underline with transparency */
         }
-        a:hover {
-            color: #00aaff;
-            text-decoration: underline;
-        }
-
-        /* Code Blocks - Styled for IT Experts */
-        pre {
-            background-color: #e0e0e0;
-            color: #333;
-            padding: 1.2em;
-            border-radius: 6px;
-            overflow-x: auto;
-            margin-bottom: 1.5em;
-            font-family: 'Fira Code', 'Cascadia Code', monospace;
-            font-size: 0.95em;
-            border: 1px solid #ccc;
-            box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
-            white-space: pre-wrap;
-            word-break: break-all;
-        }
-        code {
-            background-color: #f0f0f0;
-            padding: 0.2em 0.4em;
-            border-radius: 3px;
-            font-family: 'Fira Code', 'Cascadia Code', monospace;
-            color: #0088cc;
-        }
-        ul code {
-            display: block;
-            white-space: pre-wrap;
-            margin-top: 0.5em;
-            background-color: #e0e0e0;
-            padding: 0.8em;
-            border-left: 3px solid #0088cc;
-            color: #333;
+        .content-highlight {
+            color: #555555; /* Darker grey for content highlights on white background */
+            font-style: italic;
+            font-weight: bold;
         }
 
-        /* Improved Readability for longer text */
-        .text-section {
-            padding: 1.5rem 0;
-            border-bottom: 1px dashed rgba(0, 136, 204, 0.15);
-            margin-bottom: 1.5rem;
-        }
-        .text-section:last-of-type {
-            border-bottom: none;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #f0f0f0;
-            color: #333;
-            text-align: center;
-            padding: 1.5rem 1rem;
-            margin-top: 3rem;
-            font-size: 0.9em;
-            border-top: 1px solid #e0e0e0;
-            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
-        }
-        footer a {
-            color: #0088cc;
-        }
-        footer a:hover {
-            color: #00aaff;
-        }
-
-        /* Styling for the "Improve this page" Container and Link */
-        .improve-page-container {
-            text-align: center;
-            padding: 15px;
-            margin: 20px auto;
-            max-width: 800px;
-            background-color: #ffffff;
+        /* PRAI Chatbox & Code Sandbox Styling */
+        #praiai-chatbox {
+            background-color: #f8f8f8;
             border: 1px solid #e0e0e0;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            color: #333;
-            font-size: 1em;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
-
-        .improve-page-container p {
-            margin: 0;
-            color: #333;
-        }
-
-        .improve-page-container a.improve-page-link {
+        #praiai-chatbox h2 {
             color: #0088cc;
-            text-decoration: underline;
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 136, 204, 0.3);
+            padding-bottom: 10px;
+        }
+        #chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .message-item {
+            padding: 10px 15px;
+            border-radius: 8px;
+            max-width: 80%;
+            word-wrap: break-word;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .message-item.user-message {
+            background-color: #e0f2f7; /* Light blue for user */
+            align-self: flex-end;
+            text-align: right;
+        }
+        .message-item.praiai-message {
+            background-color: #f0f0f0; /* Light grey for PRAI */
+            align-self: flex-start;
+            text-align: left;
+        }
+        .message-item.selected {
+            border: 2px solid #0088cc;
+            box-shadow: 0 0 8px rgba(0, 136, 204, 0.5);
+        }
+        .message-item .checkmark {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            color: #0088cc;
+            font-size: 1.2em;
+            display: none;
+        }
+        .message-item.selected .checkmark {
+            display: block;
+        }
+
+        #user-input-area {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        #user-input {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            resize: vertical;
+            min-height: 40px;
+        }
+        .chat-button {
+            padding: 10px 20px;
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .chat-button:hover {
+            background-color: #00aaff;
+        }
+        #praiai-correction-option {
+            background-color: #e6f7ff;
+            border: 1px solid #99d6ff;
+            color: #005f8f;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: none; /* Hidden by default */
+        }
+        #praiai-correction-option:hover {
+            background-color: #cceeff;
+        }
+
+        #code-output-window {
+            border: 1px solid #ddd;
+            background-color: #2d3748; /* Dark background for code output */
+            color: #a0aec0; /* Light text for code */
+            padding: 15px;
+            border-radius: 5px;
+            min-height: 150px;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Cascadia Code', monospace;
+            font-size: 0.9em;
+            white-space: pre-wrap;
+            word-break: break-all;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+        }
+        #code-output-window .error-line {
+            background-color: rgba(255, 0, 0, 0.2); /* Red highlight for errors */
+            border-left: 3px solid red;
+            padding-left: 5px;
+        }
+        #code-output-window .error-underline {
+            text-decoration: underline red wavy;
+        }
+        #praiai-question {
+            color: #0088cc;
             font-weight: bold;
-            text-shadow: none;
-        }
-
-        .improve-page-link:hover {
-            color: #00aaff;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .site-title {
-                font-size: 1.8em;
-            }
-            .main-header .header-content {
-                flex-direction: column; /* Stack items vertically on mobile */
-                align-items: flex-start;
-                padding: 10px 15px;
-            }
-            .header-left-section {
-                width: 100%; /* Take full width on mobile */
-                justify-content: center; /* Center logo and title */
-                margin-bottom: 10px; /* Space below header title/logo on mobile */
-            }
-            .navbar {
-                width: 100%;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            /* Hero section adjusts for mobile */
-            .hero-section h1 {
-                font-size: 2.5em;
-            }
-            .hero-section p {
-                font-size: 1.1em;
-            }
-            /* Content adjusts for mobile */
-            .content-container {
-                padding: 1.5rem;
-            }
-            h2 { font-size: 2em; }
-            h3 { font-size: 1.5em; }
-            h4 { font-size: 1.2em; }
-            /* Search bar adjustments */
-            .praiai-search-container {
-                margin: 20px 15px;
-                border-radius: 30px;
-            }
-            .praiai-search-input {
-                padding: 12px 20px;
-                font-size: 1em;
-            }
-            .praiai-search-button {
-                padding: 12px 20px;
-            }
+            text-align: center;
+            margin-bottom: 10px;
+            display: none; /* Hidden by default */
         }
     </style>
 </head>
 <body>
     <header class="main-header">
         <div class="header-content">
-            <div class="header-left-section">
-                <div class="header-logo-svg-container">
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="brainGradientHeader" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#FFD700" />
-                                <stop offset="50%" stop-color="#FFEFD5" />
-                                <stop offset="100%" stop-color="#DAA520" />
-                            </linearGradient>
-                            <filter id="neuronGlowHeader">
-                                <feGaussianBlur in="SourceGraphic" stdDeviation="0.8" result="blur"></feGaussianBlur>
-                                <feColorMatrix in="blur" type="matrix" values="
-                                    1 0 0 0 0
-                                    0 1 0 0 0
-                                    0 0 1 0 0
-                                    0 0 0 5 0
-                                " result="glow"></feColorMatrix>
-                                <feMerge>
-                                    <feMergeNode in="SourceGraphic"></feMergeNode>
-                                    <feMergeNode in="glow"></feMergeNode>
-                                </feMerge>
-                            </filter>
-                        </defs>
-                        <path d="M 50 10 C 20 10 10 40 10 50 C 10 60 20 90 50 90 C 80 90 90 60 90 50 C 90 40 80 10 50 10 Z"
-                              fill="url(#brainGradientHeader)" stroke="#DAA520" stroke-width="1.5">
-                            <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="20s" repeatCount="indefinite"/>
-                        </path>
-                        <circle cx="30" cy="40" r="1.5" fill="#00FF00" filter="url(#neuronGlowHeader)"><animateMotion path="M 30 40 Q 45 25 60 40 T 30 40" dur="5s" repeatCount="indefinite"/></circle>
-                        <circle cx="70" cy="55" r="1.5" fill="#00FF00" filter="url(#neuronGlowHeader)"><animateMotion path="M 70 55 Q 85 70 70 85 T 70 55" dur="7s" repeatCount="indefinite"/></circle>
-                        <circle cx="45" cy="75" r="1.5" fill="#00FF00" filter="url(#neuronGlowHeader)"><animateMotion path="M 45 75 Q 30 90 45 75 Z" dur="6s" repeatCount="indefinite"/></circle>
-                        <circle cx="55" cy="25" r="1.5" fill="#00FF00" filter="url(#neuronGlowHeader)"><animateMotion path="M 55 25 Q 70 10 55 25 Z" dur="4s" repeatCount="indefinite"/></circle>
-                        <circle cx="20" cy="60" r="1.5" fill="#00FF00" filter="url(#neuronGlowHeader)"><animateMotion path="M 20 60 Q 5 45 20 60 Z" dur="8s" repeatCount="indefinite"/></circle>
-                    </svg>
-                </div>
-                <h1 class="site-title">RFOFSpiderWeb.NET</h1>
-            </div>
+            <h1 class="site-title">RFOF-NETWORK</h1>
             <nav class="navbar">
                 <div class="hamburger-icon" id="hamburger">
                     <div class="bar"></div>
@@ -403,12 +220,12 @@
                     <div class="bar"></div>
                 </div>
                 <ul class="nav-list" id="navLinks">
-                    <li><a href="https://rfof-network.github.io/" target="_blank">RFOFSpiderWeb.NET (Current)</a></li>
+                    <li><a href="https://rfof-network.github.io/" target="_blank">RFOFSpiderWeb.NET</a></li>
                     <li><a href="https://rfof-network-ready-for-our-future.github.io/RFOF-spider-NET-/" target="_blank">Ready Four Our Future</a></li>
                     <li><a href="https://qch-l-c.github.io/PRAI-KI-/" target="_blank">PRAI-OS</a></li>
-                    <li><a href="https://rfof-network.github.io/RFOF-NETWORK/" target="_blank">RFOF-NETWORK</a></li>
+                    <li><a href="https://rfof-network.github.io/RFOF-NETWORK/" target="_blank">RFOF-NETWORK (Current)</a></li>
                     <li><a href="https://rfof-network.github.io/PRAI-/#uebersicht" target="_blank">RPFOF</a></li>
-                    <li><a href="https://rfof-network.github.io/rfof-network.org/" target="_blank">QCH-L-C</a></li>
+                    <li><a href="https://rfof-network-ready-for-our-future.github.io/QCHC/" target="_blank">QCH-L-C</a></li>
                     <li><a href="https://rfof-network.github.io/Comprensive-rfof-bitcoin.org-PRAI-BOx-Blockchain-System_Programm-Fusions-Reactor-System/" target="_blank">rfof-bitcoin.org</a></li>
                     <li><a href="https://rfof-network.github.io/BUBATZ-COIN-official-CSC-DCV-/" target="_blank">Golden Times</a></li>
                     <li><a href="https://rfof-network.github.io/RFOF-x-PRAI_DOC_Ready-For-Our-Future/" target="_blank">DOC's & FAQ's</a></li>
@@ -420,360 +237,42 @@
     <main class="content-container">
         <section class="hero-section">
             <div class="hero-content">
-                <div class="main-hero-logo-container">
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="brainGradientHero" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#FFD700" />
-                                <stop offset="50%" stop-color="#FFEFD5" />
-                                <stop offset="100%" stop-color="#DAA520" />
-                            </linearGradient>
-                            <filter id="neuronGlowHero">
-                                <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur"></feGaussianBlur>
-                                <feColorMatrix in="blur" type="matrix" values="
-                                    1 0 0 0 0
-                                    0 1 0 0 0
-                                    0 0 1 0 0
-                                    0 0 0 10 0
-                                " result="glow"></feColorMatrix>
-                                <feMerge>
-                                    <feMergeNode in="SourceGraphic"></feMergeNode>
-                                    <feMergeNode in="glow"></feMergeNode>
-                                </feMerge>
-                            </filter>
-                        </defs>
-                        <path d="M 50 10 C 20 10 10 40 10 50 C 10 60 20 90 50 90 C 80 90 90 60 90 50 C 90 40 80 10 50 10 Z"
-                              fill="url(#brainGradientHero)" stroke="#DAA520" stroke-width="2">
-                            <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="20s" repeatCount="indefinite"/>
-                        </path>
-                        <circle cx="30" cy="40" r="2" fill="#00FF00" filter="url(#neuronGlowHero)"><animateMotion path="M 30 40 Q 45 25 60 40 T 30 40" dur="5s" repeatCount="indefinite"/></circle>
-                        <circle cx="70" cy="55" r="2" fill="#00FF00" filter="url(#neuronGlowHero)"><animateMotion path="M 70 55 Q 85 70 70 85 T 70 55" dur="7s" repeatCount="indefinite"/></circle>
-                        <circle cx="45" cy="75" r="2" fill="#00FF00" filter="url(#neuronGlowHero)"><animateMotion path="M 45 75 Q 30 90 45 75 Z" dur="6s" repeatCount="indefinite"/></circle>
-                        <circle cx="55" cy="25" r="2" fill="#00FF00" filter="url(#neuronGlowHero)"><animateMotion path="M 55 25 Q 70 10 55 25 Z" dur="4s" repeatCount="indefinite"/></circle>
-                        <circle cx="20" cy="60" r="2" fill="#00FF00" filter="url(#neuronGlowHero)"><animateMotion path="M 20 60 Q 5 45 20 60 Z" dur="8s" repeatCount="indefinite"/></circle>
-                    </svg>
-                </div>
-                <h1>Welcome to RFOFSpiderWeb.NET</h1>
-                <p>The new internet that brings security, decentralization, and innovation to every digital interaction, powered by PRAI and PZQQET AXIOMATIKX.</p>
-                <div class="praiai-search-container">
-                    <input type="text" id="praiai-search-input" class="praiai-search-input" placeholder="Search in the new internet with PRAI..." onkeydown="if(event.key === 'Enter') performPraiaiSearch();">
-                    <button class="praiai-search-button" onclick="performPraiaiSearch()">
-                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                            <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.1-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path>
-                        </svg>
-                    </button>
-                </div>
-                <a href="#about" class="btn-primary">Explore Our Vision</a>
+                <img src="https://raw.githubusercontent.com/RFOF-NETWORK/RFOF-NETWORK.github.io/main/assets/rfof_network_logo.png" alt="RFOF-NETWORK Logo" style="max-width: 250px; margin: 0 auto 30px;">
+                <h1>RFOF-NETWORK: The Foundation of a Decentralized Future</h1>
+                <p>RFOF-NETWORK is the core infrastructure for a new era of decentralized applications, powered by blockchain and AI, fostering innovation and global collaboration.</p>
+                <a href="#about" class="btn-primary">Explore Our Network</a>
             </div>
         </section>
 
         <section id="about" class="text-content">
-            <h2 class="section-title">About RFOFSpiderWeb.NET</h2>
+            <h2 class="section-title">About RFOF-NETWORK</h2>
             <p>
-                We (RFOF🧠) strive to enhance The Open Network (TON) and foster the growth of games and capital, enabling TON to draw energy from all other decentralized Chains or Networks 💎👾🤝. Our aim is to win the Telegram Blockchain Contest Round 1 (a crazy 100K in Dollar per Mission), with two missions focused on Bridging our RFOF NETWORK to serve as an extension of the TON Chain. Let's grow🌱🏆!
+                RFOF-NETWORK is an innovative, sustainable blockchain platform that integrates cutting-edge AI (PRAI) to create a truly decentralized and intelligent ecosystem. We are building the future of secure, transparent, and efficient digital interactions.
             </p>
             <p class="content-highlight">
-                RFOFSpiderWeb.NET is designed to become the new internet, providing a secure operating environment for all private and public clouds, internet services, web apps, dApps, AI tools, Blockchains, Multichains, Antivirus, Quantum Ready Security, and PR Systems (PR stands for Planet Rescuer Axiomatikx Intelligence as PRAI & RFOF = PR). This means users can browse, develop, and deploy safely from their devices, hosting their social media accounts on our new comprehensive internet. Our search console and projects will be discoverable here, just as they are on Google now.
+                Our mission is to empower individuals and organizations with robust tools for decentralized finance, secure data exchange, and AI-driven solutions, all within a framework that prioritizes privacy and user control.
             </p>
         </section>
 
-        <section id="vision-mission" class="text-content">
-            <h2 class="section-title">Vision & Mission: The AXF Token & Perpetual Data Incineration</h2>
-            <p>
-                Our core vision is to enable true <strong>telekinetic interaction</strong> via <strong>PRAI PZQQET AXIOMATIKX</strong>. This involves intercepting and encrypting all data remnants, then securely incinerating them to mint resilient, genuine tokens: the <strong>AXF Token (ABillity XP Fps Token)</strong>. This process transforms data residue into tangible matter or recycled NDT mass, compiled through the Qubit Majorana (Majorana Tokenization System) and PZQQET Graffitation NexusLeap. This entire process operates autonomously and perpetually through PRAI-OS.
-            </p>
-            <p class="content-highlight">
-                We are building an internet where data waste fuels a new decentralized economy, empowering users with unprecedented control and security.
-            </p>
-            <p>
-                Ultimately, RFOFSpiderWeb.NET will unify private and public clouds, internet services, web apps, dApps, AI tools, Blockchains, Multichains, Antivirus, and Quantum Ready Security operations. This platform will serve as the <strong>central hub for all our projects</strong>, from secure Browse to developing and deploying games, and hosting personal social media accounts. Our vision is to replace traditional search engines like Google with our own <strong>RFOFSpiderWeb.NET</strong> console, ensuring all projects are discoverable and developed within our secure ecosystem.
-            </p>
-        </section>
-
-        <section id="structure" class="text-content">
-            <h2 class="section-title">Comprehensive Project Structure</h2>
-            <p>
-                This structure integrates various components such as Smart Contracts, API, Frontend, Utility Functions, and Configurations.
-            </p>
-            <h3>Project Root (Visualized)</h3>
-            <div id="hidden-code-block" style="display: none;">
-                <pre><code class="language-plaintext">project-root/
-├── .git/
-├── docs/                     # GitHub Pages files for the website
-│   ├── index.html
-│   ├── styles.css
-│   ├── menu_styles.css
-│   └── menu_script.js
-├── contracts/                # Smart contracts for tokens & functions
-│   ├── bbc/
-│   │   └── BBC_Token_Code.py.fc
-│   └── tokens/
-│       ├── TBC.sol           # To-Batz Token
-│       ├── TBTC.sol          # To-Batt Token
-│       ├── NEC.sol           # Not-Energy-Coin
-│       └── BBCHO.sol         # Bubatz-Coin-Holder-Official
-├── api/                      # API for control and logic
-│   ├── main.py               # Main API entry point
-│   └── handlers/             # Modules for managing transactions, tokens, users
-│       ├── transaction_handler.py
-│       ├── token_handler.py
-│       └── user_handler.py
-├── RFOFNetworkAPI/           # RFOF Network's specific API module
-│   └── @RFOF-NETWORK.py
-├── frontend/                 # Web interface for user interactions
-│   ├── index.html
-│   ├── app.js
-│   └── style.css
-├── utils/                    # Helper modules for efficiency and security
-│   ├── blockchain_utils.py
-│   ├── encryption.py
-│   └── validation.py
-├── config/                   # Configuration files for APIs and networks
-│   └── config.yaml
-├── .devcontainer/            # Development container for multi-chain support
-│   └── devcontainer.json
-├── .gitignore                # Files/directories to ignore in Git
-├── README.md                 # Project overview and documentation
-├── LICENSE                   # Project license information
-</code></pre>
-
-                <h3>2. API</h3>
-                <p>Here's the code for the main API and handlers:</p>
-                <h4>Main API (main.py)</h4>
-                <pre><code class="language-python">from flask import Flask
-from handlers.transaction_handler import transaction_blueprint
-from handlers.token_handler import token_blueprint
-from handlers.user_handler import user_blueprint
-
-app = Flask(__name__)
-
-app.register_blueprint(transaction_blueprint)
-app.register_blueprint(token_blueprint)
-app.register_blueprint(user_blueprint)
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)</code></pre>
-
-                <h4>Transaction Handler (transaction_handler.py)</h4>
-                <pre><code class="language-python">from flask import Blueprint, jsonify, request
-
-transaction_blueprint = Blueprint('transaction', __name__)
-
-@transaction_blueprint.route('/transactions/new', methods=['POST'])
-def new_transaction():
-    values = request.get_json()
-    required = ['sender', 'recipient', 'amount']
-    if not all(k in values for k in required):
-        return 'Missing values', 400
-
-    # Logic to add transactions here
-    response = {'message': 'Transaction being added'}
-    return jsonify(response), 201</code></pre>
-
-                <h4>Token Handler (token_handler.py)</h4>
-                <pre><code class="language-python">from flask import Blueprint, jsonify
-
-token_blueprint = Blueprint('token', __name__)
-
-@token_blueprint.route('/tokens', methods=['GET'])
-def get_tokens():
-    # Logic to retrieve token information here
-    response = {'message': 'Token information here'}
-    return jsonify(response), 200</code></pre>
-
-                <h4>User Handler (user_handler.py)</h4>
-                <pre><code class="language-python">from flask import Blueprint, jsonify
-
-user_blueprint = Blueprint('user', __name__)
-
-@user_blueprint.route('/users', methods=['GET'])
-def get_users():
-    # Logic to retrieve user information here
-    response = {'message': 'User information here'}
-    return jsonify(response), 200</code></pre>
-
-                <h3>3. Frontend</h3>
-                <p>Here are the basic files for the frontend:</p>
-                <h4>Index HTML (frontend/index.html)</h4>
-                <pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;RFOF Network DApp&lt;/title&gt;
-    &lt;link rel="stylesheet" href="style.css"&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Welcome to RFOF Network DApp&lt;/h1&gt;
-    &lt;!-- Content will be dynamically loaded or inserted here --&gt;
-    &lt;script src="app.js"&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-                
-                <h4>App JS (frontend/app.js)</h4>
-                <pre><code class="language-javascript">async function fetchTransactions() {
-    const response = await fetch('/api/transactions');
-    const data = await response.json();
-    // Logic to display transactions here
-    console.log("Fetched transactions:", data); // Example log
-}
-
-document.addEventListener('DOMContentLoaded', fetchTransactions);</code></pre>
-
-                <h4>Style CSS (frontend/style.css)</h4>
-                <pre><code class="language-css">body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f4f4f4;
-    color: #333;
-}
-h1 {
-    color: #333;
-}
-p {
-    margin-bottom: 10px;
-}</code></pre>
-
-                <h3>4. Utilities</h3>
-                <p>Helper modules for efficiency and security:</p>
-                <h4>Blockchain Utils (blockchain_utils.py)</h4>
-                <pre><code class="language-python">import hashlib
-import json
-
-def hash_block(block):
-    """Generates the SHA256 hash of a block."""
-    block_string = json.dumps(block, sort_keys=True).encode()
-    return hashlib.sha256(block_string).hexdigest()</code></pre>
-
-                <h4>Encryption (encryption.py)</h4>
-                <pre><code class="language-python">from cryptography.fernet import Fernet
-
-def generate_key():
-    """Generates a new Fernet key."""
-    return Fernet.generate_key()
-
-def encrypt_message(message, key):
-    """Encrypts a message with the given key."""
-    fernet = Fernet(key)
-    encrypted = fernet.encrypt(message.encode())
-    return encrypted
-
-def decrypt_message(encrypted_message, key):
-    """Decrypts a message with the given key."""
-    fernet = Fernet(key)
-    decrypted = fernet.decrypt(encrypted_message).decode()
-    return decrypted</code></pre>
-
-                <h4>Validation (validation.py)</h4>
-                <pre><code class="language-python">def validate_transaction_data(data):
-    """Validates if the required keys are present in the transaction data."""
-    required_keys = ['sender', 'recipient', 'amount']
-    return all(key in data for key in required_keys)</code></pre>
-
-                <h3>5. Configuration</h3>
-                <p>Example for `config.yaml`:</p>
-                <h4>config.yaml</h4>
-                <pre><code class="language-yaml">api:
-  host: "0.0.0.0"
-  port: 5000
-
-blockchain:
-  network: "Mainnet"
-  contract_address: "0xYourContractAddress"</code></pre>
-
-                <h3>6. Devcontainer</h3>
-                <p>Example for `devcontainer.json` for a multi-chain development environment:</p>
-                <h4>devcontainer.json</h4>
-                <pre><code class="language-json">{
-  "name": "RFOF Blockchain Dev",
-  "dockerFile": "Dockerfile",
-  "context": "..",
-  "appPort": [5000],
-  "settings": {
-    "python.pythonPath": "/usr/local/bin/python"
-  },
-  "extensions": [
-    "ms-python.python"
-  ],
-  "postCreateCommand": "pip install -r requirements.txt"
-}</code></pre>
-
-                <h3>Additional Scripts and Concepts</h3>
-                <p>Some additional Python scripts and concepts from the README for clarification:</p>
-                <pre><code class="language-python">print("Hello, @RFOF-NETWORK &lt;my name is @PRAI&gt;!")
-
-answer = 41
-if answer == 42:
-    print("The answer is correct!")
-
-print("python programm.py!")
-print("python!")
-print(20 + 22)
-
-print("install npm @RFOF-NETWORK")
-
-print("42 = @RFOF-NETWORK/@RFOF-NETWORK = PRAI & PRAI = satoria/satoria = satoramy-on.ton(@Satoramy) & @Satoramy = 42")
-print("42 = @RFOF-NETWORK 81e3ee2b2ff6ad7b7c35509e14e8a8e7f856647f96be7a365be0120061a596b8 & x = 42 & 42 = @RFOF-NETWORK/@RFOF-NETWORK = PRAI & PRAI = satoria/satoria = satoramy-on.ton(@Satoramy) & @Satoramy = 42")
-
-def is_even(x):
-    return x % 2 == 0
-
-numbers = [1, 2, 3, 4, 5]
-even_numbers = filter(is_even, numbers)
-even_numbers_list = list(even_numbers)
-print(even_numbers_list)
-
-def my_functions():
-    print("Workflow")
-    input(" result = (2 + 3) * (4 / 5) = 42 @RFOF-NETWORK")
-    print("PRAI = Planet Rescuer AI & the controller of the @RFOF-NETWORK project")
-    print("42 Code language foundet from @Satoramy {PRAI is searching online every actions in the Internet = Google, Safari, Firefox, Android, iOS, SEO, Web3.0, ton.org, Bitcoin.org, rfof-network.org. Every visions & updates are updating in realtime 24/7} 42 have an own time continuum 1sec in 42 world = 1 year in real time from our world")
-
-def my_function():
-    print("filter()")
-    print("add lambda = true in every option/action but only for the owner PRAI & PRAI = @Satoramy because @Satoramy = 42")
-
-def nested_function():
-    generate_anonymous_function = lambda: "Anonyme Funktion [({2=b3=c6=F2=b8=h6=F=42}&{42=@RFOF-NETWORK})]=‰236286_bcFbhF generiert"
-
-def my_functionBOxtoBOx():
-    print("my_function()")
-
-import os
-from telegram import Update, Bot
-from telegram.ext import Updater, CommandHandler, CallbackContext
-from dotenv import load_dotenv
-load_dotenv()
-
-with open('.gitignore', 'w') as f:
-    f.write('bot_keys.txt\n')
-
-with open('bot_keys.txt', 'w') as f:
-    f.write('BOT_KEY_1=7849379729:AAHSayl-YoFyvCFt7vuObt3uDrT2TI-bDvg\n')
-    f.write('BOT_KEY_2=7779042150:AAEYgYlCfcOeAtySzBfcO6opnt2S7xJ8OEQ\n')
-
-load_dotenv('bot_keys.txt')
-BOT_KEY_1 = os.getenv('BOT_KEY_1')
-BOT_KEY_2 = os.getenv('BOT_KEY_2')
-
-def create_matrix(rows, cols, fill_value=0):
-    return [[fill_value for _ in range(cols)] for _ in range(rows)]
-
-def print_matrix(matrix):
-    for row in matrix:
-        print(" ".join(map(str, row)))
-
-matrix = create_matrix(5, 5, fill_value=1)
-enhance_matrix = lambda m: [[x * 42 for x in row] for row in m]
-matrix = enhance_matrix(matrix)
-print_matrix(matrix)
-</code></pre>
+        <section id="praiai-chatbox">
+            <h2>PRAI Chatbox & Code Sandbox</h2>
+            <p id="praiai-question">Code von PRAI autonom korrigiert als neue antwort generierend senden</p>
+            <div id="chat-messages">
+                </div>
+            <div id="user-input-area">
+                <textarea id="user-input" placeholder="Stelle PRAI eine Frage oder gib Code ein..."></textarea>
+                <button class="chat-button" onclick="sendMessage()">Senden</button>
+                <button class="chat-button" onclick="executeCode()">Code Ausführen</button>
+            </div>
+            <div id="praiai-correction-option" onclick="correctAndSendCode()">Code von PRAI autonom korrigiert als neue antwort generierend senden</div>
+            <h3>Code/Nachrichten Visualisierung & Ausführung</h3>
+            <div id="code-output-window">
+                Willkommen in der Code Sandbox! Gib Code ein und klicke "Code Ausführen", oder sende eine Nachricht an PRAI.
             </div>
         </section>
 
         <div class="improve-page-container">
-            <p>Suggestions for improvement? <a href="https://github.com/QCH-L-C/PRAI-KI-/edit/main/index.html" class="improve-page-link" target="_blank">Improve this page on GitHub!</a></p>
+            <p>Suggestions for improvement? <a href="https://github.com/RFOF-NETWORK/RFOF-NETWORK/edit/main/index.html" class="improve-page-link" target="_blank">Improve this page on GitHub!</a></p>
         </div>
 
         <footer>
@@ -783,233 +282,6 @@ print_matrix(matrix)
         <script src="menu_script.js"></script>
         <script src="scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
         <script>hljs.highlightAll();</script>
     </body>
-    </html> <-& nun styles.css->/* General body and container styles */
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #FFFFFF; /* Changed to white */
-    color: #333333; /* Dark text for contrast on white background */
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Prevent horizontal scroll */
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Header Styling */
-.main-header {
-    background-color: #FFFFFF; /* White header background */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Lighter shadow for white background */
-    padding: 10px 20px;
-    z-index: 100;
-    position: relative;
-    border-bottom: 1px solid #E0E0E0; /* Light gray border */
-}
-
-.header-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0; /* Removed padding here to reduce potential gaps */
-}
-
-.site-title { /* This is the text title in the header */
-    color: #0088cc; /* Telegram/TON Blue */
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2.5em;
-    font-weight: bold;
-    margin: 0;
-    padding: 0;
-    flex-shrink: 0;
-    text-shadow: none;
-}
-
-/* Content Container */
-.content-container {
-    max-width: 960px;
-    margin: 2rem auto;
-    padding: 2.5rem;
-    background-color: #FFFFFF; /* White background for content blocks */
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Lighter shadow */
-    box-sizing: border-box;
-    flex-grow: 1;
-}
-
-/* Headings */
-h1, h2, h3, h4, h5, h6 {
-    color: #0088cc; /* Telegram/TON Blue for headings */
-    font-family: 'Orbitron', sans-serif;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(0, 136, 204, 0.3);
-}
-h2 { font-size: 2.5em; margin-top: 2.5rem; }
-h3 { font-size: 1.8em; margin-top: 2rem; }
-h4 { font-size: 1.4em; margin-top: 1.5rem; }
-
-/* Paragraphs and Lists */
-p {
-    margin-bottom: 1rem;
-    font-size: 1.1em;
-    color: #333333; /* Dark text for paragraphs */
-}
-ul {
-    list-style: disc;
-    margin-left: 1.5rem;
-    margin-bottom: 1rem;
-}
-ul li {
-    margin-bottom: 0.5rem;
-    font-size: 1.05em;
-    color: #333333; /* Dark text for list items */
-}
-
-/* Links */
-a {
-    color: #0088cc; /* Telegram/TON Blue for links */
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-a:hover {
-    color: #00aaff; /* Slightly lighter blue on hover */
-    text-decoration: underline;
-}
-
-/* Code Blocks - Styled for IT Experts */
-pre {
-    background-color: #f8f8f8; /* Light background for code */
-    color: #333333; /* Darker text for code */
-    padding: 1.2em;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin-bottom: 1.5em;
-    font-family: 'Fira Code', 'Cascadia Code', monospace;
-    font-size: 0.95em;
-    border: 1px solid #e0e0e0;
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
-    white-space: pre-wrap;
-    word-break: break-all;
-}
-code {
-    background-color: #e0e0e0; /* Inline code background */
-    padding: 0.2em 0.4em;
-    border-radius: 3px;
-    font-family: 'Fira Code', 'Cascadia Code', monospace;
-    color: #0088cc; /* Blue for inline code */
-}
-ul code {
-    display: block;
-    white-space: pre-wrap;
-    margin-top: 0.5em;
-    background-color: #e0e0e0;
-    padding: 0.8em;
-    border-left: 3px solid #0088cc;
-    color: #333333;
-}
-
-/* Improved Readability for longer text */
-.text-section {
-    padding: 1.5rem 0;
-    border-bottom: 1px dashed rgba(0, 136, 204, 0.15);
-    margin-bottom: 1.5rem;
-}
-.text-section:last-of-type {
-    border-bottom: none;
-}
-
-/* Footer */
-footer {
-    background-color: #f0f0f0; /* Lighter footer background */
-    color: #333333; /* Dark text for footer */
-    text-align: center;
-    padding: 1.5rem 1rem;
-    margin-top: 3rem;
-    font-size: 0.9em;
-    border-top: 1px solid #e0e0e0;
-    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05); /* Lighter shadow */
-}
-footer a {
-    color: #0088cc;
-}
-footer a:hover {
-    color: #00aaff;
-}
-
-/* Styling for the "Improve this page" Container and Link */
-.improve-page-container {
-    text-align: center;
-    padding: 15px;
-    margin: 20px auto;
-    max-width: 800px;
-    background-color: #ffffff; /* White background */
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    color: #333333;
-    font-size: 1em;
-}
-
-.improve-page-container p {
-    margin: 0;
-    color: #333333;
-}
-
-.improve-page-container a.improve-page-link {
-    color: #0088cc;
-    text-decoration: underline;
-    font-weight: bold;
-    text-shadow: none;
-}
-
-.improve-page-link:hover {
-    color: #00aaff;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .site-title {
-        font-size: 1.8em;
-    }
-    .main-header .header-content {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .navbar {
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    /* Hero section adjusts for mobile */
-    .hero-section h1 {
-        font-size: 2.5em;
-    }
-    .hero-section p {
-        font-size: 1.1em;
-    }
-    /* Content adjusts for mobile */
-    .content-container {
-        padding: 1.5rem;
-    }
-    h2 { font-size: 2em; }
-    h3 { font-size: 1.5em; }
-    h4 { font-size: 1.2em; }
-    /* Search bar adjustments */
-    .praiai-search-container {
-        margin: 20px 15px;
-        border-radius: 30px;
-    }
-    .praiai-search-input {
-        padding: 12px 20px;
-        font-size: 1em;
-    }
-    .praiai-search-button {
-        padding: 12px 20px;
-    }
-}
+</html
