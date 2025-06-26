@@ -1,7 +1,7 @@
 /* General body and container styles */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #FFFFFF; /* White background */
+    background-color: #FFFFFF; /* Changed to white */
     color: #333333; /* Dark text for contrast on white background */
     line-height: 1.6;
     margin: 0;
