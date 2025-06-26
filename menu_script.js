@@ -79,19 +79,28 @@ document.addEventListener('DOMContentLoaded', () => {
         messageItem.addEventListener('click', () => selectMessage(messageData));
 
         if (isCode) {
-            hljs.highlightElement(messageItem.querySelector('code')); // Highlight code in chat history
+            // Highlight code in chat history after it's added to DOM
+            setTimeout(() => {
+                const codeElement = messageItem.querySelector('code');
+                if (codeElement) {
+                    hljs.highlightElement(codeElement);
+                }
+            }, 0); // Use setTimeout to ensure element is in DOM
         }
     }
 
     function selectMessage(selectedMessageData) {
+        // Deselect all previous messages
         messageHistory.forEach(msg => {
             msg.element.classList.remove('selected');
             msg.element.querySelector('.checkmark').style.display = 'none';
         });
 
+        // Select the clicked message
         selectedMessageData.element.classList.add('selected');
         selectedMessageData.element.querySelector('.checkmark').style.display = 'block';
 
+        // Display content in the code output window
         let outputHtml = '';
         if (selectedMessageData.isCode) {
             outputHtml = `<pre><code class="language-auto">${selectedMessageData.text}</code></pre>`;
@@ -184,14 +193,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const regex = new RegExp(error.text, 'g');
                 errorHighlightedCode = errorHighlightedCode.replace(regex, `<span class="error-underline">${error.text}</span>`);
             });
-            codeOutputWindow.innerHTML = `<pre><code class="language-auto error-line">${errorHighlightedCode}</code></pre>`;
+            codeOutputWindow.innerHTML = `<pre><code class="language-auto">${errorHighlightedCode}</code></pre>`;
             addMessageToChat("Ich habe Fehler in deinem Code gefunden. Möchtest du, dass ich ihn korrigiere?", 'praiai', false, '', errors);
 
         } else {
             // Simulate successful execution output for various languages
-            simulatedOutput = simulateCodeExecutionOutput(code);
-            codeOutputWindow.innerHTML = `<pre><code class="language-auto">${simulatedOutput}</code></pre>`; // Raw output
-            addMessageToChat(`Dein Code wurde verarbeitet. ${simulatedOutput.split('\n')[0]}`, 'praiai'); // Add summary to chat
+            let simulatedRawOutput = simulateCodeExecutionOutput(code); // Get the raw simulated output
+            codeOutputWindow.innerHTML = `<pre><code class="language-auto">${simulatedRawOutput}</code></pre>`; // Raw output
+            addMessageToChat(`Dein Code wurde verarbeitet. Output: ${simulatedRawOutput.split('\n')[0]}`, 'praiai'); // Add summary to chat
             praiaiCorrectionOption.style.display = 'none';
             praiaiQuestion.style.display = 'none';
         }
@@ -209,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const simulatedOutput = simulateCodeExecutionOutput(correctedCode);
         codeOutputWindow.innerHTML = `<pre><code class="language-auto">${simulatedOutput}</code></pre>`;
         
-        addMessageToChat(`Ausführung des korrigierten Codes: ${simulatedOutput.split('\n')[0]}`, 'praiai');
+        addMessageToChat(`Ausführung des korrigierten Codes: Output: ${simulatedOutput.split('\n')[0]}`, 'praiai');
         praiaiCorrectionOption.style.display = 'none';
         praiaiQuestion.style.display = 'none';
         lastCodeWithError = null; // Reset after correction
@@ -223,8 +232,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (lowerCode.includes('html') || lowerCode.includes('div') || lowerCode.includes('body')) {
             output += "HTML/CSS Code erfolgreich verarbeitet. Visuelle Interpretation im Ausgabefenster (nicht gerendert).\n";
-            // For actual rendering, you'd need an iframe: codeOutputWindow.innerHTML = `<iframe srcdoc="${code}" style="width:100%;height:100%;border:none;"></iframe>`;
-            // But we display raw code with highlighting.
         } else if (lowerCode.includes('javascript') || lowerCode.includes('console.log') || lowerCode.includes('function')) {
             try {
                 // VERY BASIC & UNSAFE EVAL - ONLY FOR DEMONSTRATION OF CONCEPT
