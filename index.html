@@ -39,7 +39,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('https://raw.githubusercontent.com/RFOF-NETWORK/RFOF-NETWORK.github.io/main/assets/rfoff_network_hero_background.jpg') no-repeat center center/cover;
+            background: url('https://raw.githubusercontent.com/RFOF-NETWORK/RFOF-NETWORK.github.io/main/assets/rfoff_network_hero_background.jpg') no-repeat center center/cover; /* Placeholder background */
             opacity: 0.15;
             z-index: 1;
         }
@@ -57,6 +57,19 @@
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
             word-wrap: break-word;
         }
+        .hero-content .btn-primary {
+            background-color: #0088cc;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .hero-content .btn-primary:hover {
+            background-color: #00aaff;
+            transform: translateY(-2px);
+        }
 
         /* General section titles consistent with RFOF-NETWORK theme */
         .section-title {
@@ -73,7 +86,7 @@
 
         /* PRAI Chatbox & Code Sandbox Styling */
         #praiai-chatbox-section { /* Outer container for the whole tool */
-            background-color: #ffffff; /* White background */
+            background-color: #f8f8f8;
             border: 1px solid #e0e0e0;
             border-radius: 8px;
             padding: 20px;
@@ -322,39 +335,7 @@
     <main class="content-container">
         <section class="hero-section">
             <div class="hero-content">
-                <div class="main-hero-logo-container">
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="brainGradientHero" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#FFD700" />
-                                <stop offset="50%" stop-color="#FFEFD5" />
-                                <stop offset="100%" stop-color="#DAA520" />
-                            </linearGradient>
-                            <filter id="neuronGlowHero">
-                                <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur"></feGaussianBlur>
-                                <feColorMatrix in="blur" type="matrix" values="
-                                    1 0 0 0 0
-                                    0 1 0 0 0
-                                    0 0 1 0 0
-                                    0 0 0 10 0
-                                " result="glow"></feColorMatrix>
-                                <feMerge>
-                                    <feMergeNode in="SourceGraphic"></feMergeNode>
-                                    <feMergeNode in="glow"></feMergeNode>
-                                </feMerge>
-                            </filter>
-                        </defs>
-                        <path d="M 50 10 C 20 10 10 40 10 50 C 10 60 20 90 50 90 C 80 90 90 60 90 50 C 90 40 80 10 50 10 Z"
-                              fill="url(#brainGradientHero)" stroke="#DAA520" stroke-width="2">
-                            <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="20s" repeatCount="indefinite"/>
-                        </path>
-                        <circle cx="30" cy="40" r="2" fill="#00FF00" filter="url(#neuronGlowHero)"><animateMotion path="M 30 40 Q 45 25 60 40 T 30 40" dur="5s" repeatCount="indefinite"/></circle>
-                        <circle cx="70" cy="55" r="2" fill="#00FF00" filter="url(#neuronGlowHero)"><animateMotion path="M 70 55 Q 85 70 70 85 T 70 55" dur="7s" repeatCount="indefinite"/></circle>
-                        <circle cx="45" cy="75" r="2" fill="#00FF00" filter="url(#neuronGlowHero)"><animateMotion path="M 45 75 Q 30 90 45 75 Z" dur="6s" repeatCount="indefinite"/></circle>
-                        <circle cx="55" cy="25" r="2" fill="#00FF00" filter="url(#neuronGlowHero)"><animateMotion path="M 55 25 Q 70 10 55 25 Z" dur="4s" repeatCount="indefinite"/></circle>
-                        <circle cx="20" cy="60" r="2" fill="#00FF00" filter="url(#neuronGlowHero)"><animateMotion path="M 20 60 Q 5 45 20 60 Z" dur="8s" repeatCount="indefinite"/></circle>
-                    </svg>
-                </div>
+                <img src="https://raw.githubusercontent.com/RFOF-NETWORK/RFOF-NETWORK.github.io/main/assets/rfof_network_logo.png" alt="RFOF-NETWORK Logo" style="max-width: 250px; margin: 0 auto 30px;">
                 <h1>RFOF-NETWORK: The Foundation of a Decentralized Future</h1>
                 <p>RFOF-NETWORK is the core infrastructure for a new era of decentralized applications, powered by blockchain and AI, fostering innovation and global collaboration.</p>
                 <a href="#about" class="btn-primary">Explore Our Network</a>
@@ -378,8 +359,8 @@
                 </div>
             <div id="user-input-area">
                 <textarea id="user-input" placeholder="Stelle PRAI eine Frage oder gib Code ein..."></textarea>
-                <button class="chat-button" onclick="sendMessage()">Senden</button>
-                <button class="chat-button" onclick="executeCode()">Code Ausführen</button>
+                <button class="chat-button" id="send-message-btn">Senden</button>
+                <button class="chat-button" id="execute-code-btn">Code Ausführen</button>
             </div>
             <div id="praiai-correction-option" onclick="correctAndSendCode()">Code von PRAI autonom korrigiert als neue antwort generierend senden</div>
             <h3 id="output-window-title">rfof-sandbox.com</h3>
@@ -389,7 +370,7 @@
         </section>
 
         <div class="improve-page-container">
-            <p>Suggestions for improvement? <a href="https://github.com/RFOF-NETWORK/RFOF-NETWORK/edit/main/index.html" class="improve-page-link" target="_blank">Improve this page on GitHub!</a></p>
+            <p>Suggestions for improvement? <a href="https://github.com/RFOF-NETWORK/RFOF-NETWORK.github.io/edit/main/index.html" class="improve-page-link" target="_blank">Improve this page on GitHub!</a></p>
         </div>
 
         <footer>
@@ -401,4 +382,4 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
         <script>hljs.highlightAll();</script>
     </body>
-</html>
+                </html>

@@ -40,6 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- PRAI Chatbox & Code Sandbox Functionality ---
     const userInput = document.getElementById('user-input');
+    const sendMessageBtn = document.getElementById('send-message-btn'); // Get the Senden button by ID
+    const executeCodeBtn = document.getElementById('execute-code-btn'); // Get the Code Ausführen button by ID
     const chatMessages = document.getElementById('chat-messages');
     const codeOutputWindow = document.getElementById('code-output-window');
     const praiaiCorrectionOption = document.getElementById('praiai-correction-option');
@@ -56,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isCode) {
             contentHtml = `<pre><code class="language-auto">${text}</code></pre>`;
             if (errors.length > 0) {
-                // Apply error highlighting
                 let errorHtml = text;
                 errors.forEach(error => {
                     const regex = new RegExp(error.text, 'g');
@@ -77,24 +78,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         messageItem.addEventListener('click', () => selectMessage(messageData));
 
-        // Re-highlight code if it's a code block
         if (isCode) {
-            hljs.highlightElement(messageItem.querySelector('code'));
+            hljs.highlightElement(messageItem.querySelector('code')); // Highlight code in chat history
         }
     }
 
     function selectMessage(selectedMessageData) {
-        // Deselect all previous messages
         messageHistory.forEach(msg => {
             msg.element.classList.remove('selected');
             msg.element.querySelector('.checkmark').style.display = 'none';
         });
 
-        // Select the clicked message
         selectedMessageData.element.classList.add('selected');
         selectedMessageData.element.querySelector('.checkmark').style.display = 'block';
 
-        // Display content in the code output window
         let outputHtml = '';
         if (selectedMessageData.isCode) {
             outputHtml = `<pre><code class="language-auto">${selectedMessageData.text}</code></pre>`;
@@ -122,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
         praiaiCorrectionOption.style.display = 'none'; // Hide correction option
         praiaiQuestion.style.display = 'none'; // Hide PRAI's question
 
-        // Simulate PRAI's text response
         let praiaiResponse = "Ich habe deine Nachricht erhalten. Wie kann ich dir weiterhelfen?";
         if (message.toLowerCase().includes("hallo") || message.toLowerCase().includes("hi")) {
             praiaiResponse = "Hallo! Wie schön, von dir zu hören. Was möchtest du heute besprechen?";
@@ -135,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         addMessageToChat(praiaiResponse, 'praiai');
         codeOutputWindow.innerHTML = `<p>${praiaiResponse}</p>`; // Show PRAI's text response in output window
+        hljs.highlightAll(); // Re-highlight all code blocks in chat and output
     }
 
     function executeCode() {
@@ -152,17 +149,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Basic simulated error detection and correction for common languages
         // This is a simplified simulation and not a real compiler/interpreter.
-        if (code.includes('function') && !code.includes('{')) {
-            errors.push({ text: 'function', message: 'Missing opening curly brace for function body.' });
-            correctedCode = code.replace('function', 'function ') + ' {\n    // code here\n}';
+        // It provides simulated feedback based on common patterns.
+        if (code.includes('function') && (!code.includes('{') || !code.includes(')'))) {
+            errors.push({ text: 'function', message: 'Missing parts of function definition (curly braces or parentheses).' });
+            correctedCode = code.replace(/function\s*([a-zA-Z0-9_]*)\s*\(.*\)/, 'function $1() {\n    // code here\n}');
         } else if (code.includes('console.log') && !code.includes('(')) {
             errors.push({ text: 'console.log', message: 'Missing parentheses for console.log.' });
             correctedCode = code.replace('console.log', 'console.log()');
         } else if (code.includes('import') && !code.includes('from')) {
             errors.push({ text: 'import', message: 'Missing "from" clause in import statement.' });
             correctedCode = code + ' from "module"';
-        } else if (code.includes('<div>') && !code.includes('</div>')) {
-            errors.push({ text: '<div>', message: 'Missing closing </div> tag.' });
+        } else if (code.includes('<div') && !code.includes('</div>')) {
+            errors.push({ text: '<div', message: 'Missing closing </div> tag.' });
             correctedCode = code + '</div>';
         } else if (code.includes('body {') && !code.includes('}')) {
             errors.push({ text: 'body {', message: 'Missing closing curly brace for CSS rule.' });
@@ -170,9 +168,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (code.includes('print(') && !code.includes(')')) { // Python example
             errors.push({ text: 'print(', message: 'Missing closing parenthesis for print function.' });
             correctedCode = code + ')';
-        } else if (code.toLowerCase().includes('error')) { // Generic error simulation
-            errors.push({ text: 'error', message: 'Simulated error detected.' });
-            correctedCode = "Fehler simuliert. Hier wäre der korrigierte Code.";
+        } else if (code.toLowerCase().includes('error') || code.toLowerCase().includes('fehler')) { // Generic error simulation
+            errors.push({ text: 'error', message: 'Simulated error detected in logic.' });
+            correctedCode = "// PRAI: Detected a potential logical error. Review the following code:\n" + code; // Example correction
         }
 
         lastCodeWithError = { code: code, corrected: correctedCode, errors: errors };
@@ -180,58 +178,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (errors.length > 0) {
             praiaiCorrectionOption.style.display = 'block';
             praiaiQuestion.style.display = 'block';
-            codeOutputWindow.innerHTML = `<pre><code class="language-auto">${code}</code></pre>`;
+            
+            let errorHighlightedCode = code;
             errors.forEach(error => {
                 const regex = new RegExp(error.text, 'g');
-                codeOutputWindow.innerHTML = codeOutputWindow.innerHTML.replace(regex, `<span class="error-underline">${error.text}</span>`);
+                errorHighlightedCode = errorHighlightedCode.replace(regex, `<span class="error-underline">${error.text}</span>`);
             });
-            codeOutputWindow.innerHTML = `<div class="error-line">${codeOutputWindow.innerHTML}</div>`;
+            codeOutputWindow.innerHTML = `<pre><code class="language-auto error-line">${errorHighlightedCode}</code></pre>`;
             addMessageToChat("Ich habe Fehler in deinem Code gefunden. Möchtest du, dass ich ihn korrigiere?", 'praiai', false, '', errors);
+
         } else {
-            // Simulate execution output for various languages
-            if (code.toLowerCase().includes('html') || code.toLowerCase().includes('div') || code.toLowerCase().includes('body')) {
-                simulatedOutput = "HTML/CSS Code erfolgreich verarbeitet. Visualisierung im Ausgabefenster.";
-                // Attempt to render HTML/CSS in the output window
-                codeOutputWindow.innerHTML = code;
-            } else if (code.toLowerCase().includes('javascript') || code.toLowerCase().includes('console.log') || code.toLowerCase().includes('function')) {
-                simulatedOutput = "JavaScript Code erfolgreich ausgeführt. Ergebnis im Ausgabefenster.";
-                try {
-                    // This is a very basic and unsafe eval, for demonstration only.
-                    // In a real application, this would be done server-side or in a secure sandbox.
-                    let evalResult = eval(code);
-                    simulatedOutput += `\nOutput: ${evalResult !== undefined ? evalResult : 'No explicit return'}`;
-                } catch (e) {
-                    simulatedOutput += `\nAusführungsfehler: ${e.message}`;
-                }
-                codeOutputWindow.innerHTML = `<pre><code class="language-javascript">${simulatedOutput}</code></pre>`;
-            } else if (code.toLowerCase().includes('python') || code.toLowerCase().includes('print') || code.toLowerCase().includes('def')) {
-                simulatedOutput = "Python Code simuliert ausgeführt. (Echte Ausführung erfordert Server-Backend)";
-                if (code.includes('print("Hello")')) {
-                    simulatedOutput += "\nSimulierter Output: Hello";
-                } else {
-                    simulatedOutput += "\nSimulierter Output: Code-Logik erfolgreich verarbeitet.";
-                }
-                codeOutputWindow.innerHTML = `<pre><code class="language-python">${simulatedOutput}</code></pre>`;
-            } else if (code.toLowerCase().includes('c++') || code.toLowerCase().includes('int main') || code.toLowerCase().includes('cout')) {
-                simulatedOutput = "C++ Code simuliert ausgeführt. (Echte Ausführung erfordert Server-Backend)";
-                simulatedOutput += "\nSimulierter Output: Programm erfolgreich kompiliert und ausgeführt.";
-                codeOutputWindow.innerHTML = `<pre><code class="language-cpp">${simulatedOutput}</code></pre>`;
-            } else if (code.toLowerCase().includes('rust') || code.toLowerCase().includes('fn main') || code.toLowerCase().includes('println!')) {
-                simulatedOutput = "Rust Code simuliert ausgeführt. (Echte Ausführung erfordert Server-Backend)";
-                simulatedOutput += "\nSimulierter Output: Rust-Programm erfolgreich ausgeführt.";
-                codeOutputWindow.innerHTML = `<pre><code class="language-rust">${simulatedOutput}</code></pre>`;
-            } else if (code.toLowerCase().includes('solidity') || code.toLowerCase().includes('pragma') || code.toLowerCase().includes('contract')) {
-                simulatedOutput = "Solidity Smart Contract Code simuliert. (Echte Ausführung erfordert EVM)";
-                simulatedOutput += "\nSimulierter Output: Smart Contract Logik analysiert.";
-                codeOutputWindow.innerHTML = `<pre><code class="language-solidity">${simulatedOutput}</code></pre>`;
-            }
-            else {
-                simulatedOutput = "Code erfolgreich simuliert ausgeführt. Für eine echte Ausführung aller Sprachen ist ein Server-Backend erforderlich.";
-                codeOutputWindow.innerHTML = `<pre><code class="language-auto">${simulatedOutput}</code></pre>`;
-            }
-            addMessageToChat(`Dein Code wurde verarbeitet. ${simulatedOutput}`, 'praiai');
-            praiaiCorrectionOption.style.display = 'none'; // Hide correction option
-            praiaiQuestion.style.display = 'none'; // Hide PRAI's question
+            // Simulate successful execution output for various languages
+            simulatedOutput = simulateCodeExecutionOutput(code);
+            codeOutputWindow.innerHTML = `<pre><code class="language-auto">${simulatedOutput}</code></pre>`; // Raw output
+            addMessageToChat(`Dein Code wurde verarbeitet. ${simulatedOutput.split('\n')[0]}`, 'praiai'); // Add summary to chat
+            praiaiCorrectionOption.style.display = 'none';
+            praiaiQuestion.style.display = 'none';
         }
         userInput.value = '';
         hljs.highlightAll(); // Re-highlight all code blocks in chat and output
@@ -244,46 +206,77 @@ document.addEventListener('DOMContentLoaded', () => {
         addMessageToChat("Hier ist die von PRAI autonom korrigierte Version deines Codes:", 'praiai', true, correctedCode);
         
         // Simulate execution of the corrected code
-        let simulatedOutput = '';
-        if (correctedCode.toLowerCase().includes('html') || correctedCode.toLowerCase().includes('div') || correctedCode.toLowerCase().includes('body')) {
-            simulatedOutput = "Korrigierter HTML/CSS Code erfolgreich verarbeitet. Visualisierung im Ausgabefenster.";
-            codeOutputWindow.innerHTML = correctedCode;
-        } else if (correctedCode.toLowerCase().includes('javascript') || correctedCode.toLowerCase().includes('console.log') || correctedCode.toLowerCase().includes('function')) {
-            simulatedOutput = "Korrigierter JavaScript Code erfolgreich ausgeführt. Ergebnis im Ausgabefenster.";
-            try {
-                let evalResult = eval(correctedCode);
-                simulatedOutput += `\nOutput: ${evalResult !== undefined ? evalResult : 'No explicit return'}`;
-            } catch (e) {
-                simulatedOutput += `\nAusführungsfehler: ${e.message}`;
-            }
-            codeOutputWindow.innerHTML = `<pre><code class="language-javascript">${simulatedOutput}</code></pre>`;
-        } else if (correctedCode.toLowerCase().includes('python') || correctedCode.toLowerCase().includes('print') || correctedCode.toLowerCase().includes('def')) {
-            simulatedOutput = "Korrigierter Python Code simuliert ausgeführt.";
-            simulatedOutput += "\nSimulierter Output: Code-Logik erfolgreich verarbeitet.";
-            codeOutputWindow.innerHTML = `<pre><code class="language-python">${simulatedOutput}</code></pre>`;
-        } else {
-            simulatedOutput = "Korrigierter Code erfolgreich simuliert ausgeführt.";
-            codeOutputWindow.innerHTML = `<pre><code class="language-auto">${simulatedOutput}</code></pre>`;
-        }
+        const simulatedOutput = simulateCodeExecutionOutput(correctedCode);
+        codeOutputWindow.innerHTML = `<pre><code class="language-auto">${simulatedOutput}</code></pre>`;
         
-        addMessageToChat(`Ausführung des korrigierten Codes: ${simulatedOutput}`, 'praiai');
+        addMessageToChat(`Ausführung des korrigierten Codes: ${simulatedOutput.split('\n')[0]}`, 'praiai');
         praiaiCorrectionOption.style.display = 'none';
         praiaiQuestion.style.display = 'none';
         lastCodeWithError = null; // Reset after correction
-        hljs.highlightAll(); // Re-highlight all code blocks
+        hljs.highlightAll();
     }
 
-    // Allow Enter key to send message or execute code based on context (simplified for now)
-    userInput.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' && !event.shiftKey) { // Shift+Enter for new line
-            event.preventDefault();
-            // For simplicity, if correction option is visible, assume user wants to execute code
-            // Otherwise, assume they want to send a message.
-            if (praiaiCorrectionOption.style.display === 'block') {
-                correctAndSendCode();
-            } else {
-                sendMessage();
+    // Helper function to simulate output for various languages
+    function simulateCodeExecutionOutput(code) {
+        let output = "Simulierte Ausführung:\n";
+        const lowerCode = code.toLowerCase();
+
+        if (lowerCode.includes('html') || lowerCode.includes('div') || lowerCode.includes('body')) {
+            output += "HTML/CSS Code erfolgreich verarbeitet. Visuelle Interpretation im Ausgabefenster (nicht gerendert).\n";
+            // For actual rendering, you'd need an iframe: codeOutputWindow.innerHTML = `<iframe srcdoc="${code}" style="width:100%;height:100%;border:none;"></iframe>`;
+            // But we display raw code with highlighting.
+        } else if (lowerCode.includes('javascript') || lowerCode.includes('console.log') || lowerCode.includes('function')) {
+            try {
+                // VERY BASIC & UNSAFE EVAL - ONLY FOR DEMONSTRATION OF CONCEPT
+                let result = eval(code);
+                output += `JavaScript Code erfolgreich ausgeführt.\nOutput: ${result !== undefined ? result : 'No explicit return'}`;
+            } catch (e) {
+                output += `JavaScript Ausführungsfehler: ${e.message}\n`;
             }
+        } else if (lowerCode.includes('python') || lowerCode.includes('print') || lowerCode.includes('def')) {
+            output += "Python Code simuliert ausgeführt. (Echte Ausführung erfordert Server-Backend)\n";
+            if (code.includes('print("Hello")')) output += "Simulierter Output: Hello\n";
+            else output += "Simulierter Output: Code-Logik erfolgreich verarbeitet.\n";
+        } else if (lowerCode.includes('solidity') || lowerCode.includes('contract')) {
+            output += "Solidity Smart Contract Code simuliert. (Echte Ausführung erfordert EVM)\n";
+            output += "Simulierter Output: Smart Contract Logik analysiert und verifiziert.\n";
+        } else if (lowerCode.includes('c++') || lowerCode.includes('int main') || lowerCode.includes('cout')) {
+            output += "C++ Code simuliert ausgeführt. (Echte Ausführung erfordert Compiler)\n";
+            output += "Simulierter Output: Kompilierung und Ausführung erfolgreich simuliert.\n";
+        } else if (lowerCode.includes('rust') || lowerCode.includes('fn main') || lowerCode.includes('println!')) {
+            output += "Rust Code simuliert ausgeführt. (Echte Ausführung erfordert Compiler)\n";
+            output += "Simulierter Output: Rust-Programm erfolgreich simuliert.\n";
+        } else if (lowerCode.includes('go ') || lowerCode.includes('package main') || lowerCode.includes('func main')) {
+            output += "Go Code simuliert ausgeführt. (Echte Ausführung erfordert Compiler)\n";
+            output += "Simulierter Output: Go-Routine erfolgreich simuliert.\n";
+        } else if (lowerCode.includes('bash') || lowerCode.includes('sh ') || lowerCode.includes('chmod')) {
+            output += "Bash Skript simuliert ausgeführt. (Echte Ausführung erfordert Shell)\n";
+            output += "Simulierter Output: Befehle erfolgreich simuliert abgearbeitet.\n";
+        } else if (lowerCode.includes('apache')) {
+            output += "Apache Konfiguration simuliert. (Echte Ausführung erfordert Webserver)\n";
+            output += "Simulierter Output: Konfiguration erfolgreich geprüft.\n";
+        } else if (lowerCode.includes('elixir') || lowerCode.includes('defmodule')) {
+            output += "Elixir Code simuliert ausgeführt. (Echte Ausführung erfordert VM)\n";
+            output += "Simulierter Output: Elixir-Prozess erfolgreich simuliert.\n";
+        } else if (lowerCode.includes('func') && !lowerCode.includes('function')) { // For FunC
+             output += "FunC Code simuliert ausgeführt. (Echte Ausführung erfordert TON VM)\n";
+             output += "Simulierter Output: FunC Contract Logik analysiert.\n";
+        } else if (lowerCode.includes('yggdrasil') || lowerCode.includes('roff')) {
+             output += "Yggdrasil/Roff Code simuliert ausgeführt. (Spezifische Ausführungsumgebung erforderlich)\n";
+             output += "Simulierter Output: Syntax erfolgreich interpretiert.\n";
         }
-    });
+        else {
+            output += "Code-Sprache nicht erkannt oder komplexer Code. Simulation der Ausführung.\nFür eine echte Ausführung ist ein Server-Backend erforderlich.";
+        }
+        return code; // Return the code itself to be highlighted
+    }
+
+    // Attach event listeners to buttons
+    if (sendMessageBtn) {
+        sendMessageBtn.addEventListener('click', sendMessage);
+    }
+    if (executeCodeBtn) {
+        executeCodeBtn.addEventListener('click', executeCode);
+    }
+    // Enter key handling for user input is in index.html (onkeydown)
 });
