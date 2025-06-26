@@ -1,120 +1,241 @@
-/* Grundlegende Styles für Body und Header */
+/* General body and container styles */
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-}
-
-header {
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between; /* Logo links, Hamburger/Menü rechts */
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.logo {
-    font-size: 1.8em;
-    font-weight: bold;
-}
-
-/* Styling für die Navigationslinks (normale Ansicht) */
-.nav-links {
-    list-style: none; /* Entfernt die Listenpunkte */
+    font-family: 'Roboto', sans-serif;
+    background-color: #FFFFFF; /* White background */
+    color: #333333; /* Dark text for contrast on white background */
+    line-height: 1.6;
     margin: 0;
     padding: 0;
-    display: flex; /* Zeigt Links nebeneinander an */
-}
-
-.nav-links li a {
-    color: white;
-    text-decoration: none;
-    padding: 10px 15px;
-    display: block;
-    transition: background-color 0.3s ease;
-}
-
-.nav-links li a:hover {
-    background-color: #575757;
-}
-
-/* Styling für den Hamburger-Icon (drei graue Striche) */
-.hamburger-icon {
-    display: none; /* Standardmäßig versteckt auf großen Bildschirmen */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    min-height: 100vh;
+    display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    width: 30px;
-    height: 25px;
-    cursor: pointer;
-    z-index: 1000; /* Stellt sicher, dass es über anderen Elementen liegt */
 }
 
-.hamburger-icon .bar {
-    width: 100%;
-    height: 3px;
-    background-color: #aaa; /* Graue Farbe für die Striche */
-    border-radius: 5px;
-    transition: all 0.3s ease-in-out;
+/* Header Styling */
+.main-header {
+    background-color: #FFFFFF; /* White header background */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Lighter shadow for white background */
+    padding: 10px 0; /* Adjusted padding to remove top/bottom gaps */
+    z-index: 100;
+    position: relative;
+    border-bottom: 1px solid #E0E0E0; /* Light gray border */
 }
 
-/* Hauptinhaltsbereich */
-main {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
+.header-content {
+    max-width: 960px; /* Constrain header content to align with main content */
+    margin: 0 auto; /* Center the header content */
+    display: flex;
+    justify-content: space-between; /* Space between logo/title and navbar */
+    align-items: center;
+    padding: 0 20px; /* Horizontal padding for content inside this constrained header */
+    box-sizing: border-box; /* Include padding in width */
+    width: 100%; /* Take full width within its max-width */
+}
+
+.site-title { /* This is the text title in the header */
+    color: #0088cc; /* Telegram/TON Blue */
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5em; /* Adjusted font size for larger display */
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+    text-shadow: none;
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis if truncated */
+    line-height: 1.2; /* Ensure consistent line height */
+    max-width: calc(100% - 100px); /* Adjust based on logo width and desired spacing, prevents pushing nav */
+    /* This max-width will be dynamically adjusted by JS if needed for better responsiveness */
+}
+
+
+/* Content Container */
+.content-container {
+    max-width: 960px; /* This is the reference width for the whole page content */
+    margin: 2rem auto;
+    padding: 2.5rem;
+    background-color: #FFFFFF; /* White background for content blocks */
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Lighter shadow */
+    box-sizing: border-box;
+    flex-grow: 1;
 }
 
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: #0088cc; /* Telegram/TON Blue for headings */
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 136, 204, 0.3);
+}
+h2 { font-size: 2.5em; margin-top: 2.5rem; }
+h3 { font-size: 1.8em; margin-top: 2rem; }
+h4 { font-size: 1.4em; margin-top: 1.5rem; }
 
-/* Media Queries für responsive Design (wichtig für das Hamburger-Menü) */
-@media (max-width: 768px) { /* Wenn Bildschirm kleiner als 768px ist */
-    .nav-links {
-        display: none; /* Standardmäßig versteckt das gesamte Menü */
-        flex-direction: column; /* Links untereinander */
+/* Paragraphs and Lists */
+p {
+    margin-bottom: 1rem;
+    font-size: 1.1em;
+    color: #333333; /* Dark text for paragraphs */
+}
+ul {
+    list-style: disc;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+ul li {
+    margin-bottom: 0.5rem;
+    font-size: 1.05em;
+    color: #333333; /* Dark text for list items */
+}
+
+/* Links */
+a {
+    color: #0088cc; /* Telegram/TON Blue for links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+a:hover {
+    color: #00aaff; /* Slightly lighter blue on hover */
+    text-decoration: underline;
+}
+
+/* Code Blocks - Styled for IT Experts */
+pre {
+    background-color: #f8f8f8; /* Light background for code */
+    color: #333333; /* Darker text for code */
+    padding: 1.2em;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin-bottom: 1.5em;
+    font-family: 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 0.95em;
+    border: 1px solid #e0e0e0;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+code {
+    background-color: #e0e0e0; /* Inline code background */
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: 'Fira Code', 'Cascadia Code', monospace;
+    color: #0088cc; /* Blue for inline code */
+}
+ul code {
+    display: block;
+    white-space: pre-wrap;
+    margin-top: 0.5em;
+    background-color: #e0e0e0;
+    padding: 0.8em;
+    border-left: 3px solid #0088cc;
+    color: #333333;
+}
+
+/* Improved Readability for longer text */
+.text-section {
+    padding: 1.5rem 0;
+    border-bottom: 1px dashed rgba(0, 136, 204, 0.15);
+    margin-bottom: 1.5rem;
+}
+.text-section:last-of-type {
+    border-bottom: none;
+}
+
+/* Footer */
+footer {
+    background-color: #f0f0f0; /* Lighter footer background */
+    color: #333333; /* Dark text for footer */
+    text-align: center;
+    padding: 1.5rem 1rem;
+    margin-top: 3rem;
+    font-size: 0.9em;
+    border-top: 1px solid #e0e0e0;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05); /* Lighter shadow */
+}
+footer a {
+    color: #0088cc;
+}
+footer a:hover {
+    color: #00aaff;
+}
+
+/* Styling for the "Improve this page" Container and Link */
+.improve-page-container {
+    text-align: center;
+    padding: 15px;
+    margin: 20px auto;
+    max-width: 800px;
+    background-color: #ffffff; /* White background */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #333333;
+}
+
+.improve-page-container p {
+    margin: 0;
+    color: #333333;
+}
+
+.improve-page-container a.improve-page-link {
+    color: #0088cc;
+    text-decoration: underline;
+    font-weight: bold;
+    text-shadow: none;
+}
+
+.improve-page-link:hover {
+    color: #00aaff;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .site-title {
+        font-size: 1.8em;
+    }
+    .main-header .header-content {
+        flex-direction: column; /* Stack items vertically on mobile */
+        align-items: flex-start;
+        padding: 10px 15px;
+    }
+    .header-left-section {
+        width: 100%; /* Take full width on mobile */
+        justify-content: center; /* Center logo and title */
+        margin-bottom: 10px; /* Space below header title/logo on mobile */
+    }
+    .navbar {
         width: 100%;
-        background-color: #444; /* Hintergrund für das aufgeklappte Menü */
-        position: absolute; /* Positioniert das Menü unter dem Header */
-        top: 60px; /* Höhe des Headers */
-        left: 0;
-        right: 0;
-        padding: 10px 0;
-        box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-        z-index: 999;
+        flex-direction: column;
+        align-items: flex-start;
     }
-
-    .nav-links.active { /* Klasse wird per JavaScript hinzugefügt, wenn Menü offen ist */
-        display: flex; /* Menü anzeigen, wenn aktiv */
+    /* Hero section adjusts for mobile */
+    .hero-section h1 {
+        font-size: 2.5em;
     }
-
-    .nav-links li {
-        text-align: center;
-        margin: 10px 0;
+    .hero-section p {
+        font-size: 1.1em;
     }
-
-    .hamburger-icon {
-        display: flex; /* Hamburger-Icon anzeigen */
+    /* Content adjusts for mobile */
+    .content-container {
+        padding: 1.5rem;
     }
-}
-
-/* Animation für das Hamburger-Icon, wenn es aktiv ist (optional, aber schön) */
-.hamburger-icon.active .bar:nth-child(2) {
-    opacity: 0; /* Mittlerer Balken verschwindet */
-}
-
-.hamburger-icon.active .bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg); /* Oberer Balken dreht sich */
-}
-
-.hamburger-icon.active .bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg); /* Unterer Balken dreht sich */
+    h2 { font-size: 2em; }
+    h3 { font-size: 1.5em; }
+    h4 { font-size: 1.2em; }
+    /* Search bar adjustments */
+    .praiai-search-container {
+        margin: 20px 15px;
+        border-radius: 30px;
+    }
+    .praiai-search-input {
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+    .praiai-search-button {
+        padding: 12px 20px;
+    }
 }
