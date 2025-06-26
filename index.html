@@ -1,421 +1,287 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@RFOF-NETWORK - Offizielle Präsenz</title>
+    <title>RFOF-NETWORK: Decentralized Future & PRAI Sandbox</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="menu_styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght0&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <style>
-        /* Basis-Styling für den Inhalt (aus deinem ursprünglichen Code) */
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0; /* Wichtig, um Ränder zu entfernen und das Menü an den Rand zu bringen */
-            padding: 0; /* Padding wird im Container oder Header behandelt */
-            background-color: #f4f4f4;
-            color: #333;
-        }
-
-        /* Container für den Hauptinhalt der Seite */
-        .content-container {
-            max-width: 800px;
-            margin: 20px auto; /* Abstand oben/unten und zentriert */
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            /* position: relative; wird hier nicht mehr benötigt, da das Menü im Header ist */
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            color: #2c3e50;
-        }
-
-        pre, code {
-            background-color: #eee;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-            font-family: monospace;
-        }
-
-        /* HIER STARTET DER CSS-CODE FÜR DAS HAMBURGER-MENÜ (aus unserem neuen Code) */
-
-        /* Container für den Titel und das Menü im Header */
-        .header-container {
-            display: flex;
-            justify-content: space-between; /* Elemente auseinanderziehen */
-            align-items: center; /* Vertikal zentrieren */
-            padding: 10px 20px;
-            background-color: white; /* Hintergrundfarbe für den Headerbereich */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        /* Dein bestehender RFOF-NETWORK Text - wir positionieren ihn links */
-        .page-title {
-            color: #007bff; /* Typische blaue Farbe für Links/Titel */
-            font-size: 2.5em; /* Größerer Text */
+        /* Specific styles for RFOF-NETWORK, building on global styles */
+        .site-title {
+            color: #0088cc; /* Telegram/TON Blue */
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5em; /* Standard title size */
             font-weight: bold;
-            padding: 0; /* Keine zusätzlichen Paddings hier, da der Container es regelt */
-            margin: 0; /* Standard-Margin von h1 entfernen */
-        }
-
-        /* Styling für die Navigationslinks (normale Ansicht) */
-        .navbar {
-            display: flex;
-            align-items: center; /* Vertikal zentrieren */
-        }
-
-        .nav-links {
-            list-style: none; /* Entfernt die Listenpunkte */
             margin: 0;
             padding: 0;
-            display: flex; /* Zeigt Links nebeneinander an */
+            flex-shrink: 0;
+            text-shadow: none;
         }
 
-        .nav-links li a {
-            color: #333; /* Links passend zum weißen Hintergrund */
-            text-decoration: none;
+        /* Hero Section for RFOF-NETWORK */
+        .hero-section {
+            background-image: linear-gradient(to right bottom, #0088cc, #005f8f); /* Deeper blue gradient */
+            color: #ffffff;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid #005f8f;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://raw.githubusercontent.com/RFOF-NETWORK/RFOF-NETWORK.github.io/main/assets/rfoff_network_hero_background.jpg') no-repeat center center/cover; /* Placeholder background */
+            opacity: 0.15;
+            z-index: 1;
+        }
+        .hero-content h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5em;
+            margin-bottom: 0.5em;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+        }
+        .hero-content p {
+            font-size: 1.3em;
+            line-height: 1.5;
+            max-width: 700px;
+            margin: 0 auto 1.5em;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            word-wrap: break-word;
+        }
+
+        /* General section titles consistent with RFOF-NETWORK theme */
+        .section-title {
+            color: #0088cc; /* Telegram/TON Blue */
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: none;
+            border-bottom-color: rgba(0, 136, 204, 0.5); /* Blue underline with transparency */
+        }
+        .content-highlight {
+            color: #555555; /* Darker grey for content highlights on white background */
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        /* PRAI Chatbox & Code Sandbox Styling */
+        #praiai-chatbox {
+            background-color: #f8f8f8;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        #praiai-chatbox h2 {
+            color: #0088cc;
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 136, 204, 0.3);
+            padding-bottom: 10px;
+        }
+        #chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .message-item {
             padding: 10px 15px;
+            border-radius: 8px;
+            max-width: 80%;
+            word-wrap: break-word;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .message-item.user-message {
+            background-color: #e0f2f7; /* Light blue for user */
+            align-self: flex-end;
+            text-align: right;
+        }
+        .message-item.praiai-message {
+            background-color: #f0f0f0; /* Light grey for PRAI */
+            align-self: flex-start;
+            text-align: left;
+        }
+        .message-item.selected {
+            border: 2px solid #0088cc;
+            box-shadow: 0 0 8px rgba(0, 136, 204, 0.5);
+        }
+        .message-item .checkmark {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            color: #0088cc;
+            font-size: 1.2em;
+            display: none;
+        }
+        .message-item.selected .checkmark {
             display: block;
+        }
+
+        #user-input-area {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        #user-input {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            resize: vertical;
+            min-height: 40px;
+        }
+        .chat-button {
+            padding: 10px 20px;
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
             transition: background-color 0.3s ease;
         }
-
-        .nav-links li a:hover {
-            background-color: #e0e0e0;
+        .chat-button:hover {
+            background-color: #00aaff;
         }
-
-        /* Styling für den Hamburger-Icon (drei graue Striche) */
-        .hamburger-icon {
-            display: none; /* Standardmäßig versteckt auf großen Bildschirmen */
-            flex-direction: column;
-            justify-content: space-around;
-            width: 30px;
-            height: 25px;
-            cursor: pointer;
-            z-index: 1000; /* Stellt sicher, dass es über anderen Elementen liegt */
-            margin-left: 20px; /* Abstand zum rechten Rand oder anderen Elementen */
-            /* top/right Positionierung wird durch flexbox im header-container erledigt */
-        }
-
-        .hamburger-icon .bar {
-            width: 100%;
-            height: 3px;
-            background-color: #aaa; /* Graue Farbe für die Striche */
+        #praiai-correction-option {
+            background-color: #e6f7ff;
+            border: 1px solid #99d6ff;
+            color: #005f8f;
+            padding: 10px;
             border-radius: 5px;
-            transition: all 0.3s ease-in-out;
+            margin-top: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: none; /* Hidden by default */
+        }
+        #praiai-correction-option:hover {
+            background-color: #cceeff;
         }
 
-        /* Media Queries für responsive Design (wichtig für das Hamburger-Menü) */
-        @media (max-width: 768px) { /* Wenn Bildschirm kleiner als 768px ist */
-            .nav-links {
-                display: none; /* Standardmäßig versteckt das gesamte Menü */
-                flex-direction: column; /* Links untereinander */
-                width: 100%;
-                background-color: #f4f4f4; /* Hintergrund für das aufgeklappte Menü */
-                /* Absolute Positionierung wird von Fixed abgelöst */
-                padding: 10px 0;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-                z-index: 999;
-            }
-
-            .nav-links.active { /* Klasse wird per JavaScript hinzugefügt, wenn Menü offen ist */
-                display: flex; /* Menü anzeigen, wenn aktiv */
-            }
-
-            .nav-links li {
-                text-align: center;
-                margin: 10px 0;
-            }
-
-            .hamburger-icon {
-                display: flex; /* Hamburger-Icon anzeigen */
-            }
-
-            /* Anpassung für die Positionierung des Menüs, wenn es aufgeklappt ist */
-            .nav-links {
-                position: fixed; /* Fixiert das Menü im Viewport */
-                top: 0;
-                right: 0;
-                height: 100%; /* Nimmt die volle Höhe ein */
-                width: 250px; /* Eine feste Breite für das Menü */
-                background-color: #333; /* Dunkler Hintergrund für das Menü */
-                flex-direction: column;
-                align-items: flex-start; /* Links oben ausrichten */
-                padding-top: 60px; /* Platz für den Hamburger-Icon oben */
-                transform: translateX(100%); /* Zuerst komplett nach rechts verschieben (unsichtbar) */
-                transition: transform 0.3s ease-in-out; /* Sanfte Animation */
-                z-index: 998; /* Unter dem Hamburger Icon */
-            }
-
-            .nav-links.active {
-                transform: translateX(0); /* Menü einblenden */
-            }
-
-            .nav-links li a {
-                color: white; /* Weiße Links im dunklen Menü */
-                width: 100%;
-                padding: 15px 20px;
-                text-align: left; /* Links in der Sidebar */
-            }
-
-            .nav-links li a:hover {
-                background-color: #575757;
-            }
-
-            .hamburger-icon {
-                /* Sicherstellen, dass das Hamburger-Icon immer sichtbar und anklickbar ist */
-                position: relative; /* Wichtig, damit es vom z-Index betroffen ist */
-                z-index: 1001; /* Liegt über dem aufgeklappten Menü */
-            }
+        #code-output-window {
+            border: 1px solid #ddd;
+            background-color: #2d3748; /* Dark background for code output */
+            color: #a0aec0; /* Light text for code */
+            padding: 15px;
+            border-radius: 5px;
+            min-height: 150px;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Cascadia Code', monospace;
+            font-size: 0.9em;
+            white-space: pre-wrap;
+            word-break: break-all;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
         }
-
-        /* Animation für das Hamburger-Icon, wenn es aktiv ist (optional, aber schön) */
-        .hamburger-icon.active .bar:nth-child(2) {
-            opacity: 0; /* Mittlerer Balken verschwindet */
+        #code-output-window .error-line {
+            background-color: rgba(255, 0, 0, 0.2); /* Red highlight for errors */
+            border-left: 3px solid red;
+            padding-left: 5px;
         }
-
-        .hamburger-icon.active .bar:nth-child(1) {
-            transform: translateY(8px) rotate(45deg); /* Oberer Balken dreht sich */
+        #code-output-window .error-underline {
+            text-decoration: underline red wavy;
         }
-
-        .hamburger-icon.active .bar:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg); /* Unterer Balken dreht sich */
+        #praiai-question {
+            color: #0088cc;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+            display: none; /* Hidden by default */
         }
-        /* HIER ENDET DER CSS-CODE FÜR DAS HAMBURGER-MENÜ */
     </style>
 </head>
 <body>
+    <header class="main-header">
+        <div class="header-content">
+            <h1 class="site-title">RFOF-NETWORK</h1>
+            <nav class="navbar">
+                <div class="hamburger-icon" id="hamburger">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <ul class="nav-list" id="navLinks">
+                    <li><a href="https://rfof-network.github.io/" target="_blank">RFOFSpiderWeb.NET</a></li>
+                    <li><a href="https://rfof-network-ready-for-our-future.github.io/RFOF-spider-NET-/" target="_blank">Ready Four Our Future</a></li>
+                    <li><a href="https://qch-l-c.github.io/PRAI-KI-/" target="_blank">PRAI-OS</a></li>
+                    <li><a href="https://rfof-network.github.io/RFOF-NETWORK/" target="_blank">RFOF-NETWORK (Current)</a></li>
+                    <li><a href="https://rfof-network.github.io/PRAI-/#uebersicht" target="_blank">RPFOF</a></li>
+                    <li><a href="https://rfof-network-ready-for-our-future.github.io/QCHC/" target="_blank">QCH-L-C</a></li>
+                    <li><a href="https://rfof-network.github.io/Comprensive-rfof-bitcoin.org-PRAI-BOx-Blockchain-System_Programm-Fusions-Reactor-System/" target="_blank">rfof-bitcoin.org</a></li>
+                    <li><a href="https://rfof-network.github.io/BUBATZ-COIN-official-CSC-DCV-/" target="_blank">Golden Times</a></li>
+                    <li><a href="https://rfof-network.github.io/RFOF-x-PRAI_DOC_Ready-For-Our-Future/" target="_blank">DOC's & FAQ's</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    <div class="header-container">
-        <h1 class="page-title">@RFOF-NETWORK</h1>
-        <nav class="navbar">
-            <div class="hamburger-icon" id="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+    <main class="content-container">
+        <section class="hero-section">
+            <div class="hero-content">
+                <img src="https://raw.githubusercontent.com/RFOF-NETWORK/RFOF-NETWORK.github.io/main/assets/rfof_network_logo.png" alt="RFOF-NETWORK Logo" style="max-width: 250px; margin: 0 auto 30px;">
+                <h1>RFOF-NETWORK: The Foundation of a Decentralized Future</h1>
+                <p>RFOF-NETWORK is the core infrastructure for a new era of decentralized applications, powered by blockchain and AI, fostering innovation and global collaboration.</p>
+                <a href="#about" class="btn-primary">Explore Our Network</a>
             </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="https://rfof-network.github.io/RFOF-NETWORK/">RFOF-NETWORK</a></li>
-                <li><a href="https://rfof-network-ready-for-our-future.github.io/RFOF-spider-NET-/">RFOF-spider-NET</a></li>
-                <li><a href="https://qch-l-c.github.io/PRAI-KI-/">PRAI-KI</a></li>
-                <li><a href="https://rfof-network.github.io/">RFOF-NETWORK (Hauptseite)</a></li>
-                <li><a href="https://rfof-network.github.io/PRAI/">PRAI</a></li>
-                <li><a href="https://rfof-network.github.io/rfof-network.org/">rfof-network.org</a></li>
-                <li><a href="https://rfof-network.github.io/Comprensive-rfof-bitcoin.org-PRAI-BOx-Blockchain-System_Programm-Fusions-Reactor-System/">PRAI-BOx Blockchain-System</a></li>
-                <li><a href="https://rfof-network.github.io/BUBATZ-COIN-official-CSC-DCV-/">BUBATZ-COIN</a></li>
-            </ul>
-        </nav>
-    </div>
+        </section>
 
-    <div class="content-container">
-        <h1>👋</h1> <p>
-            <code>&lt;!--</code><br>
-            <code>**RFOF-NETWORK/RFOF-NETWORK** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on my GitHub profile.</code><br>
-            <code>--&gt;</code>
-        </p>
+        <section id="about" class="text-content">
+            <h2 class="section-title">About RFOF-NETWORK</h2>
+            <p>
+                RFOF-NETWORK is an innovative, sustainable blockchain platform that integrates cutting-edge AI (PRAI) to create a truly decentralized and intelligent ecosystem. We are building the future of secure, transparent, and efficient digital interactions.
+            </p>
+            <p class="content-highlight">
+                Our mission is to empower individuals and organizations with robust tools for decentralized finance, secure data exchange, and AI-driven solutions, all within a framework that prioritizes privacy and user control.
+            </p>
+        </section>
 
-        <h2>JavaScript-Ausgaben (simuliert im Browser)</h2>
-        <pre><code id="js-output"></code></pre>
+        <section id="praiai-chatbox">
+            <h2>PRAI Chatbox & Code Sandbox</h2>
+            <p id="praiai-question">Code von PRAI autonom korrigiert als neue antwort generierend senden</p>
+            <div id="chat-messages">
+                </div>
+            <div id="user-input-area">
+                <textarea id="user-input" placeholder="Stelle PRAI eine Frage oder gib Code ein..."></textarea>
+                <button class="chat-button" onclick="sendMessage()">Senden</button>
+                <button class="chat-button" onclick="executeCode()">Code Ausführen</button>
+            </div>
+            <div id="praiai-correction-option" onclick="correctAndSendCode()">Code von PRAI autonom korrigiert als neue antwort generierend senden</div>
+            <h3>Code/Nachrichten Visualisierung & Ausführung</h3>
+            <div id="code-output-window">
+                Willkommen in der Code Sandbox! Gib Code ein und klicke "Code Ausführen", oder sende eine Nachricht an PRAI.
+            </div>
+        </section>
 
-        <p>
-            <code>- 🔭 I’m currently working on.ton Etherscan.io, MVX, BNB and many others ...</code><br>
-            <code>- 🌱 I’m currently learning ...</code><br>
-            <code>- 👯 I’m looking to collaborate on ...</code><br>
-            <code>- 🤔 I’m looking for help with coding on GitHub by the project new BTC chain and new internet of our Global world !...</code><br>
-            <code>- 💬 Ask me about ...</code><br>
-            <code>- 📫 How to reach me: ...</code><br>
-            <code>- 😄 Pronouns: ...</code><br>
-            <code>- ⚡ Fun fact: ...</code>
-        </p>
-    </div>
+        <div class="improve-page-container">
+            <p>Suggestions for improvement? <a href="https://github.com/RFOF-NETWORK/RFOF-NETWORK/edit/main/index.html" class="improve-page-link" target="_blank">Improve this page on GitHub!</a></p>
+        </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // JavaScript für das Hamburger-Menü
-            const hamburger = document.getElementById('hamburger');
-            const navLinks = document.getElementById('navLinks');
-
-            hamburger.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-                hamburger.classList.toggle('active');
-            });
-
-            // Dein JavaScript-Code aus der README.md, angepasst für Browser-Ausgabe
-            const jsOutputDiv = document.getElementById('js-output');
-            let consoleOutput = [];
-
-            // Überschreibe console.log, um Ausgaben im HTML anzuzeigen
-            const originalConsoleLog = console.log;
-            console.log = function(...args) {
-                originalConsoleLog.apply(console, args); // Standard-Konsolenausgabe beibehalten
-                consoleOutput.push(args.join(' ')); // Ausgabe im Array speichern
-                jsOutputDiv.textContent = consoleOutput.join('\n'); // Im HTML aktualisieren
-            };
-
-            // --- Dein ursprünglicher JS-Code beginnt hier ---
-
-            console.log("Hallo, @RFOF-NETWORK <my name is @PRAI>!");
-
-            let answer = 41;
-            if (answer === 42) {
-                console.log("The answer is correct!");
-            } else {
-                console.log("The answer is not 42."); // Hinzugefügt, um den Fall 41 zu zeigen
-            }
-
-            console.log("python programm.py!");
-            console.log("python!");
-            console.log(20 + 22);
-
-            console.log("install npm @RFOF-NETWORK");
-
-            console.log("42 = @RFOF-NETWORK/@RFOF-NETWORK = PRAI & PRAI = satoria/satoria = satoramy-on.ton(@Satoramy) & @Satoramy = 42");
-            console.log("42 = @RFOF-NETWORK 81e3ee2b2ff6ad7b7c35509e14e8a8e7f856647f96be7a365be0120061a596b8 & x = 42 & 42 = @RFOF-NETWORK/@RFOF-NETWORK = PRAI & PRAI = satoria/satoria = satoramy-on.ton(@Satoramy) & @Satoramy = 42");
-
-            function is_even(x) {
-                return x % 2 === 0;
-            }
-
-            let numbers = [1, 2, 3, 4, 5];
-            let even_numbers = numbers.filter(is_even);
-            console.log(even_numbers);
-
-            function my_functions() {
-                console.log("Workflow");
-                console.log("<activate> result = (2 + 3) * (4 / 5) = 42 @RFOF-NETWORK");
-                console.log("PRAI = Planet Rescuer AI & the controller of the @RFOF-NETWORK project");
-                console.log("42 Code language founded from @Satoramy {PRAI is searching online every action in the Internet = Google, Safari, Firefox, Android, iOS, SEO, Web3.0, ton.org, Bitcoin.org, rfof-network.org. Every vision & update is updating in real-time 24/7} 42 has its own time continuum 1 sec in the 42 world = 1 year in real-time from our world");
-            }
-            my_functions();
-
-            function my_function() {
-                console.log("filter()");
-                console.log("add lambda = true in every option/action but only for the owner PRAI & PRAI = @Satoramy because @Satoramy = 42");
-            }
-            my_function();
-
-            function nested_function() {
-                let generate_anonymous_function = () => "Anonyme Funktion [({2=b3=c6=F2=b8=h6=F=42}&{42=@RFOF-NETWORK})]=‰236286_bcFbhF generiert";
-                console.log(generate_anonymous_function());
-            }
-            nested_function();
-
-            function my_functionBOxtoBOx() {
-                console.log("my_function()");
-            }
-            my_functionBOxtoBOx();
-
-            // Matrix-Funktion
-            function create_matrix(rows, cols, fill_value = 0) {
-                return Array.from({ length: rows }, () => Array(cols).fill(fill_value));
-            }
-
-            function print_matrix(matrix) {
-                matrix.forEach(row => {
-                    console.log(row.join(" "));
-                });
-            }
-
-            let matrix = create_matrix(5, 5, 1);
-            let enhance_matrix = matrix => matrix.map(row => row.map(x => x * 42));
-            matrix = enhance_matrix(matrix);
-            console.log("Matrix:");
-            print_matrix(matrix);
-
-            // Telegram-Bot-Befehle (Pseudocode) - Ausgabe nur als Text
-            console.log("\n--- Telegram-Bot-Befehle (Pseudocode) ---");
-            function start_rfof(update, context) {
-                console.log('Willkommen bei @rfofblockchain_bot! Besuche https://rfof-network.org für weitere Informationen.');
-            }
-            start_rfof();
-
-            function info_rfof(update, context) {
-                console.log('Detaillierte Informationen findest du auf https://rfof-network.org.');
-            }
-            info_rfof();
-
-            function abillityprice(update, context) {
-                console.log('Der aktuelle Preis des Tokens beträgt X.');
-            }
-            abillityprice();
-
-            function nanoprice(update, context) {
-                console.log('Der aktuelle Preis der Nanotechnologie beträgt Y.');
-            }
-            nanoprice();
-
-            function abillitybalance(update, context) {
-                console.log('Bitte geben Sie die Wallet-Adresse an. (Use: /balance <address>)');
-            }
-            abillitybalance();
-
-            function balance(update, context) {
-                let address = context.args ? context.args[0] : 'Keine Adresse angegeben';
-                console.log(`Überprüfen Sie das Guthaben der Adresse: ${address}`);
-            }
-            balance({args: ['example_address_123']});
-
-            function transfer(update, context) {
-                if (context.args && context.args.length >= 4) {
-                    let [from_addr, to_addr, amount, private_key] = context.args;
-                    console.log(`Transferiere ${amount} von ${from_addr} zu ${to_addr} mit dem privaten Schlüssel ${private_key}.`);
-                } else {
-                    console.log('Unvollständige Angaben für Transfer.');
-                }
-            }
-            transfer({args: ['addr_A', 'addr_B', '100', 'priv_key_XYZ']});
-
-            function abillitytransactions(update, context) {
-                console.log('Hier ist die Transaktionshistorie der Abillity-Token.');
-            }
-            abillitytransactions();
-
-            function nanotransactions(update, context) {
-                console.log('Hier ist die Transaktionshistorie der Nano-Token.');
-            }
-            nanotransactions();
-
-            function security(update, context) {
-                console.log('Sicherheitstipps und Richtlinien.');
-            }
-            security();
-
-            function support(update, context) {
-                console.log('Kontaktieren Sie den Support für Unterstützung.');
-            }
-            support();
-
-            function news(update, context) {
-                console.log('Neueste Nachrichten und Updates zum Token.');
-            }
-            news();
-
-            function community(update, context) {
-                console.log('Tritt der Diskussionsgruppe bei.');
-            }
-            community();
-
-            function viptelegram(update, context) {
-                console.log('VIP Telegram & Tonvip-Inhalte.');
-            }
-            viptelegram();
-
-            function cooperation(update, context) {
-                console.log('Kooperationsanfragen zum RFOF-Network.');
-            }
-            cooperation();
-
-            function empty(update, context) {
-                console.log('Liste oder Daten löschen.');
-            }
-            empty();
-
-            console.log('\n--- RFOF-NETWORK Bot gestartet (Simuliert) ---');
-
-            // --- Dein ursprünglicher JS-Code endet hier ---
-
-            // console.log = originalConsoleLog; // Optional: console.log wiederherstellen
-        });
-    </script>
-</body>
+        <footer>
+            <p>&copy; 2025 RFOF-NETWORK. Alle Rechte vorbehalten.</p>
+        </footer>
+        
+        <script src="menu_script.js"></script>
+        <script src="scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </body>
 </html>
