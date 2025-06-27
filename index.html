@@ -1,213 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RFOF-NETWORK: Decentralized Future & PRAI Sandbox</title>
+    <title>RFOF-NETWORK - PRAI Sandbox</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="menu_styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght0&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
-    <style>
-        /* Specific styles for RFOF-NETWORK, building on global styles */
-        .site-title {
-            color: #0088cc; /* Telegram/TON Blue */
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5em; /* Standard title size */
-            font-weight: bold;
-            margin: 0;
-            padding: 0;
-            flex-shrink: 0;
-            text-shadow: none;
-        }
-
-        /* Hero Section for RFOF-NETWORK */
-        .hero-section {
-            background-image: linear-gradient(to right bottom, #0088cc, #005f8f); /* Deeper blue gradient */
-            color: #ffffff;
-            padding: 80px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            border-bottom: 2px solid #005f8f;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('https://raw.githubusercontent.com/RFOF-NETWORK/RFOF-NETWORK.github.io/main/assets/rfoff_network_hero_background.jpg') no-repeat center center/cover; /* Placeholder background */
-            opacity: 0.15;
-            z-index: 1;
-        }
-        .hero-content h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.5em;
-            margin-bottom: 0.5em;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-        }
-        .hero-content p {
-            font-size: 1.3em;
-            line-height: 1.5;
-            max-width: 700px;
-            margin: 0 auto 1.5em;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-            word-wrap: break-word;
-        }
-
-        /* General section titles consistent with RFOF-NETWORK theme */
-        .section-title {
-            color: #0088cc; /* Telegram/TON Blue */
-            font-family: 'Orbitron', sans-serif;
-            text-shadow: none;
-            border-bottom-color: rgba(0, 136, 204, 0.5); /* Blue underline with transparency */
-        }
-        .content-highlight {
-            color: #555555; /* Darker grey for content highlights on white background */
-            font-style: italic;
-            font-weight: bold;
-        }
-
-        /* PRAI Chatbox & Code Sandbox Styling */
-        #praiai-chatbox {
-            background-color: #f8f8f8;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 30px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        }
-        #praiai-chatbox h2 {
-            color: #0088cc;
-            font-family: 'Orbitron', sans-serif;
-            text-align: center;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(0, 136, 204, 0.3);
-            padding-bottom: 10px;
-        }
-        #chat-messages {
-            height: 300px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .message-item {
-            padding: 10px 15px;
-            border-radius: 8px;
-            max-width: 80%;
-            word-wrap: break-word;
-            position: relative;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-        .message-item.user-message {
-            background-color: #e0f2f7; /* Light blue for user */
-            align-self: flex-end;
-            text-align: right;
-        }
-        .message-item.praiai-message {
-            background-color: #f0f0f0; /* Light grey for PRAI */
-            align-self: flex-start;
-            text-align: left;
-        }
-        .message-item.selected {
-            border: 2px solid #0088cc;
-            box-shadow: 0 0 8px rgba(0, 136, 204, 0.5);
-        }
-        .message-item .checkmark {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            color: #0088cc;
-            font-size: 1.2em;
-            display: none;
-        }
-        .message-item.selected .checkmark {
-            display: block;
-        }
-
-        #user-input-area {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        #user-input {
-            flex-grow: 1;
-            padding: 12px 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1em;
-            resize: vertical;
-            min-height: 40px;
-        }
-        .chat-button {
-            padding: 10px 20px;
-            background-color: #0088cc;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
-        }
-        .chat-button:hover {
-            background-color: #00aaff;
-        }
-        #praiai-correction-option {
-            background-color: #e6f7ff;
-            border: 1px solid #99d6ff;
-            color: #005f8f;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            display: none; /* Hidden by default */
-        }
-        #praiai-correction-option:hover {
-            background-color: #cceeff;
-        }
-
-        #code-output-window {
-            border: 1px solid #ddd;
-            background-color: #2d3748; /* Dark background for code output */
-            color: #a0aec0; /* Light text for code */
-            padding: 15px;
-            border-radius: 5px;
-            min-height: 150px;
-            overflow-x: auto;
-            font-family: 'Fira Code', 'Cascadia Code', monospace;
-            font-size: 0.9em;
-            white-space: pre-wrap;
-            word-break: break-all;
-            box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
-        }
-        #code-output-window .error-line {
-            background-color: rgba(255, 0, 0, 0.2); /* Red highlight for errors */
-            border-left: 3px solid red;
-            padding-left: 5px;
-        }
-        #code-output-window .error-underline {
-            text-decoration: underline red wavy;
-        }
-        #praiai-question {
-            color: #0088cc;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 10px;
-            display: none; /* Hidden by default */
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@700&family=Fira+Code&family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="main-header">
@@ -220,68 +20,63 @@
                     <div class="bar"></div>
                 </div>
                 <ul class="nav-list" id="navLinks">
-                    <li><a href="https://rfof-network.github.io/" target="_blank">RFOFSpiderWeb.NET</a></li>
-                    <li><a href="https://rfof-network-ready-for-our-future.github.io/RFOF-spider-NET-/" target="_blank">Ready Four Our Future</a></li>
-                    <li><a href="https://qch-l-c.github.io/PRAI-KI-/" target="_blank">PRAI-OS</a></li>
-                    <li><a href="https://rfof-network.github.io/RFOF-NETWORK/" target="_blank">RFOF-NETWORK (Current)</a></li>
-                    <li><a href="https://rfof-network.github.io/PRAI-/#uebersicht" target="_blank">RPFOF</a></li>
-                    <li><a href="https://rfof-network-ready-for-our-future.github.io/QCHC/" target="_blank">QCH-L-C</a></li>
-                    <li><a href="https://rfof-network.github.io/Comprensive-rfof-bitcoin.org-PRAI-BOx-Blockchain-System_Programm-Fusions-Reactor-System/" target="_blank">rfof-bitcoin.org</a></li>
-                    <li><a href="https://rfof-network.github.io/BUBATZ-COIN-official-CSC-DCV-/" target="_blank">Golden Times</a></li>
-                    <li><a href="https://rfof-network.github.io/RFOF-x-PRAI_DOC_Ready-For-Our-Future/" target="_blank">DOC's & FAQ's</a></li>
+                    <li><a href="https://rfof-network.github.io/">RFOFSpiderWeb.NET</a></li>
+                    <li><a href="https://rfof-network-ready-for-our-future.github.io/RFOF-spider-NET-/">Ready Four Our Future</a></li>
+                    <li><a href="https://qch-l-c.github.io/PRAI-KI-/">PRAI-OS</a></li>
+                    <li><a href="https://rfof-network.github.io/RFOF-NETWORK/">RFOF-NETWORK</a></li>
+                    <li><a href="https://rfof-network.github.io/Comprensive-rfof-bitcoin.org-PRAI-BOx-Blockchain-System_Programm-Fusions-Reactor-System/">RPFOF</a></li>
+                    <li><a href="https://rfof-network-ready-for-our-future.github.io/QCHC/">QCH-L-C</a></li>
+                    <li><a href="https://rfof-network.github.io/Crypto-Hustler/">rfof-bitcoin.org</a></li>
+                    <li><a href="https://rfof-network.github.io/DDEUGGP/">Golden Times</a></li>
+                    <li><a href="https://rfof-network.github.io/RFOF-x-PRAI_DOC_Ready-For-Our-Future/">DOC's & FAQ's</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main class="content-container">
-        <section class="hero-section">
-            <div class="hero-content">
-                <img src="https://raw.githubusercontent.com/RFOF-NETWORK/RFOF-NETWORK.github.io/main/assets/rfof_network_logo.png" alt="RFOF-NETWORK Logo" style="max-width: 250px; margin: 0 auto 30px;">
-                <h1>RFOF-NETWORK: The Foundation of a Decentralized Future</h1>
-                <p>RFOF-NETWORK is the core infrastructure for a new era of decentralized applications, powered by blockchain and AI, fostering innovation and global collaboration.</p>
-                <a href="#about" class="btn-primary">Explore Our Network</a>
-            </div>
-        </section>
-
-        <section id="about" class="text-content">
-            <h2 class="section-title">About RFOF-NETWORK</h2>
-            <p>
-                RFOF-NETWORK is an innovative, sustainable blockchain platform that integrates cutting-edge AI (PRAI) to create a truly decentralized and intelligent ecosystem. We are building the future of secure, transparent, and efficient digital interactions.
-            </p>
-            <p class="content-highlight">
-                Our mission is to empower individuals and organizations with robust tools for decentralized finance, secure data exchange, and AI-driven solutions, all within a framework that prioritizes privacy and user control.
-            </p>
-        </section>
-
-        <section id="praiai-chatbox">
-            <h2>PRAI Chatbox & Code Sandbox</h2>
-            <p id="praiai-question">Code von PRAI autonom korrigiert als neue antwort generierend senden</p>
-            <div id="chat-messages">
+    <main>
+        <div class="content-container">
+            <section id="about" class="text-section">
+                <h2 class="main-tool-title">@RFOF-NETWORK</h2>
+                <p>This is the central hub for interaction with the RFOF-NETWORK. Use the PRAI Chatbox to ask questions or the Code Sandbox to simulate code execution across various languages.</p>
+                <a href="https://rfof-network.github.io/PRAI-/" class="btn-primary" target="_blank">Explore QUANTUM READY Integration</a>
+            </section>
+            
+            <section id="praiai-chatbox-section">
+                <div class="sandbox-title-bar">
+                    <span class="sandbox-title">PRAI Blue deep Gold AI</span>
+                    <span class="sandbox-title-right">rfof-sandbox.com</span>
                 </div>
-            <div id="user-input-area">
-                <textarea id="user-input" placeholder="Stelle PRAI eine Frage oder gib Code ein..."></textarea>
-                <button class="chat-button" onclick="sendMessage()">Senden</button>
-                <button class="chat-button" onclick="executeCode()">Code Ausführen</button>
-            </div>
-            <div id="praiai-correction-option" onclick="correctAndSendCode()">Code von PRAI autonom korrigiert als neue antwort generierend senden</div>
-            <h3>Code/Nachrichten Visualisierung & Ausführung</h3>
-            <div id="code-output-window">
-                Willkommen in der Code Sandbox! Gib Code ein und klicke "Code Ausführen", oder sende eine Nachricht an PRAI.
-            </div>
-        </section>
+                <div id="chat-history">
+                    </div>
+                <div id="user-input-area">
+                    <textarea id="user-input" placeholder="Stelle PRAI eine Frage oder gib Code ein..." rows="3"></textarea>
+                    <div class="button-group">
+                        <button id="send-message-btn" class="btn-primary">Senden</button>
+                        <button id="execute-code-btn" class="btn-secondary">Code Ausführen</button>
+                    </div>
+                </div>
+                <div id="praiai-correction-option" class="is-hidden">
+                    <p>Fehler entdeckt. Soll PRAI den Code autonom korrigieren und als neue Antwort senden?</p>
+                    <button id="correct-code-btn" class="btn-primary">Ja, korrigieren und senden</button>
+                </div>
+                <div id="code-output-window">
+                    <pre>Willkommen in der RFOF-Sandbox. Deine Nachrichten und Code-Ausgaben werden hier visualisiert.</pre>
+                </div>
+            </section>
 
-        <div class="improve-page-container">
-            <p>Suggestions for improvement? <a href="https://github.com/RFOF-NETWORK/RFOF-NETWORK/edit/main/index.html" class="improve-page-link" target="_blank">Improve this page on GitHub!</a></p>
+             </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 RFOF-NETWORK. All rights reserved.</p>
+            <p><a href="https://github.com/RFOF-NETWORK/RFOF-NETWORK" target="_blank">GitHub Repository</a></p>
         </div>
+    </footer>
 
-        <footer>
-            <p>&copy; 2025 RFOF-NETWORK. Alle Rechte vorbehalten.</p>
-        </footer>
-        
-        <script src="menu_script.js"></script>
-        <script src="scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-        <script>hljs.highlightAll();</script>
-    </body>
-</html
+    <script src="menu_script.js"></script>
+    <script src="scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</body>
+</html>
