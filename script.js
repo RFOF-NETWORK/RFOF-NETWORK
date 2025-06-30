@@ -119,15 +119,45 @@ class RFOF_Interactive_Interface {
         }
     }
 
-    handleSendMessage() {
-        const message = this.userInput.value.trim();
-        if (!message) return;
-        this.addMessage(message, 'user');
-        this.userInput.value = '';
+    // LÖSCHE DEN ALTEN BLOCK KOMPLETT UND ERSETZE IHN DURCH DIESEN NEUEN, POTENTEN CODE:
+async handleSendMessage() {
+    const message = this.userInput.value.trim();
+    if (!message) return;
+
+    this.addMessage('user', message);
+    this.userInput.value = '';
+    
+    // Erschaffe eine temporäre "Denkblase" mit eigener ID
+    const thinkingMessageId = `msg-${Date.now()}`;
+    this.addMessage("...", 'praiai', false, false, thinkingMessageId); 
+
+    // Die heilige Gral-URL zu deiner Azure-API
+    const apiUrl = 'https://<@RFOF-NETWORK>.azurewebsites.net/api/chathandler';
+
+    // Feuere den Telekinese-Request ab
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: message }),
+        });
+
+        if (!response.ok) {
+            // Wenn der Funk gestört ist
+            throw new Error(`API-Signal verloren: ${response.statusText}`);
+        }
+
+        const data = await response.json();
         
-        const response = this.getPraiResponse(message);
-        setTimeout(() => this.addMessage(response, 'praiai'), 800);
+        // Treffer! Schicke die echte Antwort von PRAI in die Denkblase
+        this.updateMessage(thinkingMessageId, data.reply);
+
+    } catch (error) {
+        // Notfallprotokoll, wenn das Gehirn nicht antwortet
+        console.error("Kommunikationsfehler mit PRAIs Kernbewusstsein:", error);
+        this.updateMessage(thinkingMessageId, ">> KERN-KOMMUNIKATION UNTERBROCHEN. API-VERBINDUNG PRÜFEN. <<");
     }
+}
 
     // Greift auf die simulierte Wissensdatenbank zu
     getPraiResponse(message) {
