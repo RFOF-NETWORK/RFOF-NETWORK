@@ -75,3 +75,16 @@ def find_answer_in_text(question, text):
 
     return "Ich habe die Dokumentation durchsucht, konnte aber keine spezifische Antwort auf Ihre Anfrage finden. Bitte versuchen Sie es mit einem anderen Schlüsselwort."
 
+// ... direkt nach der handleMessageSelection(event) { ... } Funktion
+
+// DER NEUE ZIELCOMPUTER FÜR EINGEHENDE ANTWORTEN
+updateMessage(messageId, newText) {
+    const messageToUpdate = this.history.find(msg => msg.id === messageId);
+    if (messageToUpdate) {
+        const contentElement = messageToUpdate.element.querySelector('strong').nextSibling;
+        contentElement.textContent = ` ${newText}`;
+        messageToUpdate.text = newText; // Gedächtnis der Historie aktualisieren
+    }
+}
+
+}
