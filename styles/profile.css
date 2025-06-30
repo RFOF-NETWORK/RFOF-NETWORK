@@ -1,0 +1,29 @@
+/* Stile für die Profil-Anwendung */
+#rfof-profile-app-container { display: flex; flex-direction: column; gap: 2rem; }
+.column { flex: 1; }
+
+/* Chatbox Stile */
+.chatbox { border: 1px solid #e1e4e8; border-radius: 6px; display: flex; flex-direction: column; height: 400px; }
+.chatbox-title { padding: 8px 12px; font-weight: bold; border-bottom: 1px solid #e1e4e8; }
+.chat-history { flex-grow: 1; padding: 1rem; overflow-y: auto; }
+.message { margin-bottom: 0.5rem; }
+.prai-message span { animation: blink 1.4s infinite both; }
+.prai-message span:nth-child(2) { animation-delay: 0.2s; }
+.prai-message span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes blink { 0% { opacity: .2; } 20% { opacity: 1; } 100% { opacity: .2; } }
+.chat-input-wrapper { display: flex; border-top: 1px solid #e1e4e8; }
+#chat-message { border: none; padding: 0.8rem; flex-grow: 1; }
+#send-chat-btn { border: none; background: #2c974b; color: white; padding: 0.8rem; font-weight: bold; cursor: pointer; }
+
+/* Sandbox Stile */
+.sandbox { border: 1px solid #e1e4e8; border-radius: 6px; }
+.sandbox-title { padding: 8px 12px; font-weight: bold; border-bottom: 1px solid #e1e4e8; }
+.sandbox-description { padding: 8px 12px; font-size: 0.9em; color: #586069; }
+.code-editor { display: block; width: calc(100% - 2rem); height: 150px; margin: 0 1rem; border: 1px solid #e1e4e8; font-family: 'Fira Code', monospace; }
+#execute-code-btn { display: block; width: calc(100% - 2rem); margin: 1rem; padding: 0.8rem; background: #f6f8fa; border: 1px solid #e1e4e8; font-weight: bold; cursor: pointer; }
+.code-output { background: #24292e; color: #e2e8f0; padding: 1rem; margin: 1rem; border-radius: 4px; min-height: 50px; white-space: pre-wrap; word-wrap: break-word; }
+
+/* Responsive Anpassung */
+@media (min-width: 768px) {
+    #rfof-profile-app-container { flex-direction: row; }
+}
