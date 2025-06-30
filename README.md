@@ -116,6 +116,19 @@ This repository is organized into distinct, yet interconnected, directories, eac
 **Satoramy (J.K.)**
 *Creator and Architect of RFOF-NETWORK, PRAI, Yggdrasil, and PZQQET Axiomatikx*
 
+<link rel="stylesheet" href="styles/profile.css">
+
+<div id="rfof-profile-app-container">
+    <div class="column">
+        <div id="chat-container-target"></div>
+    </div>
+    <div class="column">
+        <div id="sandbox-container-target"></div>
+    </div>
+</div>
+
+<script src="scripts/main.js"></script>
+
 
 RFOF-NETWORK/
 ├── .github/                                    // GitHub spezifische Konfigurationen (Workflows, Actions, Security, Dependabot).
