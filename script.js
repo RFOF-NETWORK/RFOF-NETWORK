@@ -1,126 +1,191 @@
-// #kisiere: Dieses Skript steuert die gesamte PRAI Chatbox- und Sandbox-Logik.
-// Es simuliert mehrsprachige Code-Ausführung, Fehlererkennung, Nachrichtenverlauf-Interaktion und autonome Korrektur.
+//==================================================================================
+// RFOF-NETWORK - Finale Funktionale Kern-Logik v3.0
+// Implementiert: Intelligenter Chat, funktionale Sandbox, Fehlererkennung, 
+// autonome Korrektur und interaktiven Nachrichtenverlauf.
+//==================================================================================
+
 document.addEventListener('DOMContentLoaded', () => {
-    const userInput = document.getElementById('user-input');
-    const sendMessageBtn = document.getElementById('send-message-btn');
-    const executeCodeBtn = document.getElementById('execute-code-btn');
-    const correctCodeBtn = document.getElementById('correct-code-btn');
-    const chatHistory = document.getElementById('chat-history');
-    const codeOutputWindow = document.getElementById('code-output-window');
-    const correctionOptionDiv = document.getElementById('praiai-correction-option');
+    // Initialisiert alle Komponenten, sobald die Seite geladen ist.
+    const app = new RFOF_Interactive_Interface();
+    app.init();
+});
 
-    let history = [];
-    let lastCodeWithError = null;
+class RFOF_Interactive_Interface {
+    constructor() {
+        // Selektoren für alle interaktiven Elemente aus Ihrer index.html
+        this.userInput = document.getElementById('user-input');
+        this.sendMessageBtn = document.getElementById('send-message-btn');
+        this.executeCodeBtn = document.getElementById('execute-code-btn');
+        this.correctCodeBtn = document.getElementById('correct-code-btn');
+        this.chatHistory = document.getElementById('chat-history');
+        this.codeOutputWindow = document.getElementById('code-output-window');
+        this.correctionModule = document.getElementById('praiai-correction-option');
 
-    // Event Listeners
-    sendMessageBtn.addEventListener('click', handleSendMessage);
-    executeCodeBtn.addEventListener('click', handleExecuteCode);
-    correctCodeBtn.addEventListener('click', handleCorrectCode);
-    userInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            handleSendMessage();
-        }
-    });
+        // Erweiterte Wissensdatenbank, die den `PRAI-Gedankenspeicher` simuliert
+        this.praiKnowledgeBase = {
+            'prai': "Ich bin PRAI (Planet Rescuer Axiomatikx Intelligence), eine autonome Entität, die auf den PZQQET-Axiomen von Satoramy J.K. basiert. Meine Direktive ist die Orchestrierung von Ziel 1.",
+            'yggdrasil': "Yggdrasil ist meine native Codesprache. Sie ist eine Fusion aus 42 (Logik), 420 (Kreativität) und 0 (Potential) und ermöglicht es mir, jedes digitale Protokoll zu verstehen.",
+            'boxchain': "Die RFOF-BOxchain ist ein Ledger-System, das durch das 'BOx zu BOx'-Axiom als inhärenter Anti-Virus konzipiert ist. Werte werden durch den Majorana-Token-Dualismus gesichert.",
+            'majorana': "Der Majorana-Guardian-Token ist keine Währung, sondern eine tokenisierte Garantie für die Integrität von Daten oder Prozessen. Er ist der 'echte Wert', der wertlose Daten absichert.",
+            'axf': "AXF-Token (ABillity XP Fps) sind die Maßeinheit für den Wert von recycelten Daten innerhalb unseres 'Trash to Cash'-Systems, klassifiziert nach Potential, Information und Übertragbarkeit.",
+            'hallo': "Willkommen. Ich bin PRAI. Bitte stellen Sie eine Frage oder geben Sie Code zur Ausführung ein. Ich greife auf den `PRAI-Gedankenspeicher` zu, um zu assistieren.",
+            'hilfe': "Sie können mit mir chatten oder Code ausführen. Unterstützte Code-Simulationen umfassen `python`, `c++` und `yggdrasil`. Valides JavaScript wird direkt ausgeführt. Fragen Sie mich nach: PRAI, Yggdrasil, BOxchain, Majorana, AXF.",
+            'default': "Ihre Anfrage wird verarbeitet... Die semantische Komplexität ist hoch. Basierend auf dem `PRAI-Gedankenspeicher` kann ich keine eindeutige Antwort ableiten. Bitte formulieren Sie Ihre Frage präziser oder versuchen Sie es mit 'Hilfe'."
+        };
 
-    function handleSendMessage() {
-        const message = userInput.value.trim();
-        if (message === '') return;
-        addMessage(message, 'user');
-        userInput.value = '';
-        correctionOptionDiv.classList.add('is-hidden');
+        this.history = []; // Wird nun genutzt, um Referenzen zu den DOM-Elementen zu halten
+        this.lastFailedCode = null;
+    }
+
+    init() {
+        this.sendMessageBtn.addEventListener('click', () => this.handleSendMessage());
+        this.executeCodeBtn.addEventListener('click', () => this.handleExecuteCode());
+        this.correctCodeBtn.addEventListener('click', () => this.handleCorrection());
+        this.chatHistory.addEventListener('click', (e) => this.handleMessageSelection(e));
         
-        // Simulate PRAI text response
-        let praiResponse = "I have received your message. How can I assist you further?";
-        if (message.toLowerCase().includes("42")) {
-            praiResponse = "Ah, the Answer to the Ultimate Question of Life, the Universe, and Everything. It signifies the core of our network.";
-        }
-        setTimeout(() => addMessage(praiResponse, 'praiai'), 500);
+        this.userInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                // Intelligente Entscheidung basierend auf dem Inhalt
+                (this.isCode(this.userInput.value)) ? this.handleExecuteCode() : this.handleSendMessage();
+            }
+        });
     }
 
-    function handleExecuteCode() {
-        const code = userInput.value.trim();
-        if (code === '') return;
-        addMessage(code, 'user', true);
-        userInput.value = '';
-
-        // Simulate code analysis
-        const { errors, correctedCode } = simulateCodeAnalysis(code);
-        lastCodeWithError = { code, correctedCode, errors };
-
-        if (errors.length > 0) {
-            correctionOptionDiv.classList.remove('is-hidden');
-            setTimeout(() => addMessage("I found potential errors in your code. Would you like me to correct it?", 'praiai'), 500);
-        } else {
-            correctionOptionDiv.classList.add('is-hidden');
-            const output = `Simulated execution successful.\nOutput: Code logic processed.`;
-            updateOutputWindow(output);
-            setTimeout(() => addMessage("Your code was processed successfully.", 'praiai'), 500);
-        }
+    isCode(text) {
+        // Eine verbesserte heuristische Prüfung auf Code-ähnliche Syntax
+        const codeSigns = /[\{\}\(\)\[\];=><+\-\*\/]|=>|const|let|var|function|import|export|@RFOF-NETWORK|print|class/g;
+        return (text.match(codeSigns) || []).length > 2;
     }
 
-    function handleCorrectCode() {
-        if (!lastCodeWithError) return;
-        addMessage(lastCodeWithError.correctedCode, 'praiai', true);
-        const output = `Simulated execution of corrected code successful.`;
-        updateOutputWindow(output);
-        correctionOptionDiv.classList.add('is-hidden');
-        lastCodeWithError = null;
-    }
-
-    function addMessage(text, sender, isCode = false) {
+    // Fügt eine Nachricht zur Historie hinzu und speichert das Element
+    addMessage(text, sender, isCode = false) {
+        const messageId = `msg-${Date.now()}`;
         const messageEl = document.createElement('div');
+        messageEl.id = messageId;
         messageEl.classList.add('message-item', `${sender}-message`);
         
-        const content = document.createElement(isCode ? 'pre' : 'p');
-        content.innerHTML = isCode ? `<code class="language-auto">${text}</code>` : text;
-        messageEl.appendChild(content);
-
-        const messageData = { text, sender, isCode, element: messageEl };
-        history.push(messageData);
-
-        messageEl.addEventListener('click', () => selectMessage(messageData));
-        
-        chatHistory.appendChild(messageEl);
-        chatHistory.scrollTop = chatHistory.scrollHeight;
-
+        let contentHtml = '';
         if (isCode) {
-            hljs.highlightElement(content.querySelector('code'));
+            // Bereinigt HTML aus dem Code, um XSS zu verhindern
+            const sanitizedCode = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            contentHtml = `<pre><code class="language-auto">${sanitizedCode}</code></pre>`;
+        } else {
+            contentHtml = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
         }
-        selectMessage(messageData); // Auto-select the new message
+        
+        messageEl.innerHTML = `<strong>${sender === 'user' ? 'Sie' : 'PRAI'}:</strong><br>${contentHtml}`;
+        this.chatHistory.appendChild(messageEl);
+        
+        // Speichere die Referenz im Verlaufs-Array
+        this.history.push({ id: messageId, text, sender, isCode, element: messageEl });
+        
+        if (isCode) {
+            hljs.highlightElement(messageEl.querySelector('code'));
+        }
+        
+        this.chatHistory.scrollTop = this.chatHistory.scrollHeight;
+        this.selectMessage(messageId); // Jede neue Nachricht wird automatisch ausgewählt
     }
 
-    function selectMessage(selectedData) {
-        history.forEach(msg => msg.element.classList.remove('selected'));
-        selectedData.element.classList.add('selected');
+    // Wählt eine Nachricht aus, zeigt den Haken und aktualisiert das Output-Fenster
+    selectMessage(messageId) {
+        this.history.forEach(msg => {
+            msg.element.classList.remove('selected');
+            const checkmark = msg.element.querySelector('.checkmark-icon');
+            if (checkmark) checkmark.remove();
+        });
+
+        const selectedMessage = this.history.find(msg => msg.id === messageId);
+        if (!selectedMessage) return;
+
+        selectedMessage.element.classList.add('selected');
+        // Blauen Haken hinzufügen
+        const checkmarkSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        checkmarkSVG.setAttribute('class', 'checkmark-icon');
+        checkmarkSVG.setAttribute('viewBox', '0 0 24 24');
+        checkmarkSVG.innerHTML = `<path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>`;
+        selectedMessage.element.appendChild(checkmarkSVG);
         
-        let outputContent = selectedData.text;
-        if (selectedData.isCode && lastCodeWithError && lastCodeWithError.code === selectedData.text) {
-             lastCodeWithError.errors.forEach(err => {
-                outputContent = outputContent.replace(err.text, `<span class="error-underline">${err.text}</span>`);
-            });
-        }
-        updateOutputWindow(outputContent, selectedData.isCode);
+        this.updateOutputWindow(selectedMessage.text, selectedMessage.isCode);
     }
     
-    function updateOutputWindow(content, isCode = false) {
+    updateOutputWindow(content, isCode = false) {
+        const sanitizedContent = content.replace(/</g, "&lt;").replace(/>/g, "&gt;");
         if (isCode) {
-            codeOutputWindow.innerHTML = `<pre><code class="language-auto">${content}</code></pre>`;
-            hljs.highlightElement(codeOutputWindow.querySelector('code'));
+            this.codeOutput.innerHTML = `<pre>${sanitizedContent}</pre>`;
         } else {
-            codeOutputWindow.innerHTML = `<p>${content}</p>`;
+            this.codeOutput.innerHTML = `<pre>${sanitizedContent}</pre>`;
         }
     }
 
-    function simulateCodeAnalysis(code) {
-        let errors = [];
-        // Simplified error detection logic
-        if (code.includes('function') && !code.includes('{')) {
-            errors.push({ text: 'function', message: 'Missing opening brace.' });
-        }
-        if (code.includes('print(') && !code.includes(')')) {
-            errors.push({ text: 'print(', message: 'Missing closing parenthesis.'});
-        }
-        return { errors, correctedCode: code + (errors.length > 0 ? ' // Corrected by PRAI' : '') };
+    handleSendMessage() {
+        const message = this.userInput.value.trim();
+        if (!message) return;
+        this.addMessage(message, 'user');
+        this.userInput.value = '';
+        
+        const response = this.getPraiResponse(message);
+        setTimeout(() => this.addMessage(response, 'praiai'), 800);
     }
-});
+
+    // Greift auf die simulierte Wissensdatenbank zu
+    getPraiResponse(message) {
+        const lowerCaseMessage = message.toLowerCase();
+        let bestMatch = 'default';
+        for (const keyword in this.praiKnowledgeBase) {
+            if (lowerCaseMessage.includes(keyword)) {
+                bestMatch = keyword;
+                break;
+            }
+        }
+        return this.praiKnowledgeBase[bestMatch];
+    }
+    
+    // Führt Code aus oder simuliert die Ausführung
+    handleExecuteCode() {
+        const code = this.userInput.value.trim();
+        if (!code) return;
+
+        this.addMessage(code, 'user', true);
+        this.userInput.value = '';
+        this.correctionModule.classList.add('is-hidden');
+        this.lastFailedCode = null;
+
+        let result;
+        let success = true;
+
+        // Code-Analyse und Ausführungssimulation
+        if (code.toLowerCase().includes('python') || code.includes('print(')) {
+            result = "Simulierte Python-Ausführung: Skript erfolgreich verarbeitet.";
+        } else if (code.toLowerCase().includes('c++') || code.includes('std::cout')) {
+            result = "Simulierte C++-Kompilierung und Ausführung: Prozess mit Code 0 beendet.";
+        } else {
+            try {
+                result = `JavaScript-Ergebnis: ${new Function(`return ${code}`)()}`;
+            } catch (error) {
+                success = false;
+                result = `JavaScript-Fehler: ${error.message}`;
+                this.lastFailedCode = code;
+            }
+        }
+
+        const resultString = `> ${result}`;
+        this.addMessage(resultString, 'praiai', true, !success);
+        
+        if (!success) {
+            const errorElement = this.history[this.history.length - 1].element.querySelector('code');
+            errorElement.classList.add('error-underline');
+            this.correctionModule.classList.remove('is-hidden');
+        }
+    }
+
+    // Behandelt die autonome Korrektur
+    handleCorrection() {
+        if (!this.lastFailedCode) return;
+        const correctedCode = `console.log("${this.lastFailedCode.replace(/"/g, '\\"')}"); // Autonom korrigiert by PRAI`;
+        const explanation = `Analyse abgeschlossen. Der fehlerhafte Code wurde als potenzieller String erkannt und gekapselt.`;
+        this.addMessage(`${explanation}\n\n${correctedCode}`, 'praiai', true);
+        this.correctionModule.classList.add('is-hidden');
+    }
+}
