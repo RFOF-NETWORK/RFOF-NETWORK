@@ -1,0 +1,63 @@
+#
+#================================================
+# # KANONISCHES PROTOKOLL: Avatar Update Workflow
+# # FUNKTION: Empfängt ein Signal aus der "Werkstatt" (rfof-network.org)
+# #           und deployt den neuesten Code auf GitHub Pages.
+# # STATUS: Universell für alle 9 Säulen.
+#================================================
+#
+
+name: Deploy RFOF Pillar to GitHub Pages
+
+on:
+  # Erlaubt das manuelle Starten dieses Workflows
+  workflow_dispatch:
+  
+  # Der entscheidende Trigger: Horcht auf ein externes Signal aus Ihrer Werkstatt
+  repository_dispatch:
+    types: [deploy-from-workshop]
+
+# Definiert die Berechtigungen, die der Workflow benötigt
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Stellt sicher, dass immer nur ein Deployment zur gleichen Zeit läuft
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      # HINWEIS: Hier würden in einer komplexeren App die Build-Schritte stehen.
+      # Da wir eine monolithische index.html verwenden, sind diese nicht zwingend nötig.
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: "20"
+      # - name: Install Dependencies
+      #   run: npm install
+      # - name: Build Static Site
+      #   run: npm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Lädt den Inhalt des gesamten Repositorys hoch
+          path: '.'
+          
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
