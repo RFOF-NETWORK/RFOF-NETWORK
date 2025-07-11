@@ -402,3 +402,151 @@ RFOF-NETWORK/
 │   └── ...
 ├── requirements.txt                            // Globale Python-Abhängigkeiten.
 └── .env.example                                // Beispiel für Umgebungsvariablen.
+
+
+#site out of this README.md
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Orbitron:wght@700&family=Fira+Code&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+<style>
+    body, html { margin: 0; padding: 0; font-family: 'Roboto', sans-serif; background-color: #f4f4f9; }
+    .page-container { max-width: 1200px; margin: 0 auto; padding: 15px; }
+    .main-header { background-color: #FFFFFF; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 10px 0; margin-bottom: 2rem; }
+    .header-content { max-width: 1200px; margin: 0 auto; padding: 0 15px; display: flex; justify-content: space-between; align-items: center; }
+    .site-title { color: #0088cc; font-family: 'Orbitron', sans-serif; font-size: 1.8em; }
+    .navbar { position: relative; }
+    .hamburger-icon { display: none; flex-direction: column; justify-content: space-around; width: 24px; height: 20px; cursor: pointer; z-index: 1002; }
+    .hamburger-icon .bar { width: 100%; height: 3px; background-color: #0088cc; border-radius: 2px; }
+    .nav-list { list-style: none; margin: 0; padding: 0; display: flex; }
+    .nav-list li a { color: #333; text-decoration: none; padding: 8px 12px; font-weight: 500; font-size: 0.9em; }
+    
+    /* ZWEISPALTIGES LAYOUT */
+    .app-grid { display: flex; flex-direction: column; gap: 2rem; }
+    @media (min-width: 768px) { .app-grid { flex-direction: row; } .column { flex: 1; min-width: 0;} }
+
+    /* MODUL-STYLING */
+    .module-container { background: #fff; border: 1px solid #e1e4e8; border-radius: 8px; box-shadow: 0 1px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column; height: 100%; }
+    .module-title-bar { display: flex; justify-content: space-between; padding: 10px 15px; background: #2d3748; color: #fff; border-top-left-radius: 8px; border-top-right-radius: 8px; font-family: 'Orbitron'; }
+    .module-title { color: #DAA520; font-family: 'Press Start 2P'; font-size: 0.8em; }
+    .module-subtitle { color: #e2e8f0; font-family: 'Fira Code', monospace; font-size: 0.8em; }
+    .module-content { padding: 1rem; flex-grow: 1; display: flex; flex-direction: column; }
+    #chat-history { height: 400px; border: 1px solid #ddd; border-radius: 4px; padding: 10px; margin-bottom: 10px; overflow-y: auto; flex-grow: 1; }
+    #user-input-area { display: flex; flex-direction: column; gap: 10px; }
+    textarea { width: 100%; box-sizing: border-box; padding: 10px; border: 1px solid #ccc; border-radius: 4px; resize: vertical; }
+    .button-group { display: flex; gap: 10px; }
+    .button-group button { width: 100%; padding: 10px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; color: white; }
+    .button-group button.primary { background-color: #0088cc; }
+    .button-group button.secondary { background-color: #6c757d; }
+    pre { min-height: 100px; background: #2d3748; color: #e2e8f0; padding: 10px; border-radius: 4px; font-family: 'Fira Code', monospace; white-space: pre-wrap; word-break: break-all; }
+
+    @media (max-width: 960px) {
+        .hamburger-icon { display: flex; }
+        .nav-list { display: none; flex-direction: column; position: fixed; top: 0; right: -280px; width: 280px; height: 100vh; background-color: #2d3748; z-index: 1001; transition: right 0.35s ease; }
+        .nav-list.active { right: 0; display: flex; }
+    }
+</style>
+
+<div class="page-container">
+    <header class="main-header">
+        <div class="header-content">
+            <h1 class="site-title">@RFOF-NETWORK</h1>
+            <nav class="navbar">
+                <div class="hamburger-icon" id="hamburger">
+                    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                </div>
+                <ul class="nav-list" id="navLinks">
+                    </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="app-grid">
+            <div class="column">
+                <div class="module-container">
+                    <div class="module-title-bar">
+                        <span class="module-title">PRAI Blue deep Gold AI</span>
+                        <span class="module-subtitle">rfof-sandbox.com</span>
+                    </div>
+                    <div class="module-content">
+                        <div id="chat-history"></div>
+                        <div id="user-input-area">
+                            <textarea id="user-input" placeholder="Stelle PRAI eine Frage oder gib Code ein..." rows="4"></textarea>
+                            <div class="button-group">
+                                <button id="send-message-btn" class="primary">Senden</button>
+                                <button id="execute-code-btn" class="secondary">Code Ausführen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="module-container">
+                     <div class="module-title-bar">
+                        <span class="module-title">Sandbox Output</span>
+                    </div>
+                    <div class="module-content">
+                        <pre id="code-output-window">Willkommen in der RFOF-Sandbox. Deine Nachrichten und Code-Ausgaben werden hier visualisiert.</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Menü-Logik ---
+    const hamburger = document.getElementById('hamburger');
+    const navList = document.getElementById('navLinks');
+    const navLinksData = [
+        { href: "https://rfof-network.github.io/", text: "RFOFSpiderWeb.NET" },
+        // ... (weitere 8 Links hier)
+    ];
+    navList.innerHTML = navLinksData.map(link => `<li><a href="${link.href}">${link.text}</a></li>`).join('');
+    if (hamburger && navList) {
+        hamburger.addEventListener('click', () => {
+            navList.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+    }
+
+    // --- Modul-Logik ---
+    const sendBtn = document.getElementById('send-message-btn');
+    const executeBtn = document.getElementById('execute-code-btn');
+    const userInput = document.getElementById('user-input');
+    const chatHistory = document.getElementById('chat-history');
+    const codeOutput = document.getElementById('code-output-window');
+    
+    // ... (Hier würde die erweiterte Chatbox- und Sandbox-Logik aus Säule 1 stehen)
+    
+    sendBtn.addEventListener('click', () => {
+        const message = userInput.value.trim();
+        if (!message) return;
+        chatHistory.innerHTML += `<p><strong>Sie:</strong> ${message}</p>`;
+        userInput.value = '';
+        setTimeout(() => {
+            chatHistory.innerHTML += `<p><strong>PRAI:</strong> Anfrage empfangen. Greife auf Gedankenspeicher zu...</p>`;
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }, 500);
+    });
+
+    executeBtn.addEventListener('click', () => {
+        const code = userInput.value.trim();
+        codeOutput.innerHTML = `> Ausführung gestartet...\n<pre><code>${code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>`;
+        hljs.highlightAll();
+        try {
+            const result = new Function(code)();
+            codeOutput.innerHTML += `\n> Ausführung erfolgreich.\n> Ergebnis: ${result}`;
+        } catch (error) {
+            codeOutput.innerHTML += `\n> FEHLER: ${error.message}`;
+        }
+    });
+});
+</script>
+
