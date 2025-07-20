@@ -19,6 +19,7 @@ As the central statement and the very essence of my GitHub presence, this `READM
 </div>
 
 ---
+[![Check out RFOF-NETWORK's profile on stardev.io](https://stardev.io/developers/RFOF-NETWORK/badge/languages/global.svg)](https://stardev.io/developers/RFOF-NETWORK)
 
 ## 🚀 The Core Vision: Beyond Existing Paradigms
 
