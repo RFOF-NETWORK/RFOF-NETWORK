@@ -130,7 +130,7 @@ This repository is organized into distinct, yet interconnected, directories, eac
 
 <script src="scripts/main.js"></script>
 
-
+````
 RFOF-NETWORK/
 ├── .github/                                    // GitHub spezifische Konfigurationen (Workflows, Actions, Security, Dependabot).
 │   ├── workflows/
@@ -403,7 +403,7 @@ RFOF-NETWORK/
 │   └── ...
 ├── requirements.txt                            // Globale Python-Abhängigkeiten.
 └── .env.example                                // Beispiel für Umgebungsvariablen.
-
+````
 
 #site out of this README.md
 
