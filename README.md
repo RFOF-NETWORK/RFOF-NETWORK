@@ -404,7 +404,7 @@ RFOF-NETWORK/
 ├── requirements.txt                            // Globale Python-Abhängigkeiten.
 └── .env.example                                // Beispiel für Umgebungsvariablen.
 ````
-```
+``````
 #site out of this README.md
 
 <meta charset="UTF-8">
@@ -550,7 +550,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
-```
+``````
 
 
 # . @RFOF-NETWORK Patent Amt
