@@ -1,4 +1,4 @@
-# 🌍 RFOF-NETWORK: The Universal Axiomatic Ecosystem by Satoramy (J.K.)
+# 🌍 RFOF-NETWORK: The Universal Axiomatix\Axiometix/Axiomatic Ecosystem by Satoramy (J.K.)
 
 ## ✨ Welcome to the Dawn of a New Reality
 
