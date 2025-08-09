@@ -6,7 +6,7 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Diese entscheidende Regel wurde wieder hinzugefügt. */
     min-height: 100vh;
     display: flex;
     flex-direction: column;

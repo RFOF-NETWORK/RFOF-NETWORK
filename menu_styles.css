@@ -8,8 +8,25 @@
 
 @media (max-width: 900px) {
     .hamburger-icon { display: flex; }
-    .nav-list { display: none; flex-direction: column; width: 280px; position: fixed; top: 0; right: -280px; height: 100%; background-color: #2d3748; box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4); z-index: 1000; transition: right 0.3s ease-in-out; padding-top: 60px; border-left: 1px solid #4a5568; }
-    .nav-list.active { right: 0; display: flex; }
+    .nav-list {
+        display: none;
+        flex-direction: column;
+        width: 280px;
+        position: fixed;
+        top: 0;
+        right: -280px; /* Menü ist standardmäßig außerhalb des Bildschirms */
+        height: 100%;
+        background-color: #2d3748;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
+        z-index: 1000;
+        transition: right 0.3s ease-in-out;
+        padding-top: 60px;
+        border-left: 1px solid #4a5568;
+    }
+    .nav-list.active {
+        right: 0; /* Menü wird in den sichtbaren Bereich geschoben */
+        display: flex;
+    }
     .nav-list li { width: 100%; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
     .nav-list li:last-child { border-bottom: none; }
     .nav-list li a { padding: 18px 25px; text-align: left; color: #e2e8f0; font-weight: bold; border-radius: 0; }
