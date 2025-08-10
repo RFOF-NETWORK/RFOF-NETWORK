@@ -6,7 +6,7 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Diese entscheidende Regel wurde wieder hinzugefügt. */
+    overflow-x: hidden;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -81,7 +81,6 @@ a:hover { color: #00aaff; text-decoration: underline; }
 .btn-secondary { background-color: #6c757d; color: white; }
 .btn-secondary:hover { background-color: #5a6268; transform: translateY(-2px); }
 
-
 /* MANIFEST: PRAI Chatbox & Code Sandbox Styling */
 .main-tool-title {
     font-family: 'Press Start 2P', cursive;
@@ -94,6 +93,7 @@ a:hover { color: #00aaff; text-decoration: underline; }
     text-shadow: 2px 2px #000, -2px -2px #000, 2px -2px #000, -2px 2px #000; /* Black outline */
     position: relative;
     margin-bottom: 1rem;
+    box-sizing: border-box; /* Neu: Verhindert Überlauf durch Padding */
 }
 /* Blue Pixel Snake-like element */
 .main-tool-title::before {
@@ -107,7 +107,17 @@ a:hover { color: #00aaff; text-decoration: underline; }
 }
 
 #praiai-chatbox-section { background-color: #f8f8f8; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); }
-.sandbox-title-bar { display: flex; justify-content: space-between; padding: 8px 12px; background: #e0e0e0; border-top-left-radius: 5px; border-top-right-radius: 5px; font-family: 'Orbitron'; font-weight: bold; }
+.sandbox-title-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: #e0e0e0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-family: 'Orbitron';
+    font-weight: bold;
+    box-sizing: border-box; /* Neu: Verhindert Überlauf durch Padding */
+}
 .sandbox-title { color: #0088cc; }
 .sandbox-title-right { color: #6c757d; }
 
@@ -142,4 +152,4 @@ a:hover { color: #00aaff; text-decoration: underline; }
 @media (max-width: 768px) {
     .site-title, .main-tool-title { font-size: 1.5em; }
     #user-input-area { flex-direction: column; }
-}
+    }
