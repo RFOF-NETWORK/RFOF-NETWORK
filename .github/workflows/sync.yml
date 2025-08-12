@@ -1,0 +1,28 @@
+name: PRAI Sync to Planet Rescuer AI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Source Repository
+      uses: actions/checkout@v3
+
+    - name: Clone Destination Repository
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git clone https://$GH_PAT@github.com/RFOF-NETWORK-Ready-for-our-future/rfof-network.org destination-repo
+        rsync -av --delete --exclude='.git' ./rfof_network/rfof-network.org/@RFOF-NETWORK/ ./destination-repo/Planet-Rescuer-AI-$PRAIDateien/
+        cd destination-repo
+        git add .
+        git commit -m "🤖 PRAI Sync: Update from @RFOF-NETWORK"
+        git push origin main
+
+    - name: Cleanup
+      run: rm -rf destination-repo
