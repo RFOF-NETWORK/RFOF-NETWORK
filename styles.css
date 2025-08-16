@@ -106,7 +106,18 @@ a:hover { color: #00aaff; text-decoration: underline; }
     box-shadow: 0 4px #000;
 }
 
-#praiai-chatbox-section { background-color: #f8f8f8; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); }
+#praiai-chatbox-section {
+    background-color: #f8f8f8;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    /* Flexbox für sauberes Layout */
+    display: flex;
+    flex-direction: column;
+    height: 600px; /* Einheitliche Höhe für alle Komponenten */
+}
+
 .sandbox-title-bar {
     display: flex;
     justify-content: space-between;
@@ -116,32 +127,88 @@ a:hover { color: #00aaff; text-decoration: underline; }
     border-top-right-radius: 5px;
     font-family: 'Orbitron';
     font-weight: bold;
-    box-sizing: border-box; /* Neu: Verhindert Überlauf durch Padding */
+    box-sizing: border-box;
 }
 .sandbox-title { color: #0088cc; }
 .sandbox-title-right { color: #6c757d; }
 
-#chat-history { height: 350px; overflow-y: auto; border: 1px solid #ddd; background-color: #fff; padding: 15px; margin: 0 0 15px 0; border-radius: 5px; display: flex; flex-direction: column; gap: 10px; }
-.message-item { padding: 10px 15px; border-radius: 12px; max-width: 80%; word-wrap: break-word; position: relative; cursor: pointer; transition: all 0.2s ease; border: 2px solid transparent; }
+#chat-history {
+    height: 350px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    padding: 15px;
+    margin: 0 0 15px 0;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.message-item {
+    padding: 10px 15px;
+    border-radius: 12px;
+    max-width: 80%;
+    word-wrap: break-word;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
 .message-item.user-message { background-color: #e1f5fe; align-self: flex-end; }
 .message-item.praiai-message { background-color: #f1f1f1; align-self: flex-start; }
 .message-item.selected { border-color: #0088cc; box-shadow: 0 0 8px rgba(0, 136, 204, 0.5); }
 .message-item pre { margin: 0; font-size: 0.9em; }
 
-#user-input-area { display: flex; gap: 10px; align-items: stretch; }
-#user-input { flex-grow: 1; padding: 12px 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em; resize: vertical; font-family: 'Roboto', sans-serif; }
-.button-group { display: flex; flex-direction: column; gap: 8px; }
+#user-input-area {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+}
+#user-input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    resize: vertical;
+    font-family: 'Roboto', sans-serif;
+}
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
 /* MANIFEST: Fehler-Visualisierung */
 .error-line { background-color: rgba(255, 0, 0, 0.1); }
 .error-underline { text-decoration: wavy underline red; }
 
 /* MANIFEST: Autonome Korrektur Option */
-#praiai-correction-option { background-color: #e6f7ff; border: 1px solid #99d6ff; color: #005f8f; padding: 15px; border-radius: 5px; margin: 15px 0; text-align: center; }
+#praiai-correction-option {
+    background-color: #e6f7ff;
+    border: 1px solid #99d6ff;
+    color: #005f8f;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+    text-align: center;
+}
 #praiai-correction-option.is-hidden { display: none; }
 #praiai-correction-option p { margin: 0 0 10px 0; font-weight: bold; }
 
-#code-output-window { border: 1px solid #ddd; background-color: #2d3748; color: #e2e8f0; padding: 15px; border-radius: 5px; min-height: 150px; font-family: 'Fira Code', monospace; white-space: pre-wrap; word-break: break-all; }
+#code-output-window {
+    border: 1px solid #ddd;
+    background-color: #2d3748;
+    color: #e2e8f0;
+    padding: 15px;
+    border-radius: 5px;
+    min-height: 150px;
+    font-family: 'Fira Code', monospace;
+    white-space: pre-wrap;
+    word-break: break-all;
+    flex-grow: 1; /* Neu: Füllt den verfügbaren Platz aus */
+    margin-top: 15px;
+}
 #code-output-window pre { margin: 0; }
 
 /* Footer */
@@ -152,4 +219,4 @@ a:hover { color: #00aaff; text-decoration: underline; }
 @media (max-width: 768px) {
     .site-title, .main-tool-title { font-size: 1.5em; }
     #user-input-area { flex-direction: column; }
-    }
+}
