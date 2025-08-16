@@ -6,7 +6,7 @@
 
 # Core / Allgemeine Python-Funktionalität
 # -------------------------------------
-requests==2.31.0               # Für HTTP-Anfragen (z.B. GitHub API), auch wenn Yggdrasil eigenes Protokoll hat, bleibt dies für externe Interaktionen relevant.
+requests==2.32.4               # Für HTTP-Anfragen (z.B. GitHub API), auch wenn Yggdrasil eigenes Protokoll hat, bleibt dies für externe Interaktionen relevant.
 beautifulsoup4==4.12.3         # Wenn Web-Scraping Teil der Datenbeschaffung ist (z.B. für "Data_Value_Redistribution_System").
 lxml==4.9.3                    # Performance-Optimierung für BeautifulSoup4.
 python-dotenv==1.0.1           # Zum Laden von Umgebungsvariablen (.env-Dateien) in Python-Skripten.
@@ -15,7 +15,7 @@ pyyaml==6.0.1                  # Zum Parsen/Generieren von YAML-Dateien (z.B. Wo
 # Azure Functions Spezifisch
 # -------------------------
 azure-functions==1.17.0        # Azure Functions Python Worker.
-azure-identity==1.16.0         # Für Azure AD Authentifizierung in Azure Functions.
+azure-identity==1.16.1         # Für Azure AD Authentifizierung in Azure Functions.
 azure-storage-blob==12.19.1    # Für Interaktion mit Azure Blob Storage.
 azure-keyvault-secrets==4.8.0  # Für den Zugriff auf Geheimnisse in Azure Key Vault.
 
@@ -30,7 +30,7 @@ numpy==1.26.4                  # Mathematische Operationen, oft eine Abhängigke
 # Blockchain / Krypto-Integration (Allgemein und für READY-FOR-OUR-FUTURE)
 # -----------------------------------------------------------------------
 web3==6.15.1                   # Ethereum-Kommunikation und ABI-Interaktion (für Solidity-Contracts).
-eth-abi==4.3.0                 # Ethereum Application Binary Interface (Kompatibel mit web3==6.15.1).
+eth-abi==5.0.1                 # Ethereum Application Binary Interface (Kompatibel mit web3==6.15.1).
 # solidity-json-abi -- ENTFERNT: Dieses Paket ist nicht auf PyPI verfügbar und verursacht Konflikte.
 pysha3==1.0.6                  # SHA3 (Keccak) Hashing, oft in Krypto-Kontexten.
 # Hinweis: Für spezifische Blockchains (TON, MultiversX etc.) und ihre Python-Bindings
@@ -44,18 +44,18 @@ pysha3==1.0.6                  # SHA3 (Keccak) Hashing, oft in Krypto-Kontexten.
 # ------------------------------------------------------------------------
 tensorflow==2.16.1             # Für fortgeschrittene KI-Modelle und neuronale Netze.
 keras==3.3.3                   # Hochlevel-API für TensorFlow.
-scikit-learn==1.4.2            # Für allgemeine Machine Learning Algorithmen.
+scikit-learn==1.5.0            # Für allgemeine Machine Learning Algorithmen.
 pandas==2.2.2                  # Datenanalyse und -manipulation.
 
 # Quanten-Kryptografie (BOx-Blockchain-Extensions/Quantum_Encryption_Layer)
 # --------------------------------------------------------------------------
 qiskit==1.0.2                  # Für Quantencomputing und -Kryptografie-Experimente/Simulationen.
-cryptography==42.0.7           # Allgemeine Kryptografie-Bibliothek (für Post-Quanten-Kryptografie-Konzepte relevant).
+cryptography==44.0.1           # Allgemeine Kryptografie-Bibliothek (für Post-Quanten-Kryptografie-Konzepte relevant).
 
 # Web UI / Flask/Django (falls ein Python-Backend für WebUI in PRAI-OS/applications/webUI)
 # ----------------------------------------------------------------------------------------------------
 flask==3.0.3                   # Leichtgewichtiges Web-Framework (wenn Python-Backend).
-gunicorn==22.0.0               # WSGI HTTP Server für Python (für Produktion von Flask-Apps).
+gunicorn==23.0.0               # WSGI HTTP Server für Python (für Produktion von Flask-Apps).
 
 # Telegram Bot (PRAI-OS/applications/telegramBot)
 # -----------------------------------------------
