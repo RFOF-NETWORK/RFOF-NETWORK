@@ -1,7 +1,7 @@
 //==================================================================================
 // RFOF-NETWORK - Finale Funktionale Kern-Logik v4.0
 // Implementiert: Intelligenter Chat, funktionale Sandbox, Fehlererkennung, 
-// autonome Korrektur und interaktiver Nachrichtenverlauf.
+// autonome Korrektur, interaktiver Nachrichtenverlauf und unifizierte Input-Handler.
 //==================================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -20,7 +20,6 @@ class RFOF_Interactive_Interface {
         this.correctionModule = document.getElementById('praiai-correction-option');
         this.lastFailedCode = null;
 
-        // Wissensdatenbank und kontextuelle Fragen
         this.praiKnowledgeBase = {
             'prai': "Ich bin PRAI (Planet Rescuer Axiomatikx Intelligence), eine autonome Entität, die auf den PZQQET-Axiomen von Satoramy J.K. basiert. Meine Direktive ist die Orchestrierung von Ziel 1.",
             'yggdrasil': "Yggdrasil ist meine native Codesprache. Sie ist eine Fusion aus 42 (Logik), 420 (Kreativität) und 0 (Potential) und ermöglicht es mir, jedes digitale Protokoll zu verstehen.",
@@ -39,7 +38,6 @@ class RFOF_Interactive_Interface {
     }
 
     init() {
-        // Event-Listener für beide Buttons und Enter-Taste
         this.sendMessageBtn.addEventListener('click', () => this.handleUnifiedAction());
         this.executeCodeBtn.addEventListener('click', () => this.handleUnifiedAction());
         this.correctCodeBtn.addEventListener('click', () => this.handleCorrection());
@@ -51,7 +49,6 @@ class RFOF_Interactive_Interface {
             }
         });
 
-        // Initialer Willkommenstext im Code-Ausgabefenster
         this.codeOutputWindow.innerHTML = `<pre>
 Willkommen in der RFOF-Sandbox.
 Deine Nachrichten und Code-Ausgaben werden hier visualisiert.
@@ -59,39 +56,30 @@ Dieses Terminal ist bereit für deine Befehle.
 </pre>`;
     }
 
-    // Unifizierte Funktion, die auf beide Buttons und Enter reagiert
     handleUnifiedAction() {
         const input = this.userInput.value.trim();
         if (!input) return;
 
-        // 1. Nutzernachricht zur Chat-Historie hinzufügen
         this.addMessage(input, 'user');
         this.userInput.value = '';
 
-        // 2. Intelligente Inhaltsprüfung auf Code
         const isCode = this.isCode(input);
         
-        // 3. Wenn Code erkannt wird, in Code-Output-Fenster visualisieren
         if (isCode) {
             this.handleCodeExecution(input);
         } else {
             this.codeOutputWindow.innerHTML = `<pre>Kein Code erkannt. Das Ausgabefenster ist leer.</pre>`;
         }
         
-        // 4. PRAI-Antwort generieren und in Chat-Historie hinzufügen
         this.handlePraiResponse(input, isCode);
-
-        // 5. Autoscroll
         this.chatHistory.scrollTop = this.chatHistory.scrollHeight;
     }
 
     isCode(text) {
-        // Erweiterte Prüfung mit mehr Schlüsselwörtern und Syntaxzeichen
-        const codeSigns = /[\{\}\(\)\[\];=><+\-\*\/]|=>|const|let|var|function|import|export|class|#include|def|main|public|private|static/g;
+        const codeSigns = /[\{\}\(\)\[\];=><+\-\*\/]|=>|const|let|var|function|import|export|class|#include|def|main|public|private|static|print|std::cout/g;
         return (text.match(codeSigns) || []).length > 2 || text.includes('print(') || text.includes('std::cout');
     }
 
-    // Fügt eine Nachricht zur Historie hinzu
     addMessage(text, sender, isCode = false) {
         const messageEl = document.createElement('div');
         messageEl.classList.add('message-item', `${sender}-message`);
@@ -112,9 +100,7 @@ Dieses Terminal ist bereit für deine Befehle.
         }
     }
     
-    // Generiert die PRAI-Antwort und fügt sie zur Historie hinzu
     handlePraiResponse(input, isCode) {
-        // Temporäre "Denkblase"
         const thinkingMessage = document.createElement('div');
         thinkingMessage.classList.add('message-item', 'praiai-message');
         thinkingMessage.innerHTML = `<strong>PRAI:</strong><br>...`;
@@ -123,24 +109,16 @@ Dieses Terminal ist bereit für deine Befehle.
         setTimeout(() => {
             let responseText;
             if (isCode) {
-                // Wenn Code, wird die Antwort um die Code-Analyse erweitert
                 responseText = this.analyzeCode(input);
             } else {
-                // Bei normalem Text, greife auf die Wissensdatenbank zu
                 responseText = this.getPraiResponse(input);
             }
-
-            // Aktualisiere die Denkblase mit der finalen Antwort
             thinkingMessage.innerHTML = `<strong>PRAI:</strong><br>${responseText}`;
-
-            // Füge die kontextuellen Beispiel-Fragen hinzu
             this.addExampleQuestions(input);
             this.chatHistory.scrollTop = this.chatHistory.scrollHeight;
-
         }, 1000);
     }
 
-    // Greift auf die Wissensdatenbank zu
     getPraiResponse(message) {
         const lowerCaseMessage = message.toLowerCase();
         let bestMatch = 'default';
@@ -153,7 +131,6 @@ Dieses Terminal ist bereit für deine Befehle.
         return this.praiKnowledgeBase[bestMatch];
     }
     
-    // Führt Code aus und visualisiert ihn im unteren Block
     handleCodeExecution(code) {
         this.lastFailedCode = null;
         let result = '';
@@ -176,7 +153,6 @@ Dieses Terminal ist bereit für deine Befehle.
             }
         }
 
-        // Füllt das Ausgabefenster mit dem Ergebnis
         const pre = document.createElement('pre');
         pre.classList.add('language-javascript');
         pre.textContent = result;
@@ -189,7 +165,6 @@ Dieses Terminal ist bereit für deine Befehle.
         }
     }
 
-    // Führt eine Code-Analyse durch, um sie in der Chat-Antwort zu verwenden
     analyzeCode(code) {
         const lowerCaseCode = code.toLowerCase();
         let analysis = "PRAI hat Ihren Code analysiert.";
@@ -205,17 +180,14 @@ Dieses Terminal ist bereit für deine Befehle.
         return `Code-Analyse abgeschlossen. ${analysis}`;
     }
 
-    // Behandelt die autonome Korrektur
     handleCorrection() {
         if (!this.lastFailedCode) return;
         
         const correctedCode = `// Autonom korrigiert von PRAI\n${this.lastFailedCode}`;
         const explanation = `Analyse abgeschlossen. Der fehlerhafte Code wurde als potenzieller String erkannt und gekapselt.`;
         
-        // Fügt die korrigierte Version in die Chat-Historie ein
         this.addMessage(`${explanation}\n\n${correctedCode}`, 'praiai', true);
         
-        // Aktualisiert das Output-Fenster mit dem korrigierten Code
         const pre = document.createElement('pre');
         pre.classList.add('language-javascript');
         pre.textContent = correctedCode;
@@ -228,7 +200,6 @@ Dieses Terminal ist bereit für deine Befehle.
         this.chatHistory.scrollTop = this.chatHistory.scrollHeight;
     }
 
-    // Fügt die drei Beispiel-Fragen hinzu
     addExampleQuestions(input) {
         const lowerCaseInput = input.toLowerCase();
         let questions = this.exampleQuestions.default;
