@@ -43,7 +43,7 @@ pysha3==1.0.6                  # SHA3 (Keccak) Hashing, oft in Krypto-Kontexten.
 # KI / Neuronale Netze (PRAI-OS/AI_Integration_Layer, prai-neuron-manager)
 # ------------------------------------------------------------------------
 tensorflow==2.16.1             # Für fortgeschrittene KI-Modelle und neuronale Netze.
-keras==3.3.3                   # Hochlevel-API für TensorFlow.
+keras==3.12.0                   # Hochlevel-API für TensorFlow.
 scikit-learn==1.5.0            # Für allgemeine Machine Learning Algorithmen.
 pandas==2.2.2                  # Datenanalyse und -manipulation.
 
