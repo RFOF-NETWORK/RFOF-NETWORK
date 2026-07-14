@@ -1,4 +1,4 @@
-# 🌍 RFOF-NETWORK: The Universal Axiomatix\Axiometix/Axiomatic Ecosystem by Satoramy (J.K.)
+ii# 🌍 RFOF-NETWORK: The Universal Axiomatix\Axiometix/Axiomatic Ecosystem by Satoramy (J.K.)
 
 ## ✨ Welcome to the Dawn of a New Reality
 
@@ -956,146 +956,147 @@ Dieses Dokument definiert die Git-Strukturen und Deployment-Methoden, unterteilt
 Steuerung ausschließlich per API/Token ohne lokales Terminal.
 ## Block 1A: Smartphone – Deploy from Branch
 Trennung von main (Quelle) und gh-pages (Produktion), erfordert manuellen Sync.
-
+```
  [ Smartphone ]
          │
          ▼ (Commit via Token)
  ┌────────────────────────────────────────────────────────┐
- │ GitHub Repository (Sichtbare Datenstruktur)            │
- │                                                        │
- │  ┌─────────────────┐  (Automatisierter)  ┌──────────┐  │
- │  │   main-Branch   │────────────────────>│ gh-pages │  │
- │  │ (Quell-Struktur)│  Kopier-Prozess     │ (Global) │  │
- │  └─────────────────┘                     └────┬─────┘  │
+ │ GitHub Repository (Sichtbare Datenstruktur)                      │
+ │                                                                  │
+ │  ┌─────────────────┐  (Automatisierter)      ┌──────────┐  │
+ │  │   main-Branch      │────────────────────>│ gh-pages   │  │
+ │  │ (Quell-Struktur)   │  Kopier-Prozess         │ (Global)   │  │
+ │  └─────────────────┘                         └────┬─────┘  │
  └───────────────────────────────────────────────┼───────┘
-                                                 │
-                                                 ▼
+                                                          │
+                                                          ▼
                                      ┌──────────────────────┐
-                                     │ GitHub Pages Server  │
-                                     │ (Live-Webseite)      │
+                                     │ GitHub Pages Server      │
+                                     │ (Live-Webseite)          │
                                      └──────────────────────┘
-
+```
 ## Block 1B: Smartphone – Deploy from Actions
 Single-Branch-Struktur (main), automatisierter Build in GitHub Cloud, konfliktfrei.
-
+```
  [ Smartphone ]
          │
          ▼ (Commit via Token)
  ┌────────────────────────────────────────────────────────┐
- │ GitHub Repository (Sichtbare Datenstruktur)            │
- │                                                        │
- │  ┌─────────────────┐                                   │
- │  │   main-Branch   │─────────────────┐                 │
- │  │ (Quell-Struktur)│                 │                 │
- │  └─────────────────┘                 │                 │
+ │ GitHub Repository (Sichtbare Datenstruktur)                      │
+ │                                                                  │
+ │  ┌─────────────────┐                                         │
+ │  │   main-Branch      │─────────────────┐                    │
+ │  │ (Quell-Struktur)   │                    │                    │
+ │  └─────────────────┘                    │                    │
  └──────────────────────────────────────┼─────────────────┘
-                                        │ (Triggert automatisch)
-                                        ▼
+                                               │ (Triggert automatisch)
+                                               ▼
                              ┌──────────────────────┐
-                             │ GitHub Action Runner │
-                             │ (Temporärer Speicher)│
+                             │ GitHub Action Runner     │
+                             │ (Temporärer Speicher)    │
                              └──────────┬───────────┘
-                                        │ (Direkt-Upload)
-                                        ▼
+                                          │ (Direkt-Upload)
+                                          ▼
                              ┌──────────────────────┐
                              │ GitHub Pages Server  │
                              │ (Live-Webseite)      │
                              └──────────────────────┘
-
+```
 ------------------------------
 ## ABSCHNITT 2: DESKTOP-WORKFLOW (TERMINAL-BASED)
 Nutzung von VS Code und lokalem Git.
 ## Block 2A: Laptop – Deploy from Branch
 Lokaler Build, Pushing in separate gh-pages Branch.
-
+```
 ┌───────────────────────────────── IHR LAPTOP ────────────────────────────────┐
-│                                                                             │
-│  ┌───────────────┐     git add      ┌──────────────┐     git commit         │
-│  │   VS CODE     │────────────────> │ STAGING AREA │───────────────────┐    │
-│  │ (Arbeitsplatz)│                  │   (Index)    │                   │    │
-│  └───────┬───────┘                  └──────────────┘                   ▼    │
-│          │                                                      ┌──────────┐│
-│          │ (Lokaler Build-Befehl, z.B. 'npm run build')         │  LOCAL   ││
-│          ▼                                                      │   GIT    ││
-│  ┌───────────────┐                                              │   REPO   ││
-│  │ /dist-Ordner  │─ ─ ─ ─ ─ (Wird zu gh-pages Branch) ─ ─ ─ ─ ─>│ (main &  ││
-│  │ (HTML/Output) │                                              │ gh-pages)││
-│  └───────────────┘                                              └────┬─────┘│
-└──────────────────────────────────────────────────────────────────────┼──────┘
-                                                                       │ git push
-                                                                       ▼
+│                                                                                         │
+│  ┌───────────────┐     git add         ┌──────────────┐     git commit            │
+│  │   VS CODE        │────────────────> │ STAGING AREA   │────────────────┐       │
+│  │ (Arbeitsplatz)   │                     │   (Index)      │                   │       │
+│  └───────┬───────┘                     └──────────────┘                   ▼       │
+│           │                                                           ┌─────────┐      │
+│           │ (Lokaler Build-Befehl, z.B. 'npm run build')              │  LOCAL    │     │
+│           ▼                                                          │   GIT     │      │
+│  ┌───────────────┐                                                │   REPO    │      │
+│  │ /dist-Ordner     │─ ─ ─ ─ ─ (Wird zu gh-pages Branch) ─ ─ ─ ─ ─>│ (main &   │      │
+│  │ (HTML/Output)    │                                                │ gh-pages) │     │
+│  └───────────────┘                                                └────┬─────┘     │
+└────────────────────────────────────────────────────────────────┼───────────┘
+                                                                             │ git push
+                                                                             ▼
 ┌─────────────────────────── GITHUB (USER / ORG REPO) ────────────────────────┐
-│                                                                             │
+│                                                                                      │
 │     ┌────────────────────────┐             ┌─────────────────────────┐      │
-│     │      main-Branch       │             │     gh-pages-Branch     │      │
-│     │ (Enthält Roh-Quellcode)│             │ (Enthält fertiges HTML) │      │
+│     │      main-Branch           │             │     gh-pages-Branch          │      │
+│     │ (Enthält Roh-Quellcode)    │             │ (Enthält fertiges HTML)      │      │
 │     └────────────────────────┘             └────────────┬────────────┘      │
-└─────────────────────────────────────────────────────────┼───────────────────┘
-                                                          │ 
-                                                          ▼ (Automatischer Verweis)
+└──────────────────────────────────────────────────────┼───────────────────┘
+                                                                 │ 
+                                                                 ▼ (Automatischer Verweis)
                                              ┌────────────────────────────────┐
-                                             │      GITHUB PAGES SERVER       │
-                                             │        (Live-Webseite)         │
+                                             │      GITHUB PAGES SERVER             │
+                                             │        (Live-Webseite)               │
                                              └────────────────────────────────┘
-
+```
 ## Block 2B: Laptop – Deploy from Actions
 Single-Branch, lokale Entlastung, Build auf GitHub Actions.
-
+```
 ┌───────────────────────────────── IHR LAPTOP ────────────────────────────────┐
-│                                                                             │
-│  ┌───────────────┐     git add      ┌──────────────┐     git commit         │
-│  │   VS CODE     │────────────────> │ STAGING AREA │───────────────────┐    │
-│  │ (Arbeitsplatz)│                  │   (Index)    │                   │    │
-│  └───────┬───────┘                  └──────────────┘                   ▼    │
-│                                                                 ┌──────────┐│
-│   (Kein lokaler Build nötig! Sie schreiben einfach nur Code)    │  LOCAL   ││
-│                                                                 │   GIT    ││
-│                                                                 │   REPO   ││
-│                                                                 │  (nur    ││
-│                                                                 │  main)   ││
-│                                                                 └────┬─────┘│
-└──────────────────────────────────────────────────────────────────────┼──────┘
-                                                                       │ git push
-                                                                       ▼
+│                                                                                         │
+│  ┌───────────────┐     git add      ┌──────────────┐     git commit               │
+│  │   VS CODE        │─────────────> │ STAGING AREA    │────────────┐               │
+│  │ (Arbeitsplatz)   │                  │(Index)         │              │               │
+│  └───────┬───────┘                  └──────────────┘             ▼                │
+│                                                                 ┌──────────┐          │
+│   (Kein lokaler Build nötig! Sie schreiben einfach nur Code)    │  LOCAL     │          │
+│                                                                 │   GIT      │          │
+│                                                                 │   REPO     │          │
+│                                                                 │  (nur      │          │
+│                                                                 │  main)     │          │
+│                                                                 └────┬─────┘          │
+└────────────────────────────────────────────────────────────┼───────────────┘
+                                                                        │ git push
+                                                                        ▼
 ┌─────────────────────────── GITHUB (USER / ORG REPO) ────────────────────────┐
-│                                                                             │
-│     ┌─────────────────────────────────────────────────────────────────┐     │
-│     │                           main-Branch                           │     │
-│     │   (Identische Verzeichnisstruktur: Enthält Code & Workflows)    │     │
-│     └────────────────────────────────┬────────────────────────────────┘     │
-└──────────────────────────────────────┼──────────────────────────────────────┘
+│                                                                                      │
+│     ┌─────────────────────────────────────────────────────────────────┐   │
+│     │                           main-Branch                                       │   │
+│     │   (Identische Verzeichnisstruktur: Enthält Code & Workflows)                │   │
+│     └────────────────────────────────┬────────────────────────────────┘   │
+└──────────────────────────────────────┼───────────────────────────────────┘
                                        │ (Triggert vollautomatisch)
                                        ▼
                     ┌─────────────────────────────────────┐
-                    │        GITHUB ACTION RUNNER         │
-                    │ (Baut das Projekt im Cloud-Speicher)│
+                    │        GITHUB ACTION RUNNER                │
+                    │ (Baut das Projekt im Cloud-Speicher)       │
                     └──────────────────┬──────────────────┘
                                        │ (Direkter Datei-Transfer)
                                        ▼
                     ┌─────────────────────────────────────┐
-                    │         GITHUB PAGES SERVER         │
-                    │           (Live-Webseite)           │
+                    │         GITHUB PAGES SERVER                │
+                    │           (Live-Webseite)                  │
                     └─────────────────────────────────────┘
-
+```
 ------------------------------
 ## ABSCHNITT 3: GIT-HISTORIE & ARCHITEKTUR
 Visualisierung der Branch-Modelle.
 ## Block 3A: Verlauf Methode 1 (Zwei Branches)
 Asynchrone Entwicklung: main (Code) und gh-pages (Produktion) sind getrennt.
-
+```
 main       ●───────────●───────────● (Quellcode-Entwicklung)
                         │
                         ▼ (Build & Sync)
 gh-pages                ●───────────● (Isolierte Produktions-Struktur)
-
+```
 ## Block 3B: Verlauf Methode 2 (Linear)
 Lineare Historie: main ist die Quelle und steuert das Deployment.
+```
 
 main       ●───────────●───────────●───────────● (Code + Deployment-Logik)
                                                │
                                                ▼ (Virtueller Server-Build)
                                         [ Live Web-Server ]
-
+```
 
 
 
