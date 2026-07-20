@@ -1132,6 +1132,8 @@ natürlich auch Größen Einheiten davon ......
 
 Also haben wir immer Makro & Mikro Größen je(Zeit, Energie, Gewicht, Bit = 4 Semantiken in dem ersten Step[A{A/B/C/D}->1], Millisekunden und Sekunden = 2 Semantiken in dem zweiten Step[B{A/B}->2], Gramm Kilogramm und Tonnen = 3 Semantiken in dem dritten Step[C{A/B/C}->3], so wie Bits und Bytes, KiloBits und KiloBytes GigaBits(=TonnenBits) und GigaBytes(=TonnenBytes) = 4/6 Semantiken in dem vierten Step[D{A/B/C/D}->4]> ☰ 1×1-4D also sind 0-4D = ∞ ☰ 1×1Äther und 0-2 sind eine halbe Unendlichkeit einer Unendlichkeit ☰ 2×1Äther als drei Step skallierung = 3 Unendlichkeiten also eine unendlichkeit je Step = 4 Semantiken/Unendlichkeiten also eine Unendlichkeit ☰ Äther & Äther des Äthers ≈ Zeit, Energie, Gewicht & Größe/Umfang/Durchmesser/Form/Format/Formation(Formel/Formulierung\)> ≈ AABCD BAB CABC DABCD ☰ PZQQET ☰ GeneFusioNear ≠ ∞/E & ∞/E ☰ Axiometix ->Axiomatics = Axiomatrix &  Axiomatrix = GeneFusioNear (GFN) & GFN ≈ Axonometrics & ∞ Axonometrics ≈ Axiommatrix ☰ Axiometix.
 
+---
+
 <svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
   <!-- Hintergrund: Absolutes Schwarz -->
   <rect width="100%" height="100%" fill="#000000"/>
