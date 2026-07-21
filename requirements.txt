@@ -6,10 +6,10 @@
 
 # Core / Allgemeine Python-Funktionalität
 # -------------------------------------
-requests==2.32.4               # Für HTTP-Anfragen (z.B. GitHub API), auch wenn Yggdrasil eigenes Protokoll hat, bleibt dies für externe Interaktionen relevant.
+requests==2.33.0               # Für HTTP-Anfragen (z.B. GitHub API), auch wenn Yggdrasil eigenes Protokoll hat, bleibt dies für externe Interaktionen relevant.
 beautifulsoup4==4.12.3         # Wenn Web-Scraping Teil der Datenbeschaffung ist (z.B. für "Data_Value_Redistribution_System").
-lxml==4.9.3                    # Performance-Optimierung für BeautifulSoup4.
-python-dotenv==1.0.1           # Zum Laden von Umgebungsvariablen (.env-Dateien) in Python-Skripten.
+lxml==6.1.0                    # Performance-Optimierung für BeautifulSoup4.
+python-dotenv==1.2.2           # Zum Laden von Umgebungsvariablen (.env-Dateien) in Python-Skripten.
 pyyaml==6.0.1                  # Zum Parsen/Generieren von YAML-Dateien (z.B. Workflows, Konfigurationen).
 
 # Azure Functions Spezifisch
@@ -23,14 +23,14 @@ azure-keyvault-secrets==4.8.0  # Für den Zugriff auf Geheimnisse in Azure Key V
 # -------------------------------------------------------------
 PyGithub==2.2.0                # Python-Bibliothek für die GitHub API (Datenabruf für Diagramme/Snake).
 svgwrite==1.4.3                # Zum Generieren von SVG-Dateien (Pixeltext, Gehirn, Kreise).
-pillow==10.3.0                 # Für Bildverarbeitung (z.B. in Asset-Generierungssskripten).
+pillow==12.3.0                 # Für Bildverarbeitung (z.B. in Asset-Generierungssskripten).
 matplotlib==3.8.4              # Wenn Diagramme oder komplexe Visualisierungen generiert werden (z.B. prozentualer Kreis).
 numpy==1.26.4                  # Mathematische Operationen, oft eine Abhängigkeit von Matplotlib.
 
 # Blockchain / Krypto-Integration (Allgemein und für READY-FOR-OUR-FUTURE)
 # -----------------------------------------------------------------------
-web3==6.15.1                   # Ethereum-Kommunikation und ABI-Interaktion (für Solidity-Contracts).
-eth-abi==5.0.1                 # Ethereum Application Binary Interface (Kompatibel mit web3==6.15.1).
+web3==7.15.0                   # Ethereum-Kommunikation und ABI-Interaktion (für Solidity-Contracts).
+eth-abi==5.0.1                 # Ethereum Application Binary Interface (Kompatibel mit web3==7.15.0).
 # solidity-json-abi -- ENTFERNT: Dieses Paket ist nicht auf PyPI verfügbar und verursacht Konflikte.
 pysha3==1.0.6                  # SHA3 (Keccak) Hashing, oft in Krypto-Kontexten.
 # Hinweis: Für spezifische Blockchains (TON, MultiversX etc.) und ihre Python-Bindings
@@ -43,14 +43,14 @@ pysha3==1.0.6                  # SHA3 (Keccak) Hashing, oft in Krypto-Kontexten.
 # KI / Neuronale Netze (PRAI-OS/AI_Integration_Layer, prai-neuron-manager)
 # ------------------------------------------------------------------------
 tensorflow==2.16.1             # Für fortgeschrittene KI-Modelle und neuronale Netze.
-keras==3.3.3                   # Hochlevel-API für TensorFlow.
+keras==3.13.2                   # Hochlevel-API für TensorFlow.
 scikit-learn==1.5.0            # Für allgemeine Machine Learning Algorithmen.
 pandas==2.2.2                  # Datenanalyse und -manipulation.
 
 # Quanten-Kryptografie (BOx-Blockchain-Extensions/Quantum_Encryption_Layer)
 # --------------------------------------------------------------------------
 qiskit==1.0.2                  # Für Quantencomputing und -Kryptografie-Experimente/Simulationen.
-cryptography==44.0.1           # Allgemeine Kryptografie-Bibliothek (für Post-Quanten-Kryptografie-Konzepte relevant).
+cryptography==48.0.1           # Allgemeine Kryptografie-Bibliothek (für Post-Quanten-Kryptografie-Konzepte relevant).
 
 # Web UI / Flask/Django (falls ein Python-Backend für WebUI in PRAI-OS/applications/webUI)
 # ----------------------------------------------------------------------------------------------------
@@ -63,7 +63,7 @@ python-telegram-bot==20.8      # Für die Entwicklung des Telegram Bots.
 
 # Tests
 # -----
-pytest==8.1.1                  # Allgemeines Python-Testframework.
+pytest==9.0.3                  # Allgemeines Python-Testframework.
 
 # Für 3D-Rendering als Standbild/Vektorgrafik in Python (sehr fortgeschritten & optional):
 # Wenn du komplexe 3D-Modelle in Python-Skripten rendern willst (z.B. Blender Python API, PyVista/VTK).
