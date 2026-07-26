@@ -49,12 +49,12 @@ pandas==2.2.2                  # Datenanalyse und -manipulation.
 
 # Quanten-Kryptografie (BOx-Blockchain-Extensions/Quantum_Encryption_Layer)
 # --------------------------------------------------------------------------
-qiskit==1.0.2                  # Für Quantencomputing und -Kryptografie-Experimente/Simulationen.
+qiskit==1.4.2                  # Für Quantencomputing und -Kryptografie-Experimente/Simulationen.
 cryptography==48.0.1           # Allgemeine Kryptografie-Bibliothek (für Post-Quanten-Kryptografie-Konzepte relevant).
 
 # Web UI / Flask/Django (falls ein Python-Backend für WebUI in PRAI-OS/applications/webUI)
 # ----------------------------------------------------------------------------------------------------
-flask==3.0.3                   # Leichtgewichtiges Web-Framework (wenn Python-Backend).
+flask==3.1.3                   # Leichtgewichtiges Web-Framework (wenn Python-Backend).
 gunicorn==23.0.0               # WSGI HTTP Server für Python (für Produktion von Flask-Apps).
 
 # Telegram Bot (PRAI-OS/applications/telegramBot)
