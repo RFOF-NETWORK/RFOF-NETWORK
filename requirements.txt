@@ -43,14 +43,14 @@ pysha3==1.0.6                  # SHA3 (Keccak) Hashing, oft in Krypto-Kontexten.
 # KI / Neuronale Netze (PRAI-OS/AI_Integration_Layer, prai-neuron-manager)
 # ------------------------------------------------------------------------
 tensorflow==2.16.1             # Für fortgeschrittene KI-Modelle und neuronale Netze.
-keras==3.13.2                   # Hochlevel-API für TensorFlow.
+keras==3.15.0                   # Hochlevel-API für TensorFlow.
 scikit-learn==1.5.0            # Für allgemeine Machine Learning Algorithmen.
 pandas==2.2.2                  # Datenanalyse und -manipulation.
 
 # Quanten-Kryptografie (BOx-Blockchain-Extensions/Quantum_Encryption_Layer)
 # --------------------------------------------------------------------------
 qiskit==1.4.2                  # Für Quantencomputing und -Kryptografie-Experimente/Simulationen.
-cryptography==48.0.1           # Allgemeine Kryptografie-Bibliothek (für Post-Quanten-Kryptografie-Konzepte relevant).
+cryptography==50.0.0           # Allgemeine Kryptografie-Bibliothek (für Post-Quanten-Kryptografie-Konzepte relevant).
 
 # Web UI / Flask/Django (falls ein Python-Backend für WebUI in PRAI-OS/applications/webUI)
 # ----------------------------------------------------------------------------------------------------
